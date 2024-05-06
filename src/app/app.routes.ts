@@ -1,14 +1,34 @@
-import { ResolveFn, Routes } from '@angular/router';
-import { CompanyViewComponent } from './company/company-view/company-view.component';
-import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
-import { LoginComponent } from './login/login.component';
+import { Routes } from '@angular/router';
+import { CompanyDetailComponent } from './components/company/company-detail/company-detail.component';
+import { CompanyViewComponent } from './components/company/company-view/company-view.component';
+import { DeliveryDetailsComponent } from './components/delivery/delivery-details/delivery-details.component';
+import { DeliveryViewComponent } from './components/delivery/delivery-view/delivery-view.component';
+import { LoginComponent } from './components/login/login.component';
+import { OfferDetailsComponent } from './components/offer/offer-details/offer-details.component';
+import { OfferViewComponent } from './components/offer/offer-view/offer-view.component';
+import { OrderDetailsComponent } from './components/order/order-details/order-details.component';
+import { OrderViewComponent } from './components/order/order-view/order-view.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
+import { ProductViewComponent } from './components/product/product-view/product-view.component';
+import { UserDetailsComponent } from './components/user/user-details/user-details.component';
+import { UserViewComponent } from './components/user/user-view/user-view.component';
 import { loginGuard } from './login.guard';
-
-const resolvedChildATitle: ResolveFn<string> = (id) => Promise.resolve('Company ID: ' + id.paramMap.get("id"));
 
 export const routes: Routes = [
     {path: "login", component: LoginComponent, title: "Log in"},
-    {path: "companies/:id", component: CompanyDetailComponent, title: resolvedChildATitle, canActivate: [loginGuard]},
+    {path: "users", component: UserViewComponent, title: "All users", canActivate: [loginGuard]},
+    {path: "users/:username", component: UserDetailsComponent, title: "User details", canActivate: [loginGuard]},
+    {path: "companies/:id", component: CompanyDetailComponent, title: "Company details", canActivate: [loginGuard]},
     {path: "companies", component: CompanyViewComponent, title: "All companies", canActivate: [loginGuard]},
-    {path: "", redirectTo: "/companies", pathMatch: 'full'}
+    {path: "products/:id", component: ProductDetailsComponent, title: "Product details", canActivate: [loginGuard]},
+    {path: "products", component: ProductViewComponent, title: "All products", canActivate: [loginGuard]},
+    {path: "offers/:id", component: OfferDetailsComponent, title: "Offer details", canActivate: [loginGuard]},
+    {path: "offers", component: OfferViewComponent, title: "All offers", canActivate: [loginGuard]},
+    {path: "orders/:id", component: OrderDetailsComponent, title: "Order details", canActivate: [loginGuard]},
+    {path: "orders", component: OrderViewComponent, title: "All orders", canActivate: [loginGuard]},
+    {path: "deliveries/:id", component: DeliveryDetailsComponent, title: "Delivery details", canActivate: [loginGuard]},
+    {path: "deliveries", component: DeliveryViewComponent, title: "All deliveries", canActivate: [loginGuard]},
+    {path: "", redirectTo: "/products", pathMatch: 'full'},
+    {path: "**", component: PageNotFoundComponent, title: "404 - Page not found"},
 ];

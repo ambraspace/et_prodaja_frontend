@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from '../../model/company';
-import { CompanyService } from '../../services/company.service';
 import { NgFor } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { Page } from '../../model/page';
+import { CompanyService } from '../../../services/company.service';
+import { Company } from '../../../model/company';
+import { Page } from '../../../model/page';
 
 @Component({
   selector: 'app-company-view',
