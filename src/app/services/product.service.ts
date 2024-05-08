@@ -43,11 +43,7 @@ export class ProductService {
     return this.http.get<Product>(`/api/products/${id}`);
   }
 
-  // TODO: Properly implement file upload and download
-  downloadProductPreview(productId: number, previewId: number): Observable<Blob>
-  {
-    return this.http.get<Blob>(`/api/products/${productId}/previews/${previewId}/download`);
-  }
+  // TODO: Properly implement file upload
 
   addProduct(product: Product): Observable<Product>
   {
