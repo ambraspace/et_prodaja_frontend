@@ -27,7 +27,7 @@ export class CompanyViewComponent implements OnInit{
 
   loadCompanies(): void
   {
-      this.companyService.getCompanies().subscribe(page => this.companies = page);
+      this.companyService.getCompanies(0, 10, "name,ASC").subscribe(page => this.companies = page);
   }
 
 
