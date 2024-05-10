@@ -18,23 +18,22 @@ export class ProductService {
   getProducts(query?: string, includeComments?: boolean, warehouseId?: number, tagIds?: number[], categoryId?: number): Observable<Page<Product>>
   {
 
-    let tagString = null;
-
-    if (tagIds && tagIds.length > 0)
-    {
-      tagString = JSON.stringify(tagIds);
-      tagString = tagString.slice(1, tagString.length - 1);
-    }
-
     let params: HttpParams = new HttpParams()
       .set("page", this.page)
       .set("size", this.size)
       .set("sort", this.sort);
 
     if (query) params = params.set("q", query);
+
     if (includeComments) params = params.set("cm", includeComments);
+
     if (warehouseId) params = params.set("w", warehouseId);
-    if (tagString) params = params.set("t", tagString);
+
+    if (tagIds && tagIds.length > 1)
+    {
+      tagIds.forEach(t => params = params.set("t", t));
+    }
+
     if (categoryId) params = params.set("ct", categoryId);
 
     return this.http.get<Page<Product>>(`/api/products`, {params: params});
