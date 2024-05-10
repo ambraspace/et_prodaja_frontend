@@ -11,13 +11,17 @@ export class TagService {
 
   constructor(private http: HttpClient) { }
 
-  getTags(page: number, size: number, sort: string): Observable<Page<Tag>>
+  page: number = 0;
+  size: number = 10;
+  sort: string = "name,ASC";
+
+  getTags(): Observable<Page<Tag>>
   {
 
     let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     return this.http.get<Page<Tag>>(`/api/tags`, {params: params});
 

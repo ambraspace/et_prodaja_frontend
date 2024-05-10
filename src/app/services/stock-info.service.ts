@@ -11,18 +11,22 @@ export class StockInfoService {
 
   constructor(private http: HttpClient) { }
 
+  page: number = 0;
+  size: number = 10;
+  sort: string = "id,DESC";
+
   getStockInfo(productId: number, id: number): Observable<StockInfo>
   {
     return this.http.get<StockInfo>(`/api/products/${productId}/stockInfos/${id}`);
   }
 
-  getStockInfosByProduct(productId: number, page: number, size: number, sort: string): Observable<Page<StockInfo>>
+  getStockInfosByProduct(productId: number): Observable<Page<StockInfo>>
   {
 
      let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     return this.http.get<Page<StockInfo>>(`/api/products/${productId}/stockInfos`, {params: params});
 

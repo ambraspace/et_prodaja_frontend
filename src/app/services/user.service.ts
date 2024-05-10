@@ -11,13 +11,17 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(page: number, size: number, sort: string): Observable<Page<User>>
+  page: number = 0;
+  size: number = 10;
+  sort: string = "username,ASC";
+
+  getUsers(): Observable<Page<User>>
   {
 
     let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     return this.http.get<Page<User>>(`/api/users`, {params: params});
     

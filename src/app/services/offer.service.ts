@@ -12,18 +12,22 @@ export class OfferService {
 
   constructor(private http: HttpClient) { }
 
+  page: number = 0;
+  size: number = 10;
+  sort: string = "id,DESC";
+
   getOffer(id: string): Observable<Offer>
   {
     return this.http.get<Offer>(`/api/offers/${id}`);
   }
 
-  getOffers(page: number, size: number, sort: string, username?: string, companyId?: number, status?: OfferStatus, onlyOverdue?: boolean)
+  getOffers(username?: string, companyId?: number, status?: OfferStatus, onlyOverdue?: boolean)
   {
 
     let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     if (username) params = params.set("u", username);
     if (companyId) params = params.set("c", companyId);

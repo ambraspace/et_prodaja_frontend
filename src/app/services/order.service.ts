@@ -12,18 +12,22 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
+  page: number = 0;
+  size: number = 10;
+  sort: string = "id,DESC";
+
   getOrder(id: number): Observable<Order>
   {
     return this.http.get<Order>(`/api/orders/${id}`);
   }
 
-  getOrders(page: number, size: number, sort: string, warehouseId?: number, status?: OrderStatus, onlyUndelivered?: boolean): Observable<Page<Order>>
+  getOrders(warehouseId?: number, status?: OrderStatus, onlyUndelivered?: boolean): Observable<Page<Order>>
   {
 
     let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     if (warehouseId) params = params.set("w", warehouseId);
     if (status) params = params.set("s", status);

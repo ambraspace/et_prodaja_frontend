@@ -11,18 +11,22 @@ export class DeliveryService {
 
   constructor(private http: HttpClient) { }
 
+  page: number = 0;
+  size: number = 10;
+  sort: string = "id,DESC";
+
   getDelivery(id: number): Observable<Delivery>
   {
     return this.http.get<Delivery>(`/api/deliveries/${id}`); 
   }
 
-  getDeliveries(page: number, size: number, sort: string, companyId?: number, status?: 'ON_THE_WAY' | 'DELIVERED'): Observable<Page<Delivery>>
+  getDeliveries(companyId?: number, status?: 'ON_THE_WAY' | 'DELIVERED'): Observable<Page<Delivery>>
   {
 
     let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     if (companyId)
       params = params.set("c", companyId);

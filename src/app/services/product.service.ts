@@ -11,8 +11,11 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(page: number, size: number, sort: string,
-    query?: string, includeComments?: boolean, warehouseId?: number, tagIds?: number[], categoryId?: number): Observable<Page<Product>>
+  page: number = 0;
+  size: number = 10;
+  sort: string = "name,ASC";
+
+  getProducts(query?: string, includeComments?: boolean, warehouseId?: number, tagIds?: number[], categoryId?: number): Observable<Page<Product>>
   {
 
     let tagString = null;
@@ -24,9 +27,9 @@ export class ProductService {
     }
 
     let params: HttpParams = new HttpParams()
-      .set("page", page)
-      .set("size", size)
-      .set("sort", sort);
+      .set("page", this.page)
+      .set("size", this.size)
+      .set("sort", this.sort);
 
     if (query) params = params.set("q", query);
     if (includeComments) params = params.set("cm", includeComments);
