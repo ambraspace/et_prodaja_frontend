@@ -19,13 +19,18 @@ export class ResponseInterceptor implements HttpInterceptor {
     {
         return next.handle(req).pipe(tap({
             error: (err: HttpErrorResponse) => {
+                console.log(err);
+                
                 if (err.status === 401)
                 {
                     this.auth.returnUrl = this.router.url;
                     this.auth.logout();
-                    this.snackBar.open("Authentication failed! Please check your credentials.", undefined, {duration: 2000});
+                    this.snackBar.open("Authentication failed! Please check your credentials.", undefined, {duration: 3000});
                 } else {
-                    this.snackBar.open("Error occured:\n" + err.status + " - " + err.statusText, undefined, {duration: 2000});
+                    let message = "Error occured:\n" + err.status + " - " + err.statusText;
+                    if (err.error && err.error.message)
+                        message = err.error.message;
+                    this.snackBar.open(message, "OK");
                 }
             }
         }));
