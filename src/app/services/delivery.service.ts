@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Delivery } from '../model/delivery';
 import { Page } from '../model/page';
+import { DeliveryStatus } from '../model/delivery-status';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class DeliveryService {
     return this.http.get<Delivery>(`/api/deliveries/${id}`); 
   }
 
-  getDeliveries(companyId?: number, status?: 'ON_THE_WAY' | 'DELIVERED'): Observable<Page<Delivery>>
+  getDeliveries(companyId?: number, status?: DeliveryStatus): Observable<Page<Delivery>>
   {
 
     let params: HttpParams = new HttpParams()

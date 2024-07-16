@@ -28,4 +28,11 @@ export class AppComponent {
     return false;
   }
 
+  isAdmin(): boolean
+  {
+    if (this.auth.getToken() && this.auth.getToken()!.role === 'ADMIN')
+      return true;
+    return false;
+  }
+
 }

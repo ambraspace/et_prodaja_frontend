@@ -4,16 +4,16 @@ import { Tag } from "./tag";
 
 export interface Product
 {
-    id: number;
+    id?: number;
     name: string;
     previews: Preview[];
     unit: string;
     price: number;
-    purchasePrice: number;
-    availableQty: number;
-    offeredQty: number;
-    orderedQty: number;
+    purchasePrice?: number;
+    availableQty?: number;
+    offeredQty?: number;
+    orderedQty?: number;
     category: Category;
     tags: Tag[];
-    comment: string;
+    comment?: string;
 }

@@ -1,1 +1,46 @@
-<p>product-view works!</p>
+<h2>Proizvodi<button mat-icon-button color="accent" (click)="addProduct()"><span class="material-symbols-outlined">add_circle</span></button></h2>
+<div>
+    <div id="filter">
+        @if (filterApplied()) {
+            <button mat-mini-fab color="accent" color="accent" (click)="openFilter()">
+                <span class="material-symbols-outlined">tune</span>
+            </button>
+        } @else {
+            <button mat-mini-fab color="accent" color="basic" (click)="openFilter()">
+                <span class="material-symbols-outlined">tune</span>
+            </button>
+        }
+        </div>
+    <mat-paginator [pageSize]="productPage?.size" [pageIndex]="productPage?.number" [pageSizeOptions]="pageSizeOptions" [length]="productPage?.totalElements" [showFirstLastButtons]="true" (page)="updatePage($event)"></mat-paginator>
+</div>
+<mat-grid-list cols="{{numColums}}" rowHeight="1:1.5" gutterSize="10px">
+    <mat-grid-tile *ngFor="let product of productPage?.content">
+        <mat-card>
+            <mat-card-content>
+                <a routerLink="/products/{{product.id}}">
+                    <img src="/api/files?fn={{getDefaultPreviewImage(product)}}"  id="image" title="{{product.comment}}">
+                </a>
+                <div id="qty" title="Dostupno: {{product.availableQty}}. Prodato: {{product.orderedQty}}. Na ponudama: {{product.offeredQty}}.">
+                    <span>{{product.availableQty}}</span>
+                </div>
+            </mat-card-content>
+            <mat-card-footer>
+                <div id="name">
+                    <p>
+                        {{product.name}}
+                    </p>
+                </div>
+                <div id="mini-footer">
+                    <div id="tags">
+                        @if (product.tags && product.tags.length > 0) {
+                            <span title="{{tagsSerialized(product.tags)}}" class="material-symbols-outlined">shoppingmode</span>
+                        }
+                    </div>
+                    <div id="price">
+                        <span title="{{product.price | toEuro | currency : '1.2-2' : '€'}}">{{product.price | currency : "1.2-2" : 'KM'}}</span>
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

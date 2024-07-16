@@ -1,0 +1,15 @@
+<div style="padding: 1em;">
+    <h3>Nova kompanija:</h3>
+    <mat-form-field>
+        <mat-label>Naziv</mat-label>
+        <input matInput type="text" cdkFocusInitial [(ngModel)]="formData.name">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>Grad / država</mat-label>
+        <input matInput type="text" [(ngModel)]="formData.locality">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button (click)="onClose()">Odustani</button>
+    <button mat-raised-button (click)="onConfirm()">Dodaj</button>
+</div>

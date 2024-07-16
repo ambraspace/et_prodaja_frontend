@@ -1,1 +1,76 @@
-<p>delivery-view works!</p>
+<h2>Isporuke<button mat-icon-button color="accent"><span class="material-symbols-outlined">add_circle</span></button></h2>
+<div *ngIf="deliveryList.length > 0">
+
+    <mat-paginator [length]="deliveries?.totalElements"
+              [pageIndex]="deliveries?.number"
+              [pageSize]="deliveries?.size"
+              [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
+              aria-label="Select page" (page)="updateTable($event)">
+    </mat-paginator>
+
+    <table mat-table [dataSource]="deliveryList" class="mat-elevation-z8">
+        'id',
+        'supplier',
+        'reference',
+        'status',
+        'deliveryDate',
+        'value',
+        'comment',
+        'actions'
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Broj isporuke </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="supplier">
+        <th mat-header-cell *matHeaderCellDef> Isporučilac </th>
+        <td mat-cell *matCellDef="let element"> {{element.supplier.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reference">
+        <th mat-header-cell *matHeaderCellDef> Ref. </th>
+        <td mat-cell *matCellDef="let element"> {{element.supplierReference}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status isporuke </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.status == 'DELIVERED'" title="{{element.status | deliveryStatusLocalize}}" class="material-symbols-outlined">sports_score</span>
+          <span *ngIf="element.status == 'ON_THE_WAY'" title="{{element.status | deliveryStatusLocalize}}"class="material-symbols-outlined">local_shipping</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deliveryDate">
+        <th mat-header-cell *matHeaderCellDef> Datum isporuke </th>
+        <td mat-cell *matCellDef="let element"> {{element.deliveryDate | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Vrijednost </th>
+        <td mat-cell *matCellDef="let element" title="{{element.value | toEuro | currency : '1.2-2' : '€'}}"> {{element.value | currency : '1.2-2' : 'KM'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef> Komentar </th>
+        <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Akcije </th>
+          <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent" title="Izmijenite isporuku" (click)="editDelivery(element.id)">
+                <span class="material-symbols-outlined">edit_square</span>
+              </button>
+              <button mat-icon-button color="accent" title="Obrišite isporuku" (click)="deleteDelivery(element.id)">
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+              <button *ngIf="element.status=='ON_THE_WAY'" mat-icon-button color="accent" title="Označi isporučenom" (click)="deleteDelivery(element.id)">
+                <span class="material-symbols-outlined">sports_score</span>
+              </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>

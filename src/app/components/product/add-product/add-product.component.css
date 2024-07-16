@@ -1,0 +1,100 @@
+#component {
+    margin: 1em;
+}
+
+#main {
+    width: 100%;
+}
+
+#left {
+    position: relative;
+    float: left;
+    width: 300px;
+}
+
+#right {
+    float: left;
+    width: calc(400px - 3em);
+    position: relative;
+    left: 1em;
+}
+
+#progress {
+    width: 100%;
+    margin: 1em 0;
+    height: 2em ;
+}
+
+#upload {
+    width: 100%;
+    height: 3em;
+}
+
+#upload button {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#image {
+    height: 300px;
+    width: 300px;
+    border: 1px solid black;
+}
+
+#image p {
+    margin: auto;
+    line-height: 300px;
+    text-align: center;
+}
+
+#image img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+#left_arrow {
+    position: absolute;
+    top: calc(150px - 1em);
+    left: 1px;
+    max-height: 2em;
+    max-width: 2em;
+    background-color: white;
+    opacity: 50%;
+}
+
+#right_arrow {
+    position: absolute;
+    top: calc(150px - 1em);
+    right: 1px;
+    max-height: 2em;
+    max-width: 2em;
+    background-color: white;
+    opacity: 50%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+#price {
+    text-align: right;
+}
+
+#legacy {
+    display: none;
+}
+
+#buttons {
+    clear: both;
+    text-align: right;
+}
+
+.invalid {
+    color: red;
+}
+

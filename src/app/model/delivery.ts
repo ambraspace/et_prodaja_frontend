@@ -1,6 +1,6 @@
 import { Company } from "./company";
+import { DeliveryItem } from "./delivery-item";
 import { DeliveryStatus } from "./delivery-status";
-import { Item } from "./item";
 
 export interface Delivery
 {
@@ -10,6 +10,6 @@ export interface Delivery
     comment: string;
     deliveryDate: Date;
     status: DeliveryStatus;
-    items: Item[];
+    deliveryItems: DeliveryItem[]
     value: number;
 }

@@ -1,0 +1,38 @@
+<div>
+    <h3>Skladišta&nbsp;<button mat-icon-button color="accent" (click)="addWarehouse()"><span class="material-symbols-outlined">add_circle</span></button></h3>
+    <div *ngIf="warehouses.length > 0">
+      <table mat-table [dataSource]="warehouses" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Naziv </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Akcije </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="accent" title="Izmijenite podatke o skladištu" (click)="editWarehouse(element)">
+                  <span class="material-symbols-outlined">edit_square</span>
+                </button>
+                <button mat-icon-button color="accent" title="Obrišite skladište" (click)="deleteWarehouse(element)">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <div *ngIf="warehouses.length == 0">
+      <p>
+        Nema skladišta
+      </p>
+    </div>
+</div>
+  

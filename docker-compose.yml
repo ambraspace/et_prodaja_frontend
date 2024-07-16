@@ -1,0 +1,12 @@
+services:
+
+  et-prpdaja-frontend:
+    image: ambraspace/et-prodaja:latest
+    ports:
+      - "8443:8443"
+    volumes:
+      - "/etc/letsencrypt/live/ambraspace.com/fullchain.pem:/var/lib/ssl/fullchain.pem:ro"
+      - "/etc/letsencrypt/live/ambraspace.com/privkey.pem:/var/lib/ssl/privkey.pem:ro"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

@@ -11,18 +11,20 @@ import { OrderViewComponent } from './components/order/order-view/order-view.com
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
 import { ProductViewComponent } from './components/product/product-view/product-view.component';
-import { UserDetailsComponent } from './components/user/user-details/user-details.component';
 import { UserViewComponent } from './components/user/user-view/user-view.component';
-import { loginGuard } from './login.guard';
+import { loginGuard } from './guards/login.guard';
+import { adminGuard } from './guards/admin.guard';
+import { CategoriesEditorComponent } from './components/category/categories-editor/categories-editor.component';
+import { pendingChangesGuard } from './guards/pending-changes.guard';
 
 export const routes: Routes = [
     {path: "login", component: LoginComponent, title: "Prijava"},
-    {path: "users", component: UserViewComponent, title: "Korisnici", canActivate: [loginGuard]},
-    {path: "users/:username", component: UserDetailsComponent, title: "Detalji korisnika", canActivate: [loginGuard]},
+    {path: "users", component: UserViewComponent, title: "Korisnici", canActivate: [adminGuard, loginGuard]},
     {path: "companies/:id", component: CompanyDetailComponent, title: "Detalji kompanije", canActivate: [loginGuard]},
     {path: "companies", component: CompanyViewComponent, title: "Kompanije", canActivate: [loginGuard]},
     {path: "products/:id", component: ProductDetailsComponent, title: "Detalji proizvoda", canActivate: [loginGuard]},
     {path: "products", component: ProductViewComponent, title: "Proizvodi", canActivate: [loginGuard]},
+    {path: "categories", component: CategoriesEditorComponent, title: "Kategorije proizvoda", canActivate: [loginGuard], canDeactivate: [pendingChangesGuard]},
     {path: "offers/:id", component: OfferDetailsComponent, title: "Detalji ponude", canActivate: [loginGuard]},
     {path: "offers", component: OfferViewComponent, title: "Ponude", canActivate: [loginGuard]},
     {path: "orders/:id", component: OrderDetailsComponent, title: "Detalji narudžbe", canActivate: [loginGuard]},

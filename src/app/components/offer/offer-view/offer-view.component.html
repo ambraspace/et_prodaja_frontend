@@ -1,1 +1,74 @@
-<p>offer-view works!</p>
+<h2>Ponude<button mat-icon-button color="accent"><span class="material-symbols-outlined">add_circle</span></button></h2>
+<div *ngIf="offerList.length > 0">
+
+    <mat-paginator [length]="offers?.totalElements"
+              [pageIndex]="offers?.number"
+              [pageSize]="offers?.size"
+              [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
+              aria-label="Select page" (page)="updateTable($event)">
+    </mat-paginator>
+
+    <table mat-table [dataSource]="offerList" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Broj ponude </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Kompanija </th>
+        <td mat-cell *matCellDef="let element"> {{element.company.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="offerDate">
+        <th mat-header-cell *matHeaderCellDef> Datum ponude </th>
+        <td mat-cell *matCellDef="let element"> {{element.offerDate | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="validUntil">
+        <th mat-header-cell *matHeaderCellDef> Važnost ponude </th>
+        <td mat-cell *matCellDef="let element"> {{element.validUntil | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status ponude </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.status == 'ACTIVE'" title="{{element.status | offerStatusLocalize}}" class="material-symbols-outlined">update</span>
+          <span *ngIf="element.status == 'CANCELED'" title="{{element.status | offerStatusLocalize}}" class="material-symbols-outlined">delete</span>
+          <span *ngIf="element.status == 'ACCEPTED'" title="{{element.status | offerStatusLocalize}}" class="material-symbols-outlined">handshake</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef> Nabavna vrijednost </th>
+        <td mat-cell *matCellDef="let element" title="{{element.cost | toEuro | currency : '1.2-2' : '€'}}"> {{element.cost | currency : '1.2-2' : 'KM'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Prodajna vrijednost </th>
+        <td mat-cell *matCellDef="let element" title="{{element.value | toEuro | currency : '1.2-2' : '€'}}"> {{element.value | currency : '1.2-2' : 'KM'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="margin">
+        <th mat-header-cell *matHeaderCellDef> Marža </th>
+        <td mat-cell *matCellDef="let element"> {{(element.margin / 100) | percent : '1.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef> Komentar </th>
+        <td mat-cell *matCellDef="let element"> <span *ngIf="element.comments" class="material-symbols-outlined" title="{{element.comments}}">comment</span> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Akcije </th>
+          <td mat-cell *matCellDef="let element">
+              <a mat-icon-button color="accent" title="Pogledaj ponudu" routerLink="/offers/{{element.id}}">
+                <span class="material-symbols-outlined">visibility</span>
+              </a>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Company } from '../model/company';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Page } from '../model/page';
 
 @Injectable({
@@ -25,6 +25,20 @@ export class CompanyService {
 
     return this.http.get<Page<Company>>(`/api/companies`, {params: params});
     
+  }
+
+
+  searchCompanies(query: string, size?: number): Observable<Company[]>
+  {
+
+    if (!size) size = 5;
+
+    let params: HttpParams = new HttpParams()
+      .set("q", query);
+
+    return this.http.get<Page<Company>>(`/api/companies`, {params: params})
+      .pipe(map(page => page.content));
+
   }
 
   getCompany(id: number): Observable<Company>

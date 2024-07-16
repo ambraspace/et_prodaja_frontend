@@ -15,7 +15,7 @@ export class ProductService {
   size: number = 10;
   sort: string = "name,ASC";
 
-  getProducts(query?: string, includeComments?: boolean, warehouseId?: number, tagIds?: number[], categoryId?: number): Observable<Page<Product>>
+  getProducts(query?: string, includeComments?: boolean, warehouseId?: number, tagIds?: string[], categoryId?: number): Observable<Page<Product>>
   {
 
     let params: HttpParams = new HttpParams()
@@ -29,9 +29,9 @@ export class ProductService {
 
     if (warehouseId) params = params.set("w", warehouseId);
 
-    if (tagIds && tagIds.length > 1)
+    if (tagIds && tagIds.length > 0)
     {
-      tagIds.forEach(t => params = params.set("t", t));
+      tagIds.forEach(t => params = params.append("t", t));
     }
 
     if (categoryId) params = params.set("ct", categoryId);
@@ -44,8 +44,6 @@ export class ProductService {
   {
     return this.http.get<Product>(`/api/products/${id}`);
   }
-
-  // TODO: Properly implement file upload
 
   addProduct(product: Product): Observable<Product>
   {

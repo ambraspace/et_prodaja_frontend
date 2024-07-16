@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Warehouse } from '../model/warehouse';
@@ -20,6 +20,11 @@ export class WarehouseService {
     return this.http.get<Warehouse>(`/api/companies/${companyId}/warehouses/${id}`);
   }
 
+  getWarehouseById(id: number): Observable<Warehouse>
+  {
+    return this.http.get<Warehouse>(`/api/warehouses/${id}`);
+  }
+
   addWarehouse(companyId: number, warehouse: Warehouse): Observable<Warehouse>
   {
     return this.http.post<Warehouse>(`/api/companies/${companyId}/warehouses`, warehouse);
@@ -33,6 +38,17 @@ export class WarehouseService {
   deleteWarehouse(companyId: number, id: number): Observable<void>
   {
     return this.http.delete<void>(`/api/companies/${companyId}/warehouses/${id}`);
+  }
+
+  searchWarehouse(query: string, size: number): Observable<Warehouse[]>
+  {
+
+    let param: HttpParams = new HttpParams();
+    param = param.set("q", query);
+    param = param.set("size", "" + size);
+
+    return this.http.get<Warehouse[]>(`/api/warehouses/search`, {params: param});
+
   }
 
 }

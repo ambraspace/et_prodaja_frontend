@@ -1,0 +1,10 @@
+
+mat-tree-node {
+    border: 1px solid gray;
+    position: relative;
+}
+
+#actions {
+    position: absolute;
+    right: 0px;
+}

@@ -1,6 +1,6 @@
 import { LOCALE_ID, importProvidersFrom } from '@angular/core';
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { ActivatedRouteSnapshot, provideRouter, withComponentInputBinding } from '@angular/router';
 import '@angular/common/locales/global/bs-Latn';
 
 import { routes } from './app.routes';

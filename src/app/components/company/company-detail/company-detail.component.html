@@ -1,1 +1,16 @@
-<p>Selected company ID: {{companyId}}</p>
+<h2>Detalji kompanije</h2>
+<div>
+  <mat-form-field>
+    <mat-label>Naziv kompanije</mat-label>
+    <strong><input matInput [(ngModel)]="formFieldName"></strong>
+  </mat-form-field>&nbsp;
+  <mat-form-field>
+    <mat-label>Grad / država</mat-label>
+    <strong><input matInput [(ngModel)]="formFieldLocality"></strong>
+  </mat-form-field>&nbsp;
+  <button mat-raised-button color="accent" (click)="saveCompany()" [disabled]="!dirty">Sačuvaj</button>
+</div>
+<app-warehouse-view *ngIf="company" [companyId]="company!.id">
+</app-warehouse-view>
+<app-contact-view *ngIf="company" [companyId]="company!.id">
+</app-contact-view>

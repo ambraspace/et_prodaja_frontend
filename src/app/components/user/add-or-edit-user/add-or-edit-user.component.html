@@ -1,0 +1,52 @@
+<div style="margin: 1em;">
+    <form [formGroup]="userForm">
+        <mat-form-field>
+            <mat-label>Korisničko ime</mat-label>
+            <input matInput type="text" formControlName="username">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Lozinka</mat-label>
+            <input matInput type="password" formControlName="password">
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-label>Uloga</mat-label>
+            <mat-select formControlName="role">
+                @for (role of roleTypes; track role) {
+                    <mat-option [value]="role">{{role | userRole}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-label>Ime i prezime</mat-label>
+            <input matInput type="text" formControlName="fullName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kompanija</mat-label>
+            <input type="text" (keyup)="search(getValue($event))" formControlName="company"
+            placeholder="Pick one"
+            aria-label="Number"
+            matInput
+            [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="companyToCompanyName" requireSelection="true">
+            @for (c of companies$ | async; track c) {
+                <mat-option [value]="c">{{c.name}} ({{c.locality}})</mat-option>
+            }
+            </mat-autocomplete>
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-label>Telefon</mat-label>
+            <input matInput type="tel" formControlName="phone">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Potpis</mat-label>
+            <input matInput type="text" formControlName="signature">
+        </mat-form-field><br>
+        <mat-checkbox formControlName="canViewPrices">Cijene vidljive</mat-checkbox>
+    </form>
+    <button mat-raised-button (click)="cancel()">Odustani</button>
+    <button mat-raised-button (click)="save()">Sačuvaj</button>
+</div>

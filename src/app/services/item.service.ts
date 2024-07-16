@@ -15,19 +15,24 @@ export class ItemService {
     return this.http.get<Item>(`/api/offers/${offerId}/items/${id}`);
   }
 
+  getOrderItem(orderId: string, id: number): Observable<Item>
+  {
+    return this.http.get<Item>(`/api/orders/${orderId}/items/${id}`);
+  }
+
   getOfferItems(offerId: string): Observable<Item[]>
   {
     return this.http.get<Item[]>(`/api/offers/${offerId}/items`);
   }
 
-  getOrderItems(orderId: number): Observable<Item[]>
+  getOrderItems(orderId: number, onlyUndelivered?: boolean): Observable<Item[]>
   {
-    return this.http.get<Item[]>(`/api/orders/${orderId}/items`);
-  }
-
-  getDeliveryItems(deliveryId: number): Observable<Item[]>
-  {
-    return this.http.get<Item[]>(`/api/deliveries/${deliveryId}/items`);
+    if (onlyUndelivered)
+    {
+      return this.http.get<Item[]>(`/api/orders/${orderId}/items?ou=true`);
+    } else {
+      return this.http.get<Item[]>(`/api/orders/${orderId}/items`);
+    }
   }
 
   addItem(offerId: string, item: Item): Observable<Item>
