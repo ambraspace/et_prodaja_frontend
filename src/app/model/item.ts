@@ -1,7 +1,7 @@
 import { DeliveryItem } from "./delivery-item";
 import { Offer } from "./offer";
-import { StockInfo } from "./order";
-import { Order } from "./stock-info";
+import { Order } from "./order";
+import { StockInfo } from "./stock-info";
 
 export interface Item
 {

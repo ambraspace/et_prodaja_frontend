@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { OrderService } from '../../../services/order.service';
 import { Page } from '../../../model/page';
-import { Order } from '../../../model/stock-info';
+import { Order } from '../../../model/order';
 import { MatPaginator } from '@angular/material/paginator';
 import { OrderStatusLocalizePipe } from '../../../pipes/order-status-localize.pipe';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';

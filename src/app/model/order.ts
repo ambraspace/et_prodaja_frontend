@@ -1,7 +1,7 @@
 import { OrderStatus } from "./order-status";
 import { Warehouse } from "./warehouse";
 
-export interface StockInfo
+export interface Order
 {
     id: number;
     warehouse: Warehouse;

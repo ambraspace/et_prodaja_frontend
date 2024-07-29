@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StockInfo } from '../model/order';
+import { StockInfo } from '../model/stock-info';
 import { Page } from '../model/page';
 
 @Injectable({
