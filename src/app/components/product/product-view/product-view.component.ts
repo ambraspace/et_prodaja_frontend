@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Page } from '../../../model/page';
 import { Product } from '../../../model/product';
 import { ProductService } from '../../../services/product.service';
-import { CurrencyPipe, NgFor } from '@angular/common';
+import { AsyncPipe, CurrencyPipe, NgFor } from '@angular/common';
 import { MatGridListModule} from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { debounceTime, Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginator } from '@angular/material/paginator';
@@ -26,6 +26,7 @@ import { ProductFilterComponent } from '../product-filter/product-filter.compone
     MatButtonModule,
     MatCardModule,
     CurrencyPipe,
+    AsyncPipe,
     ToEuroPipe,
     MatBadgeModule,
     MatPaginator,
@@ -81,26 +82,23 @@ export class ProductViewComponent implements OnInit, OnDestroy {
   }
   
   
-  productPage: Page<Product> | null = null;
+  productPage?: Page<Product>
+
+
+  /*
+    Ovo je ubačeno da se ne učitavaju proizvodi dva puta za redom.
+  */
+  private productsLoadSubject: Subject<string> = new Subject<string>();
+
+  productObservable$ = this.productsLoadSubject.pipe(
+    debounceTime(200),
+    switchMap(() => this.productService.getProducts(
+      this.q, this.cm, this.w, this.t, this.ct
+    )
+  ))
 
 
   ngOnInit(): void {
-
-    this.route.queryParams.subscribe(pm => {
-      this.q = pm['q'];
-      this.cm = pm['cm'];
-      this.w = pm['w'];
-      if (typeof pm['t'] === 'string')
-      {
-        this.t = Array.of(pm['t']);
-      } else if (typeof pm['t'] === 'object') {
-        this.t = pm['t'];
-      } else {
-        this.t = [];
-      }
-      this.ct = pm['ct'];
-      this.loadProducts();
-    });
 
     this.breakpointObserver.observe(
       [
@@ -123,6 +121,22 @@ export class ProductViewComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.route.queryParams.subscribe(pm => {
+      this.q = pm['q'];
+      this.cm = pm['cm'];
+      this.w = pm['w'];
+      if (typeof pm['t'] === 'string')
+      {
+        this.t = Array.of(pm['t']);
+      } else if (typeof pm['t'] === 'object') {
+        this.t = pm['t'];
+      } else {
+        this.t = [];
+      }
+      this.ct = pm['ct'];
+      this.loadProducts();
+    });
+
   }
 
 
@@ -131,23 +145,17 @@ export class ProductViewComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-
-  /*
-    Ovo je ubačeno da se ne učitavaju proizvodi dva puta za redom.
-  */
-  private productsLoadSubject: Subject<void> = new Subject<void>();
-
-  private productObservable$ = this.productsLoadSubject.pipe(
-    debounceTime(200),
-    switchMap(() => this.productService.getProducts(
-      this.q, this.cm, this.w, this.t, this.ct
-    ))
-  )
   
   loadProducts()
   {
-    this.productsLoadSubject.next();
-    this.productObservable$.subscribe((page) => this.productPage = page)
+    this.productsLoadSubject.next("PING");
+    if (this.productObservable$)
+    {
+      let s = this.productObservable$.subscribe(p => {
+        this.productPage = p;
+        s.unsubscribe();
+      });
+    }
   }
 
 
