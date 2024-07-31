@@ -15,6 +15,8 @@ export class ProductService {
   size: number = 10;
   sort: string = "name,ASC";
 
+  rowCount: number = 2;
+
   getProducts(query?: string, includeComments?: boolean, warehouseId?: number, tagIds?: string[], categoryId?: number): Observable<Page<Product>>
   {
 

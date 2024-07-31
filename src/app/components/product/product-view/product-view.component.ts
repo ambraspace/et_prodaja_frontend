@@ -116,7 +116,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
       for (const query of Object.keys(result.breakpoints)) {
         if (result.breakpoints[query]) {
           this.numColums = this.numColumnsMap.get(query) ?? 5;
-          this.productService.size = 2 * this.numColums;
+          this.productService.size = this.productService.rowCount * this.numColums;
           this.pageSizeOptions = this.pageSizeOptionsMultiplicators.map(psom => psom * this.numColums);
           this.loadProducts();
         }
@@ -182,8 +182,10 @@ export class ProductViewComponent implements OnInit, OnDestroy {
     if (this.productService.page != event.pageIndex ||
       this.productService.size != event.pageSize)
     {
+      let numCols = this.productService.size / this.productService.rowCount;
       this.productService.page = event.pageIndex;
-      this.productService .size = event.pageSize;
+      this.productService.size = event.pageSize;
+      this.productService.rowCount = this.productService.size / numCols;
       this.loadProducts();
     }
   }
