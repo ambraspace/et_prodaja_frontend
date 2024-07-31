@@ -100,6 +100,14 @@ export class ProductFormComponent implements OnInit {
   {
     return this.productForm.dirty;
   }
+
+  set dirty(value: boolean)
+  {
+    if (value)
+      this.productForm.markAsDirty()
+    else 
+      this.productForm.reset();
+  }
   
 
   constructor(

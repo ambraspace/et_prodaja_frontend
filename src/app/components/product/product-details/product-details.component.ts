@@ -61,7 +61,10 @@ export class ProductDetailsComponent implements OnInit {
   updateProduct(): void
   {
     this.productService.updateProduct(this.productId, this.productFormComponent!.product)
-      .subscribe(p => this.router.navigateByUrl("/products"))
+      .subscribe(p => {
+        this.productFormComponent!.dirty = false;
+        this.router.navigateByUrl("/products")
+      })
   }
 
 
