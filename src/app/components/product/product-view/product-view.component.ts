@@ -88,7 +88,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
   /*
     Ovo je ubačeno da se ne učitavaju proizvodi dva puta za redom.
   */
-  private productsLoadSubject: Subject<string> = new Subject<string>();
+  private productsLoadSubject: Subject<void> = new Subject<void>();
 
   productObservable$ = this.productsLoadSubject.pipe(
     debounceTime(100),
@@ -148,7 +148,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
   
   loadProducts()
   {
-    this.productsLoadSubject.next("PING");
+    this.productsLoadSubject.next();
     if (this.productObservable$)
     {
       let s = this.productObservable$.subscribe(p => {
