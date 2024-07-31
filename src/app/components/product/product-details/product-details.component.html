@@ -2,7 +2,7 @@
 <app-product-form [product]="product" #productForm></app-product-form>
 <div class="clear">
     <button mat-flat-button color="warn" (click)="deleteProduct()">Obriši proizvod</button>
-    <button mat-flat-button color="basic" (click)="updateProduct()">Sačuvaj izmjene</button>
+    <button mat-flat-button color="basic" (click)="updateProduct()" [disabled]="!hasUnsavedChanges()">Sačuvaj izmjene</button>
 </div>
 <app-stock-info class="clear" [productId]="product?.id"></app-stock-info>   
 @if (product) {

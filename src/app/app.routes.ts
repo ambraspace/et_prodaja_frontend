@@ -22,7 +22,7 @@ export const routes: Routes = [
     {path: "users", component: UserViewComponent, title: "Korisnici", canActivate: [adminGuard, loginGuard]},
     {path: "companies/:id", component: CompanyDetailComponent, title: "Detalji kompanije", canActivate: [loginGuard]},
     {path: "companies", component: CompanyViewComponent, title: "Kompanije", canActivate: [loginGuard]},
-    {path: "products/:id", component: ProductDetailsComponent, title: "Detalji proizvoda", canActivate: [loginGuard]},
+    {path: "products/:id", component: ProductDetailsComponent, title: "Detalji proizvoda", canActivate: [loginGuard], canDeactivate: [pendingChangesGuard]},
     {path: "products", component: ProductViewComponent, title: "Proizvodi", canActivate: [loginGuard]},
     {path: "categories", component: CategoriesEditorComponent, title: "Kategorije proizvoda", canActivate: [loginGuard], canDeactivate: [pendingChangesGuard]},
     {path: "offers/:id", component: OfferDetailsComponent, title: "Detalji ponude", canActivate: [loginGuard]},

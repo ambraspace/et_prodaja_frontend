@@ -82,4 +82,12 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
+
+  hasUnsavedChanges(): boolean
+  {
+    if (this.productFormComponent?.dirty)
+      return true;
+    return false;
+  }
+
 }

@@ -96,6 +96,11 @@ export class ProductFormComponent implements OnInit {
     return this.productForm.valid;
   }
   
+  get dirty(): boolean
+  {
+    return this.productForm.dirty;
+  }
+  
 
   constructor(
     private previewService: PreviewService,
@@ -247,6 +252,7 @@ export class ProductFormComponent implements OnInit {
     if (pos === -1)
     {
       this.tags.push(new FormControl(tag));
+      this.productForm.markAsDirty();
     }
     this.tagInput!.nativeElement.value = '';
     event.option.deselect();
@@ -271,6 +277,7 @@ export class ProductFormComponent implements OnInit {
         if (pos === -1)
         {
             this.tags.push(new FormControl(t));
+            this.productForm.markAsDirty();
         }
         event.chipInput!.clear();
       });
@@ -285,6 +292,7 @@ export class ProductFormComponent implements OnInit {
 
     if (index >= 0) {
       this.tags.removeAt(index);
+      this.productForm.markAsDirty();
     }
   }
 
@@ -324,6 +332,7 @@ export class ProductFormComponent implements OnInit {
         event.body?.forEach(pr => this.previews.push(new FormControl(pr)))
         this.uploadProgress = 100;
       }
+      this.productForm.markAsDirty();
     })
   }
 
@@ -336,6 +345,7 @@ export class ProductFormComponent implements OnInit {
     } else {
       this.previewIndex--;
     }
+    this.productForm.markAsDirty();
   }
 
 
@@ -347,12 +357,14 @@ export class ProductFormComponent implements OnInit {
     } else {
       this.previewIndex++;
     }
+    this.productForm.markAsDirty();
   }
 
 
   removePreview(): void
   {
     this.previews.removeAt(this.previewIndex);
+    this.productForm.markAsDirty();
     if (this.previewIndex > (this.previews.length - 1))
       this.previewIndex--;
   }
