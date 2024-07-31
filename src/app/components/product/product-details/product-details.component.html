@@ -1,1 +1,15 @@
-<h2>Detalji proizvoda<!-- <button mat-icon-button color="accent" (click)="deleteProduct()"><span class="material-symbols-outlined">delete</span></button> --></h2>
+<h2>Detalji proizvoda</h2>
+<app-product-form [product]="product" #productForm></app-product-form>
+<div class="clear">
+    <button mat-flat-button color="warn" (click)="deleteProduct()">Obriši proizvod</button>
+    <button mat-flat-button color="basic" (click)="updateProduct()">Sačuvaj izmjene</button>
+</div>
+<app-stock-info class="clear" [productId]="product?.id"></app-stock-info>   
+@if (product) {
+    <div class="clear">
+        <p>Dostupna količina: {{product.availableQty}}</p>
+        <p>Prodata količina: {{product.orderedQty}}</p>
+        <p>Rezervisana količina: {{product.offeredQty}}</p>
+        <p>Nabavna cijena: <span title="{{product.purchasePrice! | toEuro | currency : '1.2-2' : '€'}}">{{product.purchasePrice | currency : '1.2-2' : 'KM'}}</span></p>
+    </div>
+}

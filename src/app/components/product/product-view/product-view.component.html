@@ -18,7 +18,7 @@
         <mat-card>
             <mat-card-content>
                 <a routerLink="/products/{{product.id}}">
-                    <img src="/api/files?fn={{getDefaultPreviewImage(product)}}"  id="image" title="{{product.comment}}">
+                    <img src="{{getDefaultPreviewImage(product)}}" id="image" title="{{product.comment}}">      
                 </a>
                 <div id="qty" title="Dostupno: {{product.availableQty}}. Prodato: {{product.orderedQty}}. Na ponudama: {{product.offeredQty}}.">
                     <span>{{product.availableQty}}</span>

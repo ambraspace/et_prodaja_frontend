@@ -153,12 +153,15 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 
   getDefaultPreviewImage(product: Product): string
   {
-    let preview = product.previews.find(pr => pr.primary == true);
-    if (preview)
-      return preview.fileName;
-    if (product.previews.length > 0)
-      return product.previews[0].fileName;
-    return "";
+    if (product && product.previews && product.previews.length > 0)
+    {
+      let preview = product.previews.find(pr => pr.primary == true);
+      if (preview)
+        return "/api/files?fn=" + preview.fileName;
+      if (product.previews.length > 0)
+        return "/api/files?fn=" + product.previews[0].fileName;
+    }
+    return "/assets/no-image.jpg";
   }
 
 

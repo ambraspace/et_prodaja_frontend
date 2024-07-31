@@ -1,0 +1,30 @@
+<div style="margin: 1em;">
+    <form [formGroup]="stockInfoForm">
+        <mat-form-field class="w100">
+            <mat-label>Skladište</mat-label>
+            <input type="text" (keyup)="search(getValue($event))" formControlName="warehouse"
+            placeholder="Izaberite skladište"
+            matInput
+            [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="warehouseToWarehouseName" requireSelection="true">
+            @for (w of warehouses$ | async; track w) {
+                <mat-option [value]="w">{{warehouseToWarehouseName(w)}}</mat-option>
+            }
+            </mat-autocomplete>
+        </mat-form-field><br>
+        <mat-form-field class="w100">
+            <mat-label>Šifra dobavljača</mat-label>
+            <input matInput type="text" formControlName="customerReference">
+        </mat-form-field><br>
+        <mat-form-field class="w100">
+            <mat-label>Količina</mat-label>
+            <input matInput type="number" formControlName="quantity">
+        </mat-form-field><br>
+        <mat-form-field class="w100">
+            <mat-label>Nabavna cijena</mat-label>
+            <input matInput type="number" formControlName="unitPrice">
+        </mat-form-field><br>
+    </form>
+    <button mat-raised-button (click)="cancel()">Odustani</button>
+    <button mat-raised-button (click)="save()">Sačuvaj</button>
+</div>

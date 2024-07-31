@@ -13,7 +13,7 @@ export class StockInfoService {
 
   page: number = 0;
   size: number = 10;
-  sort: string = "id,DESC";
+  sort: string = "id,ASC";
 
   getStockInfo(productId: number, id: number): Observable<StockInfo>
   {

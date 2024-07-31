@@ -1,0 +1,34 @@
+#preview
+{
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+}
+
+#preview img
+{
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.clear {
+    clear: both;
+}
+
+app-product-form
+{
+    display: block;
+}
+
+app-stock-info
+{
+    display: block;
+}
