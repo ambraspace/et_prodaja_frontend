@@ -91,7 +91,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
   private productsLoadSubject: Subject<string> = new Subject<string>();
 
   productObservable$ = this.productsLoadSubject.pipe(
-    debounceTime(200),
+    debounceTime(100),
     switchMap(() => this.productService.getProducts(
       this.q, this.cm, this.w, this.t, this.ct
     )
