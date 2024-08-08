@@ -24,6 +24,10 @@
             <mat-label>Nabavna cijena</mat-label>
             <input matInput type="number" formControlName="unitPrice">
         </mat-form-field><br>
+        <mat-form-field class="w100">
+            <mat-label>Rashodovana količina</mat-label>
+            <input matInput type="number" formControlName="repairableQuantity">
+        </mat-form-field><br>
     </form>
     <button mat-raised-button (click)="cancel()">Odustani</button>
     <button mat-raised-button (click)="save()">Sačuvaj</button>

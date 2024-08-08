@@ -66,7 +66,7 @@ export class StockInfoComponent {
   }
 
 
-  displayedColumns = ['warehouse', 'customerReference', 'quantity', 'unitPrice', 'actions'];
+  displayedColumns = ['warehouse', 'customerReference', 'quantity', 'unitPrice', 'repairableQuantity', 'actions'];
 
 
   updateTable(event: any): void

@@ -48,7 +48,8 @@ export class AddOrEditStockInfoComponent implements OnInit {
     warehouse: new FormControl<Warehouse>({} as Warehouse, [Validators.required]),
     customerReference: new FormControl<string>('', [Validators.minLength(2), Validators.maxLength(255)]),
     quantity: new FormControl<number>(0, [Validators.min(0)]),
-    unitPrice: new FormControl<number>(0, [Validators.min(0)])
+    unitPrice: new FormControl<number>(0, [Validators.min(0)]),
+    repairableQuantity: new FormControl<number>(0),
   })
 
 
