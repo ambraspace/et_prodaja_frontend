@@ -13,7 +13,7 @@ export class ProductService {
 
   page: number = 0;
   size: number = 10;
-  sort: string = "name,ASC";
+  sort: string = "category.order,name,id";
 
   rowCount: number = 2;
 
