@@ -248,4 +248,14 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 
   }
 
+
+  tooltip(p: Product): string
+  {
+    let retVal = ""; //"Dostupno: " + p.availableQty + ". ";
+    if (p.orderedQty && p.orderedQty > 0) retVal += "Prodato: " + p.orderedQty + ". ";
+    if (p.offeredQty && p.offeredQty > 0) retVal += "Na ponudama: " + p.offeredQty + ". ";
+    if (p.repairableQty && p.repairableQty > 0) retVal += "Za popravku: " + p.repairableQty + ". ";
+    return retVal;
+  }
+
 }

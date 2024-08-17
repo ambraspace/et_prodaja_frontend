@@ -11,5 +11,8 @@
         <p>Prodata količina: {{product.orderedQty}}</p>
         <p>Rezervisana količina: {{product.offeredQty}}</p>
         <p>Nabavna cijena: <span title="{{product.purchasePrice! | toEuro | currency : '1.2-2' : '€'}}">{{product.purchasePrice | currency : '1.2-2' : 'KM'}}</span></p>
+        @if (product.repairableQty && product.repairableQty > 0) {
+            <p>Oštećeno: {{product.repairableQty}}</p>
+        }
     </div>
 }

@@ -13,6 +13,7 @@ export interface Product
     availableQty?: number;
     offeredQty?: number;
     orderedQty?: number;
+    repairableQty?: number;
     category: Category;
     tags: Tag[];
     comment?: string;
