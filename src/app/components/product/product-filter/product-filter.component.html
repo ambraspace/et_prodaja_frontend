@@ -2,9 +2,9 @@
     <div id="form">
         <mat-form-field class="w100">
             <mat-label>Pojam za pretragu</mat-label>
-            <input matInput type="text" [(ngModel)]="query">
+            <input matInput type="text" [(ngModel)]="productFilter.query" (keypress)="onEnterPressed($event)">
         </mat-form-field>
-        <mat-checkbox class="w100" labelPosition="after" [(ngModel)]="searchComments" [disabled]="!queryIsNotEmpty()">Pretražuj i unutar komentara</mat-checkbox><br>
+        <mat-checkbox class="w100" labelPosition="after" [(ngModel)]="productFilter.searchComments" [disabled]="!queryIsNotEmpty()">Pretražuj i unutar komentara</mat-checkbox><br>
         <mat-form-field class="w100">
             <mat-label>Skladište</mat-label>
             <input type="text" (keyup)="searchWarehouses(getValue($event))" [(ngModel)]="selectedWarehouse"
@@ -17,8 +17,8 @@
         </mat-form-field><br>
         <mat-form-field class="w100">
             <mat-label>Oznake</mat-label>
-            <mat-chip-grid #chipGrid [(ngModel)]="tags">
-                @for (tag of tags; track tag) {
+            <mat-chip-grid #chipGrid [(ngModel)]="productFilter.tags">
+                @for (tag of productFilter.tags; track tag) {
                     <mat-chip-row (removed)="removeTag(tag)"
                     [editable]="false">
                     {{tag}}
@@ -50,7 +50,7 @@
         </mat-form-field>
     </div>
     <div id="buttons">
-        <button mat-flat-button color="basic" (click)="cancel()">Odustani</button>
+        <button mat-flat-button color="basic" (click)="cancelFilter()">Poništi</button>
         <button mat-flat-button color="accent" (click)="applyFilter()">Primijeni</button>
     </div>
 </div>

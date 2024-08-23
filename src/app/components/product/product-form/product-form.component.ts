@@ -218,8 +218,6 @@ export class ProductFormComponent implements OnInit {
         if (this._product && this._product.category)
         {
           let cat = this.flatCategories.find(fc => fc.category.id == this._product!.category!.id)!.category;
-          console.log(cat);
-
           this.productForm.get('category')?.patchValue(cat);
         } 
         else {
