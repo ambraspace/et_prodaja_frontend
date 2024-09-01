@@ -1,0 +1,8 @@
+<h2>Ponuda: {{offerId}}</h2>
+<h3>Stavki ukupno: {{items.length}} (<a routerLink="/offers/{{offerId}}">povratak na ponudu</a>)</h3>
+<app-product-list
+    [productFilter]="productFilter"
+    [onProductFilter]="filterProducts"
+    (productSelected)="showProductPage($event)"
+>
+</app-product-list>

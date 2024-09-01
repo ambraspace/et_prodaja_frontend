@@ -58,7 +58,7 @@ export class OfferService {
 
     let params: HttpParams = new HttpParams();
     
-    if (reason) params = params.set("reason", reason);
+    if (reason) params = params.set("r", reason);
 
     return this.http.patch<Offer>(`/api/offers/${id}/cancel`, null, {params: params});
 

@@ -1,0 +1,42 @@
+<div id="main">
+    <form [formGroup]="offerForm">
+        <mat-form-field class="w100">
+            <mat-label>Kupac</mat-label>
+            <input type="text" (keyup)="search(getValue($event))" formControlName="company"
+            placeholder="Izaberite kupca"
+            matInput
+            [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="companyToCompanyName" requireSelection="true" (optionSelected)="companySelected($event)">
+            @for (c of companies$ | async; track c) {
+                <mat-option [value]="c">{{companyToCompanyName(c)}}</mat-option>
+            }
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Kontakt</mat-label>
+            <mat-select formControlName="contact">
+                @for (contact of contacts; track contact) {
+                    <mat-option [value]="contact">{{contact.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Validnost ponude</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="validUntil">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>PDV</mat-label>
+            <input matInput type="number" formControlName="vat">
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Napomene</mat-label>
+            <textarea matInput cdkTextareaAutosize  formControlName="notes"></textarea>
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Komentar</mat-label>
+            <textarea matInput cdkTextareaAutosize formControlName="comments"></textarea>
+        </mat-form-field>
+    </form>
+</div>

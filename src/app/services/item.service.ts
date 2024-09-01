@@ -35,14 +35,14 @@ export class ItemService {
     }
   }
 
-  addItem(offerId: string, item: Item): Observable<Item>
+  addItems(offerId: string, items: Item[]): Observable<Item[]>
   {
-    return this.http.post<Item>(`/api/offers/${offerId}/items`, item);
+    return this.http.post<Item[]>(`/api/offers/${offerId}/items`, items);
   }
 
-  updateItem(offerId: string, id: number, item: Item): Observable<Item>
+  updateItems(offerId: string, items: Item[]): Observable<Item[]>
   {
-    return this.http.put<Item>(`/api/offers/${offerId}/items/${id}`, item);
+    return this.http.put<Item[]>(`/api/offers/${offerId}/items`, items);
   }
 
   deleteItem(offerId: string, id: number): Observable<void>

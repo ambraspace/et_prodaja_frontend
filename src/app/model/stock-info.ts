@@ -9,5 +9,6 @@ export interface StockInfo
     customerReference: string;
     quantity: number;
     unitPrice: number;
-    repairableQuantity: number
+    repairableQuantity: number;
+    availableQuantity: number;
 }

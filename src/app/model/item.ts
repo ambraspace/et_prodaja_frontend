@@ -5,15 +5,16 @@ import { StockInfo } from "./stock-info";
 
 export interface Item
 {
-    id: number;
-    offer: Offer;
-    order: Order;
-    deliveryItems: DeliveryItem[];
+    id?: number;
+    offer?: Offer;
+    order?: Order;
+    deliveryItems?: DeliveryItem[];
     stockInfo: StockInfo;
     productName: string;
+    preview: string;
     quantity: number;
     grossPrice: number;
     discountPercent: number;
-    outstandingQuantity: number;
-    netPrice: number;
+    outstandingQuantity?: number;
+    netPrice?: number;
 }

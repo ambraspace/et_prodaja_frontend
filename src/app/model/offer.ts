@@ -13,7 +13,7 @@ export interface Offer
     contact: Contact;
     vat: number;
     notes: string;
-    comment: string;
+    comments: string;
     status: OfferStatus;
     value: number;
     cost: number;

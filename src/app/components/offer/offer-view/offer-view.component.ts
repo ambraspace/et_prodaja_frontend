@@ -7,20 +7,33 @@ import { OfferService } from '../../../services/offer.service';
 import { Page } from '../../../model/page';
 import { Offer } from '../../../model/offer';
 import { OfferStatusLocalizePipe } from '../../../pipes/offer-status-localize.pipe';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AddOrEditOfferComponent } from '../add-or-edit-offer/add-or-edit-offer.component';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-offer-view',
   standalone: true,
-  imports: [NgIf, MatPaginator, MatTableModule, MatButtonModule, DatePipe, CurrencyPipe, ToEuroPipe, PercentPipe, OfferStatusLocalizePipe, RouterLink],
+  imports: [
+    NgIf,
+    MatPaginator,
+    MatTableModule,
+    MatButtonModule,
+    DatePipe, CurrencyPipe, ToEuroPipe, PercentPipe, OfferStatusLocalizePipe,
+    RouterLink,
+    MatDialogModule
+  ],
   templateUrl: './offer-view.component.html',
   styleUrl: './offer-view.component.css'
 })
 export class OfferViewComponent implements OnInit {
 
   constructor(
-    private offerService: OfferService
+    private offerService: OfferService,
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +65,27 @@ export class OfferViewComponent implements OnInit {
 
   loadOffers(): void
   {
-    this.offerService.getOffers().subscribe(o => this.offers = o);
+    this.offerService.getOffers().subscribe(o => {
+      this.offers = o;
+    });
+  }
+
+
+  addNewOffer(): void
+  {
+
+    let dialogRef = this.dialog.open<AddOrEditOfferComponent, any, Offer>(
+      AddOrEditOfferComponent,
+      {data: {offerId: undefined, offer: undefined}, width: "500px"}
+    );
+
+    dialogRef.afterClosed().subscribe(o => {
+      if (o)
+      {
+        this.router.navigateByUrl("/offers/" + o.id );
+      }
+    })
+
   }
 
 
@@ -75,4 +108,15 @@ export class OfferViewComponent implements OnInit {
     this.loadOffers();
   }
 
+
+  isOfferInvalid(o: Offer): boolean
+  {
+    let endDate = new Date()  
+    endDate.setHours(0,0,0,0);
+    
+    if (o.status == 'ACTIVE' && (new Date(o.validUntil).valueOf() <= endDate.valueOf()))
+      return true;
+
+    return false;
+  }
 }
