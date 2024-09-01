@@ -1,8 +1,10 @@
-<div style="align-content: end; padding: 1em;">
+<mat-dialog-content>
     <mat-form-field>
         <mat-label>{{question}}</mat-label>
         <input matInput type="text" [(ngModel)]="categoryName" cdkFocusInitial onfocus="this.select()">
     </mat-form-field><br>
+</mat-dialog-content>
+<mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Otkaži</button>
-    <button mat-button (click)="onYesClick()" [disabled]="categoryName == undefined || categoryName.trim() == ''">Sačuvaj</button>
-</div>
+    <button mat-button (click)="onYesClick()">Sačuvaj</button>
+</mat-dialog-actions>
