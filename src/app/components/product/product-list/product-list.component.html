@@ -21,9 +21,7 @@
             <mat-grid-tile>
                 <mat-card>
                     <mat-card-content>
-                        <a routerLink="" (click)="productClick(product)">
-                            <img src="{{getDefaultPreviewImage(product)}}" id="image" title="{{product.comment}}">
-                        </a>
+                        <img src="{{getDefaultPreviewImage(product)}}" id="image" title="{{product.comment}}" (click)="productClick(product)">
                         <div id="qty" title="{{tooltip(product)}}">
                             <span>{{product.availableQty}}</span>
                         </div>

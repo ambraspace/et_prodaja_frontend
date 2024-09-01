@@ -144,6 +144,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 
   productObservable$ = this.productsLoadSubject.pipe(
+    takeUntil(this.destroyed),  
     debounceTime(100),
     switchMap(() => this.productService.getProducts(
       this.productFilter.query,
