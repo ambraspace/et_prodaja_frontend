@@ -304,6 +304,7 @@ export class OfferDetailsComponent implements OnInit {
           let itemIndex = this.items.findIndex(i => i.id == res.item.id);
           this.itemService.updateItems(this.offerId, Array.of(res.item)).subscribe(is => {
             this.items.splice(itemIndex, 1, is[0]);
+            this.items = this.items.slice(0, this.items.length);
             this.loadOffer();
           })
         }
@@ -323,9 +324,15 @@ export class OfferDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res === 'YES')
       {
-        this.itemService.deleteItem(this.offerId, itemId).subscribe(() => {
-          this.loadItems();
-        })
+        let itemIndex = this.items.findIndex(i => i.id == itemId);
+        if (itemIndex >= 0)
+        {
+          this.itemService.deleteItem(this.offerId, itemId).subscribe(() => {
+            this.items.splice(itemIndex, 1);
+            this.items = this.items.slice(0, this.items.length);
+            this.loadOffer();
+          })
+        }
       }
     })
 
