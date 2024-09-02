@@ -3,3 +3,8 @@
     color: red;
     font-weight: bold;
 }
+
+.strikethrough
+{
+    text-decoration: 1px line-through black;
+}
