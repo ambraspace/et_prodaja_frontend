@@ -1,10 +1,14 @@
 <mat-dialog-content>
-    <mat-form-field>
-        <mat-label>{{question}}</mat-label>
-        <input matInput type="text" [(ngModel)]="categoryName" cdkFocusInitial onfocus="this.select()">
+    <mat-form-field class="w100">
+        <mat-label>{{placeholder}}</mat-label>
+        @if (multiline) {
+            <textarea matInput cdkTextareaAutosize [(ngModel)]="enteredValue" cdkFocusInitial></textarea>
+        } @else {
+            <input matInput type="text" [(ngModel)]="enteredValue" cdkFocusInitial onfocus="this.select()">
+        }
     </mat-form-field><br>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Otkaži</button>
-    <button mat-button (click)="onYesClick()">Sačuvaj</button>
+    <button mat-button (click)="onYesClick()" [disabled]="!allowEmpty && isBlank(enteredValue)">Sačuvaj</button>
 </mat-dialog-actions>

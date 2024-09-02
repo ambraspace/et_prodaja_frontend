@@ -227,7 +227,9 @@ export class CategoriesEditorComponent implements OnInit, HasUnsaavedChanges {
   addMainCategory(): void
   {
     
-    let dialogRef = this.dialog.open(TextInputDialog, {data: {prompt: "Naziv nove kategorije", name: ""}});
+    let dialogRef = this.dialog.open<TextInputDialog, {placeholder: string, defaultValue: string, allowEmpty: boolean, multiline: boolean}, string>(
+      TextInputDialog, {data: {placeholder: "Naziv nove kategorije", defaultValue: "", allowEmpty: false, multiline: false}}
+    );
     
     dialogRef.afterClosed().subscribe(result => {
       if (result)
@@ -250,7 +252,8 @@ export class CategoriesEditorComponent implements OnInit, HasUnsaavedChanges {
     let category = this.findCategory(categoryId, this.categories);
     if (category)
       {
-      let dialogRef = this.dialog.open(TextInputDialog, {data: {prompt: "Novi naziv kategorije", name: category.name}});
+      let dialogRef = this.dialog.open<TextInputDialog, {placeholder: string, defaultValue: string, allowEmpty: boolean, multiline: boolean}, string>(
+        TextInputDialog, {data: {placeholder: "Novi naziv kategorije", defaultValue: category.name, allowEmpty: false, multiline: false}});
       dialogRef.afterClosed().subscribe(result => {
         if (result && category.name != result)
         {
@@ -285,7 +288,8 @@ export class CategoriesEditorComponent implements OnInit, HasUnsaavedChanges {
     let category = this.findCategory(categoryId, this.categories);
     if (category)
       {
-      let dialogRef = this.dialog.open(TextInputDialog, {data: {prompt: "Naziv podkategorije", name: ""}});
+      let dialogRef = this.dialog.open<TextInputDialog, {placeholder: string, defaultValue: string, allowEmpty: boolean, multiline: boolean}, string>(
+        TextInputDialog, {data: {placeholder: "Naziv podkategorije", defaultValue: "", allowEmpty: false, multiline: false}});
       dialogRef.afterClosed().subscribe(result => {
         if (result)
           {

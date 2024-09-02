@@ -1,3 +1,4 @@
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +15,8 @@ import { MatInput } from '@angular/material/input';
     MatLabel,
     MatInput,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    CdkTextareaAutosize
   ],
   templateUrl: './text-input-dialog.component.html',
   styleUrl: './text-input-dialog.component.css'
@@ -24,20 +26,33 @@ export class TextInputDialog {
 
   constructor(
     public dialogRef: MatDialogRef<Component>,
-    @Inject(MAT_DIALOG_DATA) public data: {prompt: string, name: string},
+    @Inject(MAT_DIALOG_DATA) public data: {placeholder: string, defaultValue: string, allowEmpty: boolean, multiline: boolean},
   ) {
-    this.question = data.prompt;
-    this.categoryName = data.name;
+    this.placeholder = data.placeholder;
+    this.enteredValue = data.defaultValue;
+    this.allowEmpty = data.allowEmpty;
+    this.multiline = data.multiline;
   }
 
-  question: string = "Kategorija";
+  placeholder: string = "";
+  enteredValue: string = "";
+  allowEmpty: boolean = true;
+  multiline: boolean = false;
 
-  categoryName: string = "";
+
+  isBlank(value: string): boolean
+  {
+    if (value && value.trim() != "")
+      return false;
+    return true;
+  }
+
 
   onYesClick(): void
   {
-    this.dialogRef.close(this.categoryName);    
+    this.dialogRef.close(this.enteredValue);
   }
+
 
   onNoClick(): void
   {

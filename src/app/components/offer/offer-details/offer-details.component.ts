@@ -264,9 +264,8 @@ export class OfferDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(r => {
       if (r === "YES")
       {
-        let dialogRef2 = this.dialog.open<TextInputDialog, any, string>(
-          TextInputDialog, {data: {prompt: "Razlog", name: ""}}
-        );
+        let dialogRef2 = this.dialog.open<TextInputDialog, {placeholder: string, defaultValue: string, allowEmpty: boolean, multiline: boolean}, string>   (
+          TextInputDialog, {data: {placeholder: "Razlog odustajanja", defaultValue: "", allowEmpty: true, multiline: true}, width: "400px"});
         dialogRef2.afterClosed().subscribe(r2 => {
           if (r2 != undefined)
           {
