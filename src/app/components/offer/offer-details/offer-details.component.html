@@ -10,7 +10,9 @@
             <td>Autor:</td>
             <td class="strong">{{offer.user!.fullName}}</td>
             <td rowspan="8">
-                <button mat-flat-button class="w100" (click)="editOffer()"><span class="material-symbols-outlined">edit</span> Izmijeni ponudu</button><br>
+                @if (offer.status != 'CANCELED') {
+                    <button mat-flat-button class="w100" (click)="editOffer()"><span class="material-symbols-outlined">edit</span> Izmijeni ponudu</button><br>
+                }
                 @if (offer.status != "ACCEPTED") {
                     <button mat-flat-button class="w100" (click)="deleteOffer()"><span class="material-symbols-outlined">delete</span> Obriši ponudu</button><br>
                 }
