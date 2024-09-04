@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../model/order';
@@ -40,6 +40,14 @@ export class OrderService {
   closeOrder(id: number): Observable<Order>
   {
     return this.http.put<Order>(`/api/orders/${id}/close`, null);
+  }
+
+  downloadOrder(id: number): Observable<HttpResponse<Blob>>
+  {
+    return this.http.get(`/api/orders/${id}/dl`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
 
   deleteAllOrders(): Observable<void>

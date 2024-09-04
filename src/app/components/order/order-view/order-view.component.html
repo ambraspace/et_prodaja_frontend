@@ -1,4 +1,4 @@
-<h2>Narudžbe<button mat-icon-button color="accent"><span class="material-symbols-outlined">add_circle</span></button></h2>
+<h2>Narudžbe</h2>
 <div *ngIf="orderList.length > 0">
 
     <mat-paginator [length]="orders?.totalElements"
@@ -50,21 +50,19 @@
       <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Akcije </th>
           <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" title="Izmijenite narudžbu" (click)="editOrder(element.id)">
-                <span class="material-symbols-outlined">edit_square</span>
-              </button>
-              <button mat-icon-button color="accent" title="Obrišite narudžbu" (click)="deleteOrder(element.id)">
-                <span class="material-symbols-outlined">delete</span>
-              </button>
-              <button *ngIf="element.status=='OPEN'" mat-icon-button color="accent" title="Zatvori narudžbu" (click)="deleteOrder(element.id)">
-                <span class="material-symbols-outlined">folder</span>
-              </button>
-              <button *ngIf="element.status=='CLOSED'" mat-icon-button color="accent" title="Preuzmi narudžbu" (click)="deleteOrder(element.id)">
-                <span class="material-symbols-outlined">download</span>
-              </button>
+            <a mat-icon-button color="accent" title="Pogledaj narudžbu" routerLink="/orders/{{element.id}}">
+              <span class="material-symbols-outlined">visibility</span>
+            </a>
+            <a *ngIf="element.status=='OPEN'" mat-icon-button color="accent" title="Zatvori narudžbu" (click)="closeOrder(element.id)">
+              <span class="material-symbols-outlined">folder</span>
+            </a>
+            <button *ngIf="element.status=='CLOSED'"
+              mat-icon-button color="accent"
+              title="Preuzmi narudžbu" (click)="downloadOrder(element.id)">
+              <span class="material-symbols-outlined">download</span>
+          </button>
           </td>
         </ng-container>
-  
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
