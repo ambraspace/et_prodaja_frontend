@@ -29,7 +29,7 @@ export class OrderViewComponent implements OnInit {
   orders: Page<Order> | null = null;
 
   displayedColumns: string[] = [
-    'id', 'warehouse', 'status', 'closure', 'value', 'actions'
+    'id', 'warehouse', 'status', 'creation', 'closure', 'value', 'actions'
   ]
 
   get orderList(): Order[]
