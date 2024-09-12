@@ -101,9 +101,10 @@ export class OfferFormComponent implements OnInit {
       company: new FormControl<Company | undefined>(undefined, [Validators.required]),
       contact: new FormControl<Contact | undefined>(undefined),
       vat: new FormControl<number>(17, [Validators.min(1), Validators.required]),
-      notes: new FormControl<string>(`Plaćanje: po dogovoru
-Rok realizacije: po dogovoru
-Garantni period: 2 godine`),
+      notes: new FormControl<string>(`Cijene su u KM (BAM).
+Plaćanje: po dogovoru.
+Rok realizacije: po dogovoru.
+Garantni period: 2 godine.`),
       comments: new FormControl<string>('')
     }
   )

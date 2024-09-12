@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OfferStatus } from '../model/offer-status';
 import { Page } from '../model/page';
@@ -72,6 +72,14 @@ export class OfferService {
   duplicateOffer(id: string): Observable<Offer>
   {
     return this.http.post<Offer>(`/api/offers/${id}/duplicate`, null);
+  }
+
+  downloadOffer(id: string): Observable<HttpResponse<Blob>>
+  {
+    return this.http.get(`/api/offers/${id}/dl`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
 
   deleteAllOffers(): Observable<void>
