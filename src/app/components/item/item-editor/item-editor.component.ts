@@ -87,7 +87,7 @@ export class ItemEditorComponent implements OnInit {
   {
     if (fn && fn.trim() != "")
     {
-      return `/api/files?fn=${fn}`;
+      return `/api/images/${fn}`;
     } else {
       return '/assets/no-image.jpg';
     }

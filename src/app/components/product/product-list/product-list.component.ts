@@ -207,9 +207,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     {
       let preview = product.previews.find(pr => pr.primary == true);
       if (preview)
-        return "/api/files?fn=" + preview.fileName;
+        return "/api/images/" + preview.fileName;
       if (product.previews.length > 0)
-        return "/api/files?fn=" + product.previews[0].fileName;
+        return "/api/images/" + product.previews[0].fileName;
     }
     return "/assets/no-image.jpg";
   }

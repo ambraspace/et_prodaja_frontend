@@ -74,12 +74,14 @@ export class OfferService {
     return this.http.post<Offer>(`/api/offers/${id}/duplicate`, null);
   }
 
-  downloadOffer(id: string): Observable<HttpResponse<Blob>>
+  downloadOffer(fileName: string): Observable<HttpResponse<Blob>>
   {
-    return this.http.get(`/api/offers/${id}/dl`, {
+
+    return this.http.get(`/api/files/offers/${fileName}`, {
       observe: 'response',
-      responseType: 'blob',
-    });
+      responseType: 'blob'
+    })
+
   }
 
   deleteAllOffers(): Observable<void>

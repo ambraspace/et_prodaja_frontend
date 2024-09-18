@@ -5,7 +5,7 @@
                 <img src="/assets/no-image.jpg">
             }
             @if (previews.length > 0) {
-                <img src="/api/files?fn={{fileNameAt(previewIndex)}}">
+                <img src="/api/images/{{fileNameAt(previewIndex)}}">
                 @if (_product) {
                     <button id="trash" mat-icon-button (click)="removePreview()">
                         <span class="material-symbols-outlined">delete</span>

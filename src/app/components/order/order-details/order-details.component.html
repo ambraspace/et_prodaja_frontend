@@ -104,7 +104,7 @@
                 <div class="example-element-detail"
                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                         @if (element.preview && element.preview.trim() != "") {
-                            <img width="150px" height="150px" src="/api/files?fn={{element.preview}}">
+                            <img width="150px" height="150px" src="/api/images/{{element.preview}}">
                         } @else {
                             <img width="150px" height="150px" src="/assets/no-image.jpg">
                         }
