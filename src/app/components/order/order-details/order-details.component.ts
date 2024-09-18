@@ -10,7 +10,6 @@ import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { RouterLink } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { FileSaverService } from 'ngx-filesaver';
 
 @Component({
   selector: 'app-order-details',
@@ -38,7 +37,6 @@ export class OrderDetailsComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private itemService: ItemService,
-    private fileSaverService: FileSaverService
   ) {}
 
 
@@ -94,8 +92,10 @@ export class OrderDetailsComponent implements OnInit {
     if (this.order)
     {
       {
-        this.orderService.downloadOrder(this.order.id).subscribe((res) => {
-          this.fileSaverService.save(res.body, "narudžba br. " + this.order?.id + ".xlsx");
+        this.orderService.downloadOrder(this.orderId).subscribe((res) => {
+          let file: File = new File([res.body!], "Narudžba br. " + this.orderId + ".xlsx", {type: res.body?.type});
+          let fileURL = URL.createObjectURL(file);
+          window.open(fileURL, '_blank', );
         });
       }
     }

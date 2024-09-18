@@ -11,7 +11,6 @@ import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 import { RouterLink } from '@angular/router';
-import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
 
 @Component({
   selector: 'app-order-view',
@@ -31,7 +30,6 @@ export class OrderViewComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private dialog: MatDialog,
-    private fileSaverService: FileSaverService
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +89,9 @@ export class OrderViewComponent implements OnInit {
   downloadOrder(id: number): void
   {
     this.orderService.downloadOrder(id).subscribe((res) => {
-      this.fileSaverService.save(res.body, "narudžba br. " + id + ".xlsx");
+      let file: File = new File([res.body!], "Narudžba br. " + id + ".xlsx", {type: res.body?.type});
+      let fileURL = URL.createObjectURL(file);
+      window.open(fileURL, '_blank', );
     });
   }
 
