@@ -22,7 +22,6 @@ import { ProductFormComponent } from "../../product/product-form/product-form.co
 import { ProductFilterComponent } from "../../product/product-filter/product-filter.component";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ItemEditorComponent } from '../../item/item-editor/item-editor.component';
-import { FileSaverService } from 'ngx-filesaver';
 
 @Component({
   selector: 'app-offer-details',
@@ -61,7 +60,6 @@ export class OfferDetailsComponent implements OnInit {
     private productService: ProductService,
     private dialog: MatDialog,
     private router: Router,
-    private fileSaverService: FileSaverService
   ) {}
 
 
@@ -281,13 +279,19 @@ export class OfferDetailsComponent implements OnInit {
   }
 
 
-  downloadOffer(): void
+  downloadOffer(type: string): void
   {
+    if (type != 'pdf' && type != 'xlsx')
+      return;
+
     if (this.offer)
     {
+      let fileName = `${this.offer.id}.${type}`;
       {
-        this.offerService.downloadOffer(this.offer.id).subscribe((res) => {
-          this.fileSaverService.save(res.body, "Ponuda br. " + this.offer!.id + ".pdf");
+        this.offerService.downloadOffer(fileName).subscribe((res) => {
+          let file: File = new File([res.body!], "Ponuda " + fileName, {type: res.body?.type});
+          let fileURL = URL.createObjectURL(file);
+          window.open(fileURL, '_blank', );
         });
       }
     }

@@ -21,7 +21,7 @@
                     <button mat-flat-button class="w100" (click)="acceptOffer()"><span class="material-symbols-outlined">handshake</span> Prihvati ponudu</button><br>
                     <button mat-flat-button class="w100" (click)="cancelOffer()"><span class="material-symbols-outlined">cancel</span> Otkaži ponudu</button>
                 }
-                <button mat-flat-button class="w100" (click)="downloadOffer()"><span class="material-symbols-outlined">download</span> Preuzmi ponudu</button>
+                <button mat-flat-button class="w100" (click)="downloadOffer('pdf')"><span class="material-symbols-outlined">download</span> Preuzmi ponudu</button>
             </td>
         </tr>
         <tr>
@@ -163,7 +163,7 @@
                 <div class="example-element-detail"
                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                         @if (element.preview && element.preview.trim() != "") {
-                            <img width="150px" height="150px" src="/api/files?fn={{element.preview}}">
+                            <img width="150px" height="150px" src="/api/images/{{element.preview}}">
                         } @else {
                             <img width="150px" height="150px" src="/assets/no-image.jpg">
                         }
