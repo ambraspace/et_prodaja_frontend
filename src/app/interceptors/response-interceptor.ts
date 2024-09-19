@@ -19,7 +19,6 @@ export class ResponseInterceptor implements HttpInterceptor {
     {
         return next.handle(req).pipe(tap({
             error: (err: HttpErrorResponse) => {
-                console.log(err);
                 
                 if (err.status === 401)
                 {
