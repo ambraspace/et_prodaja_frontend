@@ -64,7 +64,7 @@ export class AddOrEditUserComponent implements OnInit {
       role: new FormControl<UserRole>('USER'),
       fullName: new FormControl<string>('', [Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
       company: new FormControl<Company | undefined>(undefined , [Validators.required]),
-      phone: new FormControl<string>('', [Validators.required, Validators.pattern('[\\d-()/+ ]*')]),
+      phone: new FormControl<string>('', [Validators.required, Validators.pattern('[\d-()/+ ]*')]),
       email: new FormControl<string>('', [Validators.email]),
       signature: new FormControl<string>('', [Validators.required]),
       canViewPrices: new FormControl<boolean>(true)
