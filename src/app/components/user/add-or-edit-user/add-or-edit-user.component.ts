@@ -11,7 +11,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { User } from '../../../model/user';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { UserRole } from '../../../model/user-role';
 import { UserRolePipe } from '../../../pipes/user-role.pipe';
@@ -59,15 +59,15 @@ export class AddOrEditUserComponent implements OnInit {
 
   userForm = new FormGroup(
     {
-      username: new FormControl(''),
-      password: new FormControl(''),
-      role: new FormControl('USER'),
-      fullName: new FormControl(''),
-      company: new FormControl(),
-      phone: new FormControl(''),
-      email: new FormControl(''),
-      signature: new FormControl(''),
-      canViewPrices: new FormControl(true)
+      username: new FormControl<string>('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(10)]),
+      role: new FormControl<UserRole>('USER'),
+      fullName: new FormControl<string>('', [Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
+      company: new FormControl<Company | undefined>(undefined , [Validators.required]),
+      phone: new FormControl<string>('', [Validators.required, Validators.pattern('[\\d-()/+ ]*')]),
+      email: new FormControl<string>('', [Validators.email]),
+      signature: new FormControl<string>('', [Validators.required]),
+      canViewPrices: new FormControl<boolean>(true)
     }
   );
 

@@ -48,5 +48,5 @@
         <mat-checkbox formControlName="canViewPrices">Cijene vidljive</mat-checkbox>
     </form>
     <button mat-raised-button (click)="cancel()">Odustani</button>
-    <button mat-raised-button (click)="save()">Sačuvaj</button>
+    <button mat-raised-button (click)="save()" [disabled]="!userForm.valid">Sačuvaj</button>
 </div>
