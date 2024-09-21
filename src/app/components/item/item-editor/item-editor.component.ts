@@ -27,7 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class ItemEditorComponent implements OnInit {
 
   constructor(
-    private dialogRef: MatDialogRef<ItemEditorComponent, {item: Item, applyDiscountToAll: boolean}>,
+    private dialogRef: MatDialogRef<ItemEditorComponent, {item: Item, applyDiscountToNext: boolean}>,
     @Inject(MAT_DIALOG_DATA) private data: {item: Item},
     private productService: ProductService
   ) {
@@ -54,7 +54,7 @@ export class ItemEditorComponent implements OnInit {
     quantity: new FormControl<number>(0),
     grossPrice: new FormControl<number>(0),
     discountPercent: new FormControl<number>(0),
-    applyToAll: new FormControl<boolean>(false)
+    applyDiscountToNext: new FormControl<boolean>(false)
   })
 
    
@@ -125,6 +125,6 @@ export class ItemEditorComponent implements OnInit {
     this.item!.quantity = this.itemForm.get('quantity')!.value || 0;
     this.item!.grossPrice = this.itemForm.get('grossPrice')!.value || 0;
     this.item!.discountPercent = this.itemForm.get('discountPercent')!.value || 0;
-    this.dialogRef.close({item: this.item!, applyDiscountToAll: this.itemForm.get('applyToAll')!.value!})
+    this.dialogRef.close({item: this.item!, applyDiscountToNext: this.itemForm.get('applyDiscountToNext')!.value!})
   }
 }

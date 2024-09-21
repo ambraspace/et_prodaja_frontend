@@ -300,20 +300,24 @@ export class OfferDetailsComponent implements OnInit {
 
   editItem(item: Item): void
   {
-    let dialogRef = this.dialog.open<ItemEditorComponent, any, {item: Item, applyDiscountToAll: boolean}>(
+    let dialogRef = this.dialog.open<ItemEditorComponent, any, {item: Item, applyDiscountToNext: boolean}>(
       ItemEditorComponent, {data: {item: item}, width: "500px"}
     );
 
     dialogRef.afterClosed().subscribe(res => {
       if (res)
       {
-        if (res.applyDiscountToAll)
+        if (res.applyDiscountToNext)
         {
-          this.items.forEach(i => {
-            i.discountPercent = res.item.discountPercent
-          })
           let itemIndex = this.items.findIndex(i => i.id == res.item.id);
-          this.items.splice(itemIndex,1, res.item);
+          if (itemIndex >= 0)
+          {
+            for (let i = itemIndex; i < this.items.length; i++)
+            {
+              this.items.at(i)!.discountPercent = res.item.discountPercent;
+            }
+            this.items.splice(itemIndex, 1, res.item);
+          }
           this.itemService.updateItems(this.offerId, this.items).subscribe(is => {
             this.items = is;
             this.loadOffer();
