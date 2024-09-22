@@ -19,9 +19,10 @@
                 <button mat-flat-button class="w100" (click)="duplicateOffer()"><span class="material-symbols-outlined">content_copy</span> Dupliraj ponudu</button><br>
                 @if (offer.status == "ACTIVE") {
                     <button mat-flat-button class="w100" (click)="acceptOffer()"><span class="material-symbols-outlined">handshake</span> Prihvati ponudu</button><br>
-                    <button mat-flat-button class="w100" (click)="cancelOffer()"><span class="material-symbols-outlined">cancel</span> Otkaži ponudu</button>
+                    <button mat-flat-button class="w100" (click)="cancelOffer()"><span class="material-symbols-outlined">cancel</span> Otkaži ponudu</button><br>
                 }
-                <button mat-flat-button class="w100" (click)="downloadOffer('pdf')"><span class="material-symbols-outlined">download</span> Preuzmi ponudu</button>
+                <button mat-flat-button class="w100" (click)="downloadOffer('pdf')"><span class="material-symbols-outlined">download</span> Preuzmi ponudu</button><br>
+                <button mat-flat-button class="w100" (click)="downloadOffer('xlsx')"><span class="material-symbols-outlined">export_notes</span> Izvezi u XLSX </button>
             </td>
         </tr>
         <tr>
