@@ -25,9 +25,9 @@ export class DeliveryItemService {
   }
 
 
-  addDeliveryItem(deliveryId: number, di: DeliveryItem): Observable<DeliveryItem>
+  addDeliveryItems(deliveryId: number, dis: DeliveryItem[]): Observable<DeliveryItem[]>
   {
-    return this.http.post<DeliveryItem>(`/api/deliveries/${deliveryId}/deliveryItems`, di);
+    return this.http.post<DeliveryItem[]>(`/api/deliveries/${deliveryId}/deliveryItems`, dis);
   }
 
 

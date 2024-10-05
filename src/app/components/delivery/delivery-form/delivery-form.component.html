@@ -1,0 +1,30 @@
+<div id="main">
+    <form [formGroup]="deliveryForm">
+        <mat-form-field class="w100">
+            <mat-label>Isporučilac</mat-label>
+            <input type="text" (keyup)="search(getValue($event))" formControlName="supplier"
+            placeholder="Izaberite isporučioca"
+            matInput
+            [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="companyToCompanyName" requireSelection="true">
+            @for (c of companies$ | async; track c) {
+                <mat-option [value]="c">{{companyToCompanyName(c)}}</mat-option>
+            }
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Referensa</mat-label>
+            <input matInput type="text" formControlName="supplierReference">
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Komentar</mat-label>
+            <textarea matInput cdkTextareaAutosize formControlName="comment"></textarea>
+        </mat-form-field>
+        <mat-form-field class="w100">
+            <mat-label>Datum isporuke</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="deliveryDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </form>
+</div>

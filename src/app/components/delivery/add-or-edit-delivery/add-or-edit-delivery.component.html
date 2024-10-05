@@ -1,0 +1,7 @@
+<mat-dialog-content>
+    <app-delivery-form #deliveryForm [delivery]="delivery"></app-delivery-form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button (click)="closeDialog()">Odustani</button>
+    <button mat-flat-button color="accent" (click)="saveDelivery()">Sačuvaj</button>
+</mat-dialog-actions>

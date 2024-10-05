@@ -1,0 +1,58 @@
+<h3 mat-dialog-title>Količine</h3>
+<mat-dialog-content>
+
+    @if (itemsPage) {
+
+        <mat-paginator [length]="itemsPage.totalElements"
+            [pageIndex]="itemsPage.number"
+            [pageSize]="itemsPage.size"
+            [pageSizeOptions]="[6]" [showFirstLastButtons]="true"
+            aria-label="Select page" (page)="updateTable($event)">
+        </mat-paginator>
+    
+        <table mat-table [dataSource]="items" class="mat-elevation-z8">
+        
+            <ng-container matColumnDef="reference">
+                <th mat-header-cell *matHeaderCellDef> Referenca </th>
+                <td mat-cell *matCellDef="let element" title="{{element.productName}}">
+                    {{element.stockInfo.customerReference ? element.stockInfo.customerReference : "___"}}
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="offer">
+                <th mat-header-cell *matHeaderCellDef> Ponuda </th>
+                <td mat-cell *matCellDef="let element"> <a routerLink="/offers/{{element.offer.id}}">{{element.offer.id}}</a> </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="order">
+                <th mat-header-cell *matHeaderCellDef> Narudžba </th>
+                <td mat-cell *matCellDef="let element"> <a routerLink="/orders/{{element.order.id}}">{{element.order.id}}</a> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Preostalo </th>
+                <td mat-cell *matCellDef="let element"> {{element.outstandingQuantity}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="deliveredQty">
+                <th mat-header-cell *matHeaderCellDef> Isporučuje se </th>
+                <td mat-cell *matCellDef="let element"> <input class="w100" type="number" [value]="getDeliveryQty(element.id)" min="0" [max]="element.outstandingQuantity" (change)="updateQty(element.id, $event)"> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="deliveryNote">
+                <th mat-header-cell *matHeaderCellDef> Napomena </th>
+                <td mat-cell *matCellDef="let element"> <input class="w100" type="text" [value]="getDeliveryNote(element.id)" (change)="updateNote(element.id, $event)" [disabled]="getDeliveryQty(element.id) <= 0"> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>    
+
+    }
+    
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Odustani</button>
+    <button mat-flat-button color="accent" (click)="save()">Sačuvaj</button>
+</mat-dialog-actions>

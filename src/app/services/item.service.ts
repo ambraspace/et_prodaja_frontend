@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from '../model/item';
+import { Page } from '../model/page';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,9 @@ import { Item } from '../model/item';
 export class ItemService {
 
   constructor(private http: HttpClient) { }
+
+  page: number = 0;
+  size: number = 6;
 
   getOfferItem(offerId: string, id: number): Observable<Item>
   {
@@ -33,6 +37,17 @@ export class ItemService {
     } else {
       return this.http.get<Item[]>(`/api/orders/${orderId}/items`);
     }
+  }
+
+  getUnorderedItems(): Observable<Page<Item>>
+  {
+    let params = new HttpParams();
+    params = params.set("page", this.page);
+    params = params.set("size", this.size);
+    params = params.set("sort", "stockInfo.customerReference,ASC");
+    params = params.append("sort", "order.closureTime,ASC");
+    params = params.append("sort", "id,ASC");
+    return this.http.get<Page<Item>>('/api/items', {params: params});
   }
 
   addItems(offerId: string, items: Item[]): Observable<Item[]>

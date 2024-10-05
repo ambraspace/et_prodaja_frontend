@@ -3,9 +3,9 @@ import { Item } from "./item";
 
 export interface DeliveryItem
 {
-    id: number;
-    delivery: Delivery;
+    id?: number;
+    delivery?: Delivery;
     item: Item;
     quantity: number;
-    deliveryNote: string
+    deliveryNote?: string
 }
