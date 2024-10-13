@@ -16,7 +16,7 @@ export class DeliveryService {
   size: number = 10;
   sort: string = "id,DESC";
 
-  getDelivery(id: number): Observable<Delivery>
+  getDelivery(id: string): Observable<Delivery>
   {
     return this.http.get<Delivery>(`/api/deliveries/${id}`); 
   }
@@ -43,17 +43,17 @@ export class DeliveryService {
     return this.http.post<Delivery>(`/api/deliveries`, delivery);
   }
 
-  updateDelivery(id: number, delivery: Delivery): Observable<Delivery>
+  updateDelivery(id: string, delivery: Delivery): Observable<Delivery>
   {
     return this.http.put<Delivery>(`/api/deliveries/${id}`, delivery);
   }
 
-  deleteDelivery(id: number): Observable<void>
+  deleteDelivery(id: string): Observable<void>
   {
     return this.http.delete<void>(`/api/deliveries/${id}`);
   }
 
-  setDelivered(id: number): Observable<Delivery>
+  setDelivered(id: string): Observable<Delivery>
   {
     return this.http.put<Delivery>(`/api/deliveries/${id}/delivered`, null);
   }

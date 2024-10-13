@@ -16,7 +16,7 @@ export class OrderService {
   size: number = 10;
   sort: string = "id,DESC";
 
-  getOrder(id: number): Observable<Order>
+  getOrder(id: string): Observable<Order>
   {
     return this.http.get<Order>(`/api/orders/${id}`);
   }
@@ -37,12 +37,12 @@ export class OrderService {
 
   }
 
-  closeOrder(id: number): Observable<Order>
+  closeOrder(id: string): Observable<Order>
   {
     return this.http.put<Order>(`/api/orders/${id}/close`, null);
   }
 
-  downloadOrder(id: number): Observable<HttpResponse<Blob>>
+  downloadOrder(id: string): Observable<HttpResponse<Blob>>
   {
     return this.http.get(`/api/orders/${id}/dl`, {
       observe: 'response',

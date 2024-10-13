@@ -4,7 +4,7 @@ import { DeliveryStatus } from "./delivery-status";
 
 export interface Delivery
 {
-    id: number;
+    id: string;
     supplier: Company;
     supplierReference: string;
     comment: string;

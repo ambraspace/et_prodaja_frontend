@@ -29,7 +29,7 @@ export class ItemService {
     return this.http.get<Item[]>(`/api/offers/${offerId}/items`);
   }
 
-  getOrderItems(orderId: number, onlyUndelivered?: boolean): Observable<Item[]>
+  getOrderItems(orderId: string, onlyUndelivered?: boolean): Observable<Item[]>
   {
     if (onlyUndelivered)
     {

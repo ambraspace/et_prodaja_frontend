@@ -13,31 +13,31 @@ export class DeliveryItemService {
   ) { }
 
 
-  getDeliveryItem(deliveryId: number, id: number): Observable<DeliveryItem>
+  getDeliveryItem(deliveryId: string, id: number): Observable<DeliveryItem>
   {
     return this.http.get<DeliveryItem>(`/api/deliveries/${deliveryId}/deliveryItems/${id}`);
   }
 
 
-  getDeliveryItems(deliveryId: number): Observable<DeliveryItem[]>
+  getDeliveryItems(deliveryId: string): Observable<DeliveryItem[]>
   {
     return this.http.get<DeliveryItem[]>(`/api/deliveries/${deliveryId}/deliveryItems`);
   }
 
 
-  addDeliveryItems(deliveryId: number, dis: DeliveryItem[]): Observable<DeliveryItem[]>
+  addDeliveryItems(deliveryId: string, dis: DeliveryItem[]): Observable<DeliveryItem[]>
   {
     return this.http.post<DeliveryItem[]>(`/api/deliveries/${deliveryId}/deliveryItems`, dis);
   }
 
 
-  updateDeliveryItem(deliveryId: number, id: number, di: DeliveryItem): Observable<DeliveryItem>
+  updateDeliveryItem(deliveryId: string, id: number, di: DeliveryItem): Observable<DeliveryItem>
   {
     return this.http.put<DeliveryItem>(`/api/deliveries/${deliveryId}/deliveryItems/${id}`, di);
   }
 
 
-  deleteDeliveryItem(deliveryId: number, id: number): Observable<void>
+  deleteDeliveryItem(deliveryId: string, id: number): Observable<void>
   {
     return this.http.delete<void>(`/api/deliveries/${deliveryId}/deliveryItems/${id}`);
   }

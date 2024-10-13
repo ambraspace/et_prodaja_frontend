@@ -47,13 +47,13 @@ export class DeliveryDetailsComponent implements OnInit {
 
 
   @Input()
-  set id(id: number)
+  set id(id: string)
   {
     this.deliveryId = id;
   }
 
 
-  deliveryId!: number;
+  deliveryId!: string;
 
 
   delivery?: Delivery;

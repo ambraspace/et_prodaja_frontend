@@ -3,7 +3,7 @@ import { Warehouse } from "./warehouse";
 
 export interface Order
 {
-    id: number;
+    id: string;
     warehouse: Warehouse;
     status: OrderStatus;
     creationDate: Date;

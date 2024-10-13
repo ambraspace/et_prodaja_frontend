@@ -68,7 +68,7 @@ export class OrderViewComponent implements OnInit {
   }
 
 
-  closeOrder(id: number): void
+  closeOrder(id: string): void
   {
     let dialogRef = this.dialog.open<YesNoDialogComponent, any, string>(
       YesNoDialogComponent,
@@ -86,7 +86,7 @@ export class OrderViewComponent implements OnInit {
   }
 
 
-  downloadOrder(id: number): void
+  downloadOrder(id: string): void
   {
     this.orderService.downloadOrder(id).subscribe((res) => {
       let file: File = new File([res.body!], "Narudžba br. " + id + ".xlsx", {type: res.body?.type});

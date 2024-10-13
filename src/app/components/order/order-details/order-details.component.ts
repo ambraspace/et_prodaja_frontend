@@ -45,7 +45,7 @@ export class OrderDetailsComponent implements OnInit {
 
 
   @Input("id")
-  orderId: number = 0;
+  orderId: string = '';
 
 
   order?: Order;

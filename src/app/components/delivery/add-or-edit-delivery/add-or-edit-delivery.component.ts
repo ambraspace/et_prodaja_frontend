@@ -22,7 +22,7 @@ export class AddOrEditDeliveryComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<AddOrEditDeliveryComponent, Delivery>,
-    @Inject(MAT_DIALOG_DATA) private data: {deliveryId: number, delivery: Delivery},
+    @Inject(MAT_DIALOG_DATA) private data: {deliveryId: string, delivery: Delivery},
     private deliveryService: DeliveryService
   ) {}
 
