@@ -12,7 +12,11 @@
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Broj narudžbe </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <td mat-cell *matCellDef="let element">
+          <a title="Pogledaj narudžbu" routerLink="/orders/{{element.id}}">
+            {{element.id}}
+          </a>
+        </td>
       </ng-container>
     
       <ng-container matColumnDef="warehouse">
