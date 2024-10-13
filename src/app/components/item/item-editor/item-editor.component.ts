@@ -74,20 +74,17 @@ export class ItemEditorComponent implements OnInit {
         {
           this.selectedPreview = 0;
         }
-        if (this.previews.length > 0)
-        {
-          this.itemForm.get('preview')!.patchValue(this.previews.at(this.selectedPreview)!.fileName); 
-        }
       })
     }
   }
 
 
-  getImage(fn: string): string
+  getImage(): string
   {
-    if (fn && fn.trim() != "")
+    let preview = this.itemForm.get('preview')?.value;
+    if (preview && preview.trim() != "")
     {
-      return `/api/images/${fn}`;
+      return `/api/images/${preview}`;
     } else {
       return '/assets/no-image.jpg';
     }
@@ -109,6 +106,13 @@ export class ItemEditorComponent implements OnInit {
     if (this.selectedPreview >= this.previews.length)
       this.selectedPreview = 0;
     this.itemForm.get('preview')?.patchValue(this.previews[this.selectedPreview].fileName)
+  }
+
+
+  removePreview(): void
+  {
+    this.itemForm.get('preview')?.setValue('');
+    this.selectedPreview = 0;
   }
 
 

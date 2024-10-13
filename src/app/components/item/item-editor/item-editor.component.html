@@ -1,15 +1,14 @@
 <mat-dialog-content>
     <form [formGroup]="itemForm">
-        @if (
-            itemForm.get('preview') && itemForm.get('preview')!.value
-        ) {
-            <div id="previewSelector">
-                <button mat-icon-button (click)="leftPreview()"><span class="material-symbols-outlined">chevron_left</span></button>
-                <img width="200" height="200" src="{{getImage(previewFileName.value)}}">
-                <button mat-icon-button (click)="rightPreview()"><span class="material-symbols-outlined">chevron_right</span></button>
-            </div>
-        }
-        <input class="w100" type="hidden" formControlName="preview" #previewFileName>
+        <div id="previewSelector">
+            <button mat-icon-button (click)="leftPreview()"><span class="material-symbols-outlined">chevron_left</span></button>
+            <img width="200" height="200" src="{{getImage()}}">
+            <button mat-icon-button (click)="rightPreview()"><span class="material-symbols-outlined">chevron_right</span></button>
+            <button id="trash" mat-icon-button (click)="removePreview()">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+        </div>
+        <!-- <input class="w100" type="hidden" formControlName="preview" #previewFileName> -->
         <mat-form-field class="w100">
             <mat-label>Opis proizvoda</mat-label>
             <textarea matInput cdkTextareaAutosize formControlName="productName"></textarea>
