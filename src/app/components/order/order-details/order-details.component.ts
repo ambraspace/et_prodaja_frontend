@@ -10,6 +10,8 @@ import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { RouterLink } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: 'app-order-details',
@@ -37,6 +39,7 @@ export class OrderDetailsComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private itemService: ItemService,
+    private dialog: MatDialog
   ) {}
 
 
@@ -83,7 +86,19 @@ export class OrderDetailsComponent implements OnInit {
 
   closeOrder(): void
   {
+    let dialogRef = this.dialog.open<YesNoDialogComponent, any, string>(
+      YesNoDialogComponent,
+      {data: "Želite li zatvoriti ovu narudžbu?"}
+    )
 
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == 'YES')
+      {
+        this.orderService.closeOrder(this.orderId).subscribe(o => {
+          this.loadOrder()
+        })
+      }
+    })
   }
 
 
