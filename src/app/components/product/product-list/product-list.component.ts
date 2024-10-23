@@ -54,7 +54,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   numColums: number = 5;
 
   private pageSizeOptionsMultiplicators: number[] = [
-    2, 5, 10, 20, 50
+    2, 5, 10, 20, 50, 100
   ]
 
   pageSizeOptions = this.pageSizeOptionsMultiplicators;

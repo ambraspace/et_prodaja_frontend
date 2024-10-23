@@ -19,6 +19,7 @@ import { Category } from '../../../model/category';
 import { FlatTreeCategory } from '../../../model/flat-tree-category';
 import { MatTreeFlattener } from '@angular/material/tree';
 import { ProductFilter } from '../../../model/product-filter';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product-filter',
@@ -40,7 +41,8 @@ export class ProductFilterComponent implements OnInit {
   constructor(
     private warehouseService: WarehouseService,
     private tagService: TagService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private auth: AuthService
   ) {}
 
 
@@ -236,9 +238,10 @@ export class ProductFilterComponent implements OnInit {
 
   removeTag(tag: string): void
   {
+
     const index = this.productFilter.tags?.indexOf(tag);
 
-    if (index && index >= 0) {
+    if (index != undefined && index >= 0) {
       this.productFilter.tags!.splice(index, 1);
     }
 
@@ -250,6 +253,13 @@ export class ProductFilterComponent implements OnInit {
     {
       this.applyFilter();
     }
+  }
+
+  isAuthenticated(): boolean
+  {
+    if (this.auth.getToken() != undefined)
+      return true;
+    return false;
   }
 
 

@@ -17,6 +17,7 @@ import { adminGuard } from './guards/admin.guard';
 import { CategoriesEditorComponent } from './components/category/categories-editor/categories-editor.component';
 import { pendingChangesGuard } from './guards/pending-changes.guard';
 import { ProductSelectorComponent } from './components/offer/product-selector/product-selector.component';
+import { CatalogComponent } from './components/product/catalog/catalog.component';
 
 export const routes: Routes = [
     {path: "login", component: LoginComponent, title: "Prijava"},
@@ -25,6 +26,7 @@ export const routes: Routes = [
     {path: "companies", component: CompanyViewComponent, title: "Kompanije", canActivate: [loginGuard]},
     {path: "products/:id", component: ProductDetailsComponent, title: "Detalji proizvoda", canActivate: [loginGuard], canDeactivate: [pendingChangesGuard]},
     {path: "products", component: ProductViewComponent, title: "Proizvodi", canActivate: [loginGuard]},
+    {path: "catalog", component: CatalogComponent, title: "Katalog"},
     {path: "categories", component: CategoriesEditorComponent, title: "Kategorije proizvoda", canActivate: [loginGuard], canDeactivate: [pendingChangesGuard]},
     {path: "offers/:id/productSelector", component: ProductSelectorComponent, title: "Izbor proizvoda", canActivate: [loginGuard]},
     {path: "offers/:id", component: OfferDetailsComponent, title: "Detalji ponude", canActivate: [loginGuard]},

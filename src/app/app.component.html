@@ -1,11 +1,11 @@
-<p>
+<p *ngIf="isAuthenticated()">
     <a routerLink="/companies">Kompanije</a> | 
     <span *ngIf="isAdmin()"><a routerLink="/users">Korisnici</a> | </span>
     <a routerLink="/categories">Kategorije</a> | 
     <a routerLink="/products">Proizvodi</a> | 
     <a routerLink="/offers">Ponude</a> | 
     <a routerLink="/orders">Narudžbe</a> | 
-    <a routerLink="/deliveries">Isporuke</a>
-    <span *ngIf="isAuthenticated()"> | <a routerLink="/" (click)="logout()">Odjava</a></span>
+    <a routerLink="/deliveries">Isporuke</a> | 
+    <a routerLink="/" (click)="logout()">Odjava</a>
 </p>
 <router-outlet></router-outlet>
