@@ -7,11 +7,12 @@ import { OfferService } from '../../../services/offer.service';
 import { Page } from '../../../model/page';
 import { Offer } from '../../../model/offer';
 import { OfferStatusLocalizePipe } from '../../../pipes/offer-status-localize.pipe';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddOrEditOfferComponent } from '../add-or-edit-offer/add-or-edit-offer.component';
 import { ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { OfferFilter } from '../../../model/offer-filter';
 
 @Component({
   selector: 'app-offer-view',
@@ -30,17 +31,34 @@ import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 })
 export class OfferViewComponent implements OnInit {
 
+
   constructor(
     private offerService: OfferService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
+
+  offerFilter: OfferFilter = {};
+
+
   ngOnInit(): void {
+    let newOfferFilter: OfferFilter = {};
+    this.route.queryParams.subscribe(pm => {
+      newOfferFilter.username = pm['u'];
+      newOfferFilter.companyId = pm['c'];
+      newOfferFilter.status = pm['s'];
+      newOfferFilter.productId = pm['p'];
+      this.offerFilter = newOfferFilter;
+    });
+
     this.loadOffers();
   }
 
+
   offers: Page<Offer> | null = null;
+
 
   get offerList(): Offer[]
   {
@@ -65,7 +83,12 @@ export class OfferViewComponent implements OnInit {
 
   loadOffers(): void
   {
-    this.offerService.getOffers().subscribe(o => {
+    this.offerService.getOffers(
+      this.offerFilter.username,
+      this.offerFilter.companyId,
+      this.offerFilter.status,
+      this.offerFilter.productId
+    ).subscribe(o => {
       this.offers = o;
     });
   }
