@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Product } from '../../../model/product';
 import { StockInfoService } from '../../../services/stock-info.service';
 import { StockInfo } from '../../../model/stock-info';
@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { CurrencyPipe } from '@angular/common';
 import { MatInput } from '@angular/material/input';
+import { AddOrEditStockInfoComponent } from '../../stock-info/add-or-edit-stock-info/add-or-edit-stock-info.component';
 
 @Component({
   selector: 'app-quantity-dialog',
@@ -30,7 +31,8 @@ export class QuantityDialogComponent implements OnInit {
   constructor(
     private stockInfoService: StockInfoService,
     private dialogRef: MatDialogRef<QuantityDialogComponent, Map<StockInfo, number>>,
-    @Inject(MAT_DIALOG_DATA) private data: {product: Product}
+    @Inject(MAT_DIALOG_DATA) public data: {product: Product},
+    private dialog: MatDialog
   ) {}
 
 
@@ -48,7 +50,7 @@ export class QuantityDialogComponent implements OnInit {
   }
 
 
-  displayedColumns = ['warehouse', 'customerReference', 'quantity', 'unitPrice', 'quantityForOffer'];
+  displayedColumns = ['warehouse', 'customerReference', 'quantity', 'availableQuantity', 'unitPrice', 'quantityForOffer'];
 
 
   ngOnInit(): void {
@@ -94,9 +96,18 @@ export class QuantityDialogComponent implements OnInit {
   }
 
 
-  cancel(): void
+  addNewStockInfo(): void
   {
-    this.dialogRef.close();
+    let dialogRef = this.dialog.open<AddOrEditStockInfoComponent, any, StockInfo>(
+      AddOrEditStockInfoComponent, {data: {productId: this.data.product.id, stockInfo: undefined}, width: "400px"});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+      {
+        this.loadStockInfo();
+      }
+    })
+
   }
 
 
