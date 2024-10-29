@@ -1,4 +1,4 @@
-<h2>Detalji proizvoda</h2>
+<h2>Izmjena proizvoda</h2>
 <app-product-form [product]="product" #productForm></app-product-form>
 <div class="clear">
     <button mat-flat-button color="warn" (click)="deleteProduct()">Obriši proizvod</button>
@@ -8,18 +8,20 @@
 @if (product) {
     <div class="clear">
         <p>Dostupna količina: {{product.availableQty}} {{product.unit}}</p>
-        @if (product.offeredQty && product.offeredQty > 0) {
-            <p>Rezervisana količina: <a href="/offers?p={{productId}}">{{product.offeredQty}} {{product.unit}}</a></p>
+        @if (product.offeredQty) {
+            <p>Rezervisana količina: <a href="/offers?p={{productId}}&s=ACTIVE">{{product.offeredQty}} {{product.unit}}</a></p>
         } @else {
             <p>Rezervisana količina: 0 {{product.unit}}</p>
         }
-        @if (product.orderedQty && product.orderedQty > 0) {
-            <p>Prodata količina: <a href="/offers?p={{productId}}">{{product.orderedQty}} {{product.unit}}</a></p>
+        @if (product.orderedQty) {
+            <p>Prodata količina: <a href="/offers?p={{productId}}&s=ACCEPTED">{{product.orderedQty}} {{product.unit}}</a></p>
         } @else {
             <p>Prodata količina: 0 {{product.unit}}</p>
         }
-        <p>Nabavna cijena: <span title="{{product.purchasePrice! | toEuro | currency : '1.2-2' : '€'}}">{{product.purchasePrice | currency : '1.2-2' : 'KM'}}</span></p>
-        @if (product.repairableQty && product.repairableQty > 0) {
+        @if (product.purchasePrice) {
+            <p>Nabavna cijena: <span title="{{product.purchasePrice! | toEuro | currency : '1.2-2' : '€'}}">{{product.purchasePrice | currency : '1.2-2' : 'KM'}}</span></p>
+        }
+        @if (product.repairableQty) {
             <p>Oštećeno: {{product.repairableQty}} {{product.unit}}</p>
         }
     </div>

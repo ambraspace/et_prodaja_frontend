@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { ProductListComponent } from "../product-list/product-list.component";
 import { ProductFilter } from '../../../model/product-filter';
+import { ProductPopupComponent } from '../product-popup/product-popup.component';
 
 @Component({
   selector: 'app-product-view',
@@ -55,7 +56,9 @@ export class ProductViewComponent implements OnInit {
 
   showProductPage(p: Product)
   {
-    this.router.navigateByUrl("/products/" + p.id)
+    let dialodRef = this.dialog.open<ProductPopupComponent, number, void>(
+      ProductPopupComponent,
+      {data: p.id, width: "600px"});
   }
 
 
