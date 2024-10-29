@@ -60,7 +60,7 @@ export class OfferFormComponent implements OnInit {
         if (this.contacts && this.contacts.length > 0)
         {
           this.offerForm.get("contact")?.enable();
-          this.offerForm.get('contact')?.setValue(this.contacts.find(c => c.id = this.offer.contact.id));
+          this.offerForm.get('contact')?.setValue(this.contacts.find(cnt => cnt.id == this.offer.contact.id));
         } else {
           this.offerForm.get("contact")?.disable();
         }
