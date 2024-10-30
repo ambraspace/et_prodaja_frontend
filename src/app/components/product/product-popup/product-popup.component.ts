@@ -138,13 +138,6 @@ export class ProductPopupComponent implements OnInit {
   }
 
 
-  tabChange($event: MatTabChangeEvent)
-  {
-    console.log($event.tab.textLabel);
-    
-  }
-
-
   updateTable(event: any): void
   {
     this.stockInfoService.page = event.pageIndex;
