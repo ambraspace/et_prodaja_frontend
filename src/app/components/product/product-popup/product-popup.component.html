@@ -47,9 +47,9 @@
         <mat-tab label="Stanje">
             @if (stockInfoPage) {
 
-                <mat-paginator [length]="stockInfoPage.totalElements"
-                    [pageIndex]="stockInfoPage.number"
-                    [pageSize]="stockInfoPage.size"
+                <mat-paginator [length]="stockInfoPage.page.totalElements"
+                    [pageIndex]="stockInfoPage.page.number"
+                    [pageSize]="stockInfoPage.page.size"
                     [pageSizeOptions]="[5]" [showFirstLastButtons]="true"
                     aria-label="Select page" (page)="updateTable($event)">
                 </mat-paginator>

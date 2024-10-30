@@ -13,7 +13,7 @@
             <app-product-filter [productFilter]="productFilter" (filterChanged)="onProductFilter && onProductFilter($event)"></app-product-filter>
         </mat-expansion-panel>
     </div>
-    <mat-paginator [pageSize]="productPage?.size" [pageIndex]="productPage?.number" [pageSizeOptions]="pageSizeOptions" [length]="productPage?.totalElements" [showFirstLastButtons]="true" (page)="updatePage($event)"></mat-paginator>
+    <mat-paginator [pageSize]="productPage?.page?.size" [pageIndex]="productPage?.page?.number" [pageSizeOptions]="pageSizeOptions" [length]="productPage?.page?.totalElements" [showFirstLastButtons]="true" (page)="updatePage($event)"></mat-paginator>
 </div>
 @if (productPage) {
     <mat-grid-list cols="{{numColums}}" rowHeight="1:1.5" gutterSize="10px">

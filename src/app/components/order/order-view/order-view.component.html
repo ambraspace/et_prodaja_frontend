@@ -1,9 +1,9 @@
 <h2>Narudžbe</h2>
 <div *ngIf="orderList.length > 0">
 
-    <mat-paginator [length]="orders?.totalElements"
-              [pageIndex]="orders?.number"
-              [pageSize]="orders?.size"
+    <mat-paginator [length]="orders?.page?.totalElements"
+              [pageIndex]="orders?.page?.number"
+              [pageSize]="orders?.page?.size"
               [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
               aria-label="Select page" (page)="updateTable($event)">
     </mat-paginator>

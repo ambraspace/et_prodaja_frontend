@@ -3,9 +3,9 @@
 
     @if (itemsPage) {
 
-        <mat-paginator [length]="itemsPage.totalElements"
-            [pageIndex]="itemsPage.number"
-            [pageSize]="itemsPage.size"
+        <mat-paginator [length]="itemsPage.page.totalElements"
+            [pageIndex]="itemsPage.page.number"
+            [pageSize]="itemsPage.page.size"
             [pageSizeOptions]="[6]" [showFirstLastButtons]="true"
             aria-label="Select page" (page)="updateTable($event)">
         </mat-paginator>

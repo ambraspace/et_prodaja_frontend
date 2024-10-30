@@ -1,9 +1,9 @@
 <h2>Korisnici <button mat-icon-button color="accent" (click)="addUser()"><span class="material-symbols-outlined">add_circle</span></button></h2>
 <div *ngIf="userList.length > 0">
 
-    <mat-paginator [length]="users?.totalElements"
-              [pageIndex]="users?.number"
-              [pageSize]="users?.size"
+    <mat-paginator [length]="users?.page?.totalElements"
+              [pageIndex]="users?.page?.number"
+              [pageSize]="users?.page?.size"
               [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
               aria-label="Select page" (page)="updateTable($event)">
     </mat-paginator>

@@ -1,9 +1,9 @@
 <h2>Ponude<button mat-icon-button color="accent" (click)="addNewOffer()"><span class="material-symbols-outlined">add_circle</span></button></h2>
 <div *ngIf="offerList.length > 0">
 
-    <mat-paginator [length]="offers?.totalElements"
-              [pageIndex]="offers?.number"
-              [pageSize]="offers?.size"
+    <mat-paginator [length]="offers?.page?.totalElements"
+              [pageIndex]="offers?.page?.number"
+              [pageSize]="offers?.page?.size"
               [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
               aria-label="Select page" (page)="updateTable($event)">
     </mat-paginator>

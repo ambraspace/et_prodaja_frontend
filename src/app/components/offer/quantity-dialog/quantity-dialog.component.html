@@ -7,10 +7,10 @@
 </h3>
 <mat-dialog-content>
 
-    @if (stockInfoPage?.numberOfElements) {
-        <mat-paginator [length]="stockInfoPage?.totalElements"
-                  [pageIndex]="stockInfoPage?.number"
-                  [pageSize]="stockInfoPage?.size"
+    @if (stockInfoPage?.page?.totalElements) {
+        <mat-paginator [length]="stockInfoPage?.page?.totalElements"
+                  [pageIndex]="stockInfoPage?.page?.number"
+                  [pageSize]="stockInfoPage?.page?.size"
                   [pageSizeOptions]="[10]" [showFirstLastButtons]="true"
                   aria-label="Select page" (page)="updateTable($event)" tabindex="-1">
         </mat-paginator>
