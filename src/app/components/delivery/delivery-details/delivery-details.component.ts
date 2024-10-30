@@ -124,7 +124,7 @@ export class DeliveryDetailsComponent implements OnInit {
   {
 
     let dialogRef = this.dialog.open<ItemSelectorComponent, {delivery: Delivery}, DeliveryItem[]>(
-      ItemSelectorComponent, {data: {delivery: this.delivery!}});
+      ItemSelectorComponent, {data: {delivery: this.delivery!}, width: "1000px"});
 
     dialogRef.afterClosed().subscribe(res => {
       if (res)
