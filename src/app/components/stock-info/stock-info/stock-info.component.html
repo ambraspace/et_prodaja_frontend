@@ -25,6 +25,11 @@
         <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="availableQuantity">
+        <th mat-header-cell *matHeaderCellDef> Preostalo </th>
+        <td mat-cell *matCellDef="let element"> {{element.availableQuantity}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="unitPrice">
         <th mat-header-cell *matHeaderCellDef> Nabavna cijena </th>
         <td mat-cell *matCellDef="let element" title="{{element.unitPrice | toEuro | currency : '1.2-2' : '€'}}"> {{element.unitPrice | currency : '1.2-2' : 'KM'}} </td>
