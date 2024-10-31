@@ -58,7 +58,7 @@
                 
                     <ng-container matColumnDef="warehouse">
                         <th mat-header-cell *matHeaderCellDef> Skladište </th>
-                        <td mat-cell *matCellDef="let element">
+                        <td mat-cell *matCellDef="let element" title="{{element.warehouse.company.name}}, {{element.warehouse.company.locality}}">
                             {{element.warehouse.name}}
                         </td>
                     </ng-container>
