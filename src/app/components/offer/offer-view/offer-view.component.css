@@ -8,3 +8,11 @@
 {
     text-decoration: 1px line-through black;
 }
+
+td.center, th.center {
+    text-align: center;
+}
+
+td.right, th.right {
+    text-align: right;
+}

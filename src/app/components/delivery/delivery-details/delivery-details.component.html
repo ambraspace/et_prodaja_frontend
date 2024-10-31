@@ -72,8 +72,8 @@
             </ng-container>
     
             <ng-container matColumnDef="note">
-                <th mat-header-cell *matHeaderCellDef> Napomena </th>
-                <td mat-cell *matCellDef="let element"> {{element.deliveryNote}} </td>
+                <th class="td-center" mat-header-cell *matHeaderCellDef> Napomena </th>
+                <td class="td-center" mat-cell *matCellDef="let element"> <span *ngIf="element.deliveryNote" class="material-symbols-outlined" title="{{element.deliveryNote}}">comment</span> </td>
                 <td class="td-right" colspan="4" mat-footer-cell *matFooterCellDef></td>
             </ng-container>
     

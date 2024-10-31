@@ -25,35 +25,35 @@
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Status narudžbe </th>
-        <td mat-cell *matCellDef="let element">
+        <th class="center" mat-header-cell *matHeaderCellDef> Status narudžbe </th>
+        <td class="center" mat-cell *matCellDef="let element">
           <span *ngIf="element.status == 'OPEN'" title="{{element.status | orderStatusLocalize}}" class="material-symbols-outlined">folder_open</span>
           <span *ngIf="element.status == 'CLOSED'" title="{{element.status | orderStatusLocalize}}" class="material-symbols-outlined">folder</span>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="creation">
-        <th mat-header-cell *matHeaderCellDef> Datum otvaranja </th>
-        <td mat-cell *matCellDef="let element">
+        <th class="center" mat-header-cell *matHeaderCellDef> Datum otvaranja </th>
+        <td class="center" mat-cell *matCellDef="let element">
           {{element.creationDate | date}}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="closure">
-        <th mat-header-cell *matHeaderCellDef> Datum zatvaranja </th>
-        <td mat-cell *matCellDef="let element">
+        <th class="center" mat-header-cell *matHeaderCellDef> Datum zatvaranja </th>
+        <td class="center" mat-cell *matCellDef="let element">
           {{element.closureTime | date}}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef> Vrijednost </th>
-        <td mat-cell *matCellDef="let element" title="{{element.value | toEuro | currency : '1.2-2' : '€'}}"> {{element.value | currency : '1.2-2' : 'KM'}} </td>
+        <th class="right" mat-header-cell *matHeaderCellDef> Vrijednost </th>
+        <td class="right" mat-cell *matCellDef="let element" title="{{element.value | toEuro | currency : '1.2-2' : '€'}}"> {{element.value | currency : '1.2-2' : 'KM'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Akcije </th>
-          <td mat-cell *matCellDef="let element">
+          <th class="center" mat-header-cell *matHeaderCellDef> Akcije </th>
+          <td class="center" mat-cell *matCellDef="let element">
             <a mat-icon-button color="accent" title="Pogledaj narudžbu" routerLink="/orders/{{element.id}}">
               <span class="material-symbols-outlined">visibility</span>
             </a>
