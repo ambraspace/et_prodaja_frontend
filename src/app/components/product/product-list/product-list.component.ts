@@ -16,6 +16,7 @@ import { Tag } from '../../../model/tag';
 import { ProductFilter } from '../../../model/product-filter';
 import { RouterLink } from '@angular/router';
 import { ProductFilterComponent } from "../product-filter/product-filter.component";
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-list',
@@ -61,7 +62,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   constructor(
     private productService: ProductService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog
   ) { }
 
 
@@ -228,6 +230,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (p.orderedQty && p.orderedQty > 0) retVal += "Prodato: " + p.orderedQty + ". ";
     if (p.repairableQty && p.repairableQty > 0) retVal += "Za popravku: " + p.repairableQty + ". ";
     return retVal;
+  }
+
+  openProductFilter(): void
+  {
+    let dialogRef =
+      this.dialog.open<ProductFilterComponent, {filter: ProductFilter, callBack: ((filter: ProductFilter) => void) | undefined}, ProductFilter>
+        (
+          ProductFilterComponent, {data: {filter: this.productFilter, callBack: this.onProductFilter}, width: "400px"}
+        );
   }
 
 }

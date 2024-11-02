@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +20,7 @@ import { FlatTreeCategory } from '../../../model/flat-tree-category';
 import { MatTreeFlattener } from '@angular/material/tree';
 import { ProductFilter } from '../../../model/product-filter';
 import { AuthService } from '../../../services/auth.service';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-filter',
@@ -31,52 +32,44 @@ import { AuthService } from '../../../services/auth.service';
     FormsModule,
     MatAutocompleteModule,
     AsyncPipe,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   templateUrl: './product-filter.component.html',
   styleUrl: './product-filter.component.css'
 })
 export class ProductFilterComponent implements OnInit {
 
+
   constructor(
     private warehouseService: WarehouseService,
     private tagService: TagService,
     private categoryService: CategoryService,
-    private auth: AuthService
-  ) {}
-
-
-  @Input()
-  get productFilter(): ProductFilter
-  {
-    if (this._productFilter)
+    private auth: AuthService,
+    private dialogRef: MatDialogRef<ProductFilterComponent, ProductFilter>,
+    @Inject(MAT_DIALOG_DATA) private data: {filter: ProductFilter | undefined, callBack: ((filter: ProductFilter) => void) | undefined}
+  ) {
+    this.productFilter = new ProductFilter();
+    if (data.filter)
     {
-      return this._productFilter;
-    } else {
-      return new ProductFilter();
+      this.productFilter = new ProductFilter();
+      this.productFilter.query = data.filter.query;
+      this.productFilter.searchComments = data.filter.searchComments;
+      this.productFilter.warehouseId = data.filter.warehouseId;
+      this.productFilter.tags = data.filter.tags;
+      this.productFilter.categoryId = data.filter.categoryId;
+    }
+    if (data.callBack)
+    {
+      this.callBack = data.callBack;
     }
   }
-  set productFilter(pf: ProductFilter)
-  {
-    if (pf)
-    {
-      this._productFilter = new ProductFilter();
-      this._productFilter.query = pf.query;
-      this._productFilter.searchComments = pf.searchComments;
-      this._productFilter.warehouseId = pf.warehouseId;
-      this._productFilter.tags = pf.tags;
-      this._productFilter.categoryId = pf.categoryId;
-      if (this._productFilter.warehouseId)
-        this.loadWarehouse();
-    } else {
-      this._productFilter = new ProductFilter();
-    }
-  }
-  private _productFilter?: ProductFilter;
+  
+
+  productFilter?: ProductFilter;
 
 
-  @Output()
-  filterChanged = new EventEmitter<ProductFilter>();
+  private callBack?: (filter: ProductFilter) => void;
 
 
   flatCategories: FlatTreeCategory[] = [];
@@ -101,7 +94,7 @@ export class ProductFilterComponent implements OnInit {
 
   queryIsNotEmpty(): boolean
   {
-    if (this.productFilter.query && this.productFilter.query.trim().length > 0)
+    if (this.productFilter!.query && this.productFilter!.query.trim().length > 0)
       return true;
     return false;
   }
@@ -126,7 +119,7 @@ export class ProductFilterComponent implements OnInit {
 
   loadWarehouse(): void
   {
-    this.warehouseService.getWarehouseById(this.productFilter.warehouseId!).subscribe(w => {
+    this.warehouseService.getWarehouseById(this.productFilter!.warehouseId!).subscribe(w => {
       this.selectedWarehouse = w;
     })
   }
@@ -139,7 +132,7 @@ export class ProductFilterComponent implements OnInit {
   {
     this.categoryService.getCategories().subscribe(cs => {
       this.flatCategories = this.treeFlattener.flattenNodes(cs);
-      this.selectedCategory = this.flatCategories.find(ftc => ftc.category.id == this.productFilter.categoryId);
+      this.selectedCategory = this.flatCategories.find(ftc => ftc.category.id == this.productFilter!.categoryId);
     })
   }
 
@@ -190,9 +183,18 @@ export class ProductFilterComponent implements OnInit {
 
   applyFilter():void
   {
-    if (this.selectedWarehouse) this.productFilter.warehouseId = this.selectedWarehouse.id;
-    if (this.selectedCategory) this.productFilter.categoryId = this.selectedCategory.category.id;
-    this.filterChanged.emit(this.productFilter);
+    if (this.selectedWarehouse)
+      this.productFilter!.warehouseId = this.selectedWarehouse.id;
+    else
+      this.productFilter!.warehouseId = undefined;
+    if (this.selectedCategory)
+      this.productFilter!.categoryId = this.selectedCategory.category.id;
+    else
+      this.productFilter!.categoryId = undefined;
+    if (this.callBack)
+    {
+      this.callBack(this.productFilter!);
+    }
   }
 
 
@@ -207,10 +209,10 @@ export class ProductFilterComponent implements OnInit {
 
   selectedTag($event: MatAutocompleteSelectedEvent): void
   {
-    const index = this.productFilter.tags?.indexOf($event.option.value.name);
+    const index = this.productFilter!.tags?.indexOf($event.option.value.name);
 
     if (index === -1) {
-      this.productFilter.tags!.push($event.option.value.name);
+      this.productFilter!.tags!.push($event.option.value.name);
     }
 
     this.tagInput!.nativeElement.value = '';
@@ -220,10 +222,10 @@ export class ProductFilterComponent implements OnInit {
   removeTag(tag: string): void
   {
 
-    const index = this.productFilter.tags?.indexOf(tag);
+    const index = this.productFilter!.tags?.indexOf(tag);
 
     if (index != undefined && index >= 0) {
-      this.productFilter.tags!.splice(index, 1);
+      this.productFilter!.tags!.splice(index, 1);
     }
 
   }

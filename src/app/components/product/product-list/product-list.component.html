@@ -1,17 +1,14 @@
 <div>
     <div id="filter">
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-description>
                 @if (filterApplied()) {
-                    <span class="material-symbols-outlined">tune</span>&nbsp;Filtriranje proizvoda (akitvno)
+                    <button mat-fab color="accent" (click)="openProductFilter()">
+                        <span class="material-symbols-outlined">tune</span>
+                    </button>
                 } @else {
-                    <span class="material-symbols-outlined">tune</span>&nbsp;Filtriranje proizvoda
+                    <button mat-fab color="basic" (click)="openProductFilter()">
+                        <span class="material-symbols-outlined">tune</span>
+                    </button>
                 }
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <app-product-filter [productFilter]="productFilter" (filterChanged)="onProductFilter && onProductFilter($event)"></app-product-filter>
-        </mat-expansion-panel>
     </div>
     <mat-paginator [pageSize]="productPage?.page?.size" [pageIndex]="productPage?.page?.number" [pageSizeOptions]="pageSizeOptions" [length]="productPage?.page?.totalElements" [showFirstLastButtons]="true" (page)="updatePage($event)"></mat-paginator>
 </div>
