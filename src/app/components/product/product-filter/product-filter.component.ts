@@ -20,7 +20,7 @@ import { FlatTreeCategory } from '../../../model/flat-tree-category';
 import { MatTreeFlattener } from '@angular/material/tree';
 import { ProductFilter } from '../../../model/product-filter';
 import { AuthService } from '../../../services/auth.service';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-filter',
@@ -46,8 +46,7 @@ export class ProductFilterComponent implements OnInit {
     private tagService: TagService,
     private categoryService: CategoryService,
     private auth: AuthService,
-    private dialogRef: MatDialogRef<ProductFilterComponent, ProductFilter>,
-    @Inject(MAT_DIALOG_DATA) private data: {filter: ProductFilter | undefined, callBack: ((filter: ProductFilter) => void) | undefined}
+    @Inject(MAT_DIALOG_DATA) private data: {filter: ProductFilter, callBack: ((filter: ProductFilter) => void) | undefined}
   ) {
     this.productFilter = new ProductFilter();
     if (data.filter)
@@ -66,7 +65,7 @@ export class ProductFilterComponent implements OnInit {
   }
   
 
-  productFilter?: ProductFilter;
+  productFilter: ProductFilter;
 
 
   private callBack?: (filter: ProductFilter) => void;
@@ -94,7 +93,7 @@ export class ProductFilterComponent implements OnInit {
 
   queryIsNotEmpty(): boolean
   {
-    if (this.productFilter!.query && this.productFilter!.query.trim().length > 0)
+    if (this.productFilter.query && this.productFilter.query.trim().length > 0)
       return true;
     return false;
   }
@@ -119,7 +118,7 @@ export class ProductFilterComponent implements OnInit {
 
   loadWarehouse(): void
   {
-    this.warehouseService.getWarehouseById(this.productFilter!.warehouseId!).subscribe(w => {
+    this.warehouseService.getWarehouseById(this.productFilter.warehouseId!).subscribe(w => {
       this.selectedWarehouse = w;
     })
   }
@@ -132,7 +131,7 @@ export class ProductFilterComponent implements OnInit {
   {
     this.categoryService.getCategories().subscribe(cs => {
       this.flatCategories = this.treeFlattener.flattenNodes(cs);
-      this.selectedCategory = this.flatCategories.find(ftc => ftc.category.id == this.productFilter!.categoryId);
+      this.selectedCategory = this.flatCategories.find(ftc => ftc.category.id == this.productFilter.categoryId);
     })
   }
 
@@ -184,16 +183,16 @@ export class ProductFilterComponent implements OnInit {
   applyFilter():void
   {
     if (this.selectedWarehouse)
-      this.productFilter!.warehouseId = this.selectedWarehouse.id;
+      this.productFilter.warehouseId = this.selectedWarehouse.id;
     else
-      this.productFilter!.warehouseId = undefined;
+      this.productFilter.warehouseId = undefined;
     if (this.selectedCategory)
-      this.productFilter!.categoryId = this.selectedCategory.category.id;
+      this.productFilter.categoryId = this.selectedCategory.category.id;
     else
-      this.productFilter!.categoryId = undefined;
+      this.productFilter.categoryId = undefined;
     if (this.callBack)
     {
-      this.callBack(this.productFilter!);
+      this.callBack(this.productFilter);
     }
   }
 
@@ -209,10 +208,10 @@ export class ProductFilterComponent implements OnInit {
 
   selectedTag($event: MatAutocompleteSelectedEvent): void
   {
-    const index = this.productFilter!.tags?.indexOf($event.option.value.name);
+    const index = this.productFilter.tags?.indexOf($event.option.value.name);
 
     if (index === -1) {
-      this.productFilter!.tags!.push($event.option.value.name);
+      this.productFilter.tags!.push($event.option.value.name);
     }
 
     this.tagInput!.nativeElement.value = '';
@@ -222,10 +221,10 @@ export class ProductFilterComponent implements OnInit {
   removeTag(tag: string): void
   {
 
-    const index = this.productFilter!.tags?.indexOf(tag);
+    const index = this.productFilter.tags?.indexOf(tag);
 
     if (index != undefined && index >= 0) {
-      this.productFilter!.tags!.splice(index, 1);
+      this.productFilter.tags!.splice(index, 1);
     }
 
   }

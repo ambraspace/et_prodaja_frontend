@@ -234,11 +234,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   openProductFilter(): void
   {
-    let dialogRef =
-      this.dialog.open<ProductFilterComponent, {filter: ProductFilter, callBack: ((filter: ProductFilter) => void) | undefined}, ProductFilter>
-        (
-          ProductFilterComponent, {data: {filter: this.productFilter, callBack: this.onProductFilter}, width: "400px"}
-        );
+    this.dialog.open<ProductFilterComponent, {filter: ProductFilter, callBack: ((filter: ProductFilter) => void) | undefined}, void>
+      (
+        ProductFilterComponent, {
+          data: {filter: this.productFilter, callBack: this.onProductFilter},
+          width: "400px"
+        }
+      );
   }
 
 }
