@@ -3,6 +3,7 @@ import { ProductListComponent } from "../product-list/product-list.component";
 import { ProductFilter } from '../../../model/product-filter';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
+import { ProductViewComponent } from '../product-view/product-view.component';
 
 @Component({
   selector: 'app-catalog',
@@ -21,8 +22,9 @@ export class CatalogComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe(pm => {
-      let newProductFilter: ProductFilter = {};
+      let newProductFilter = new ProductFilter();
       newProductFilter.query = pm['q'];
       newProductFilter.searchComments = pm['cm'];
       newProductFilter.warehouseId = pm['w'];
@@ -41,33 +43,29 @@ export class CatalogComponent implements OnInit {
   }
 
 
-  productFilter: ProductFilter = {};
+  productFilter = new ProductFilter();
 
   filterProducts = (pf: ProductFilter) =>
+  {
+
+    if (pf)
     {
-        if (pf)
-        {
-          let url: string = "/catalog";
-          url = url + "?";
-          if (pf.query) {
-            url = url + `q=${encodeURI(pf.query)}&`;
-            if (pf.searchComments) url = url + `cm=${pf.searchComments}&`;
-          }
-          if (pf.warehouseId) url = url + `w=${pf.warehouseId}&`;
-          if (pf.tags && pf.tags.length > 0)
-          {
-            pf.tags.forEach(tag => url = url + `t=${encodeURI(tag)}&`)
-          }
-          if (pf.categoryId) url = url + `ct=${pf.categoryId}&`;
-          if (url.charAt(url.length - 1) === '&' || url.charAt(url.length - 1) === '?')
-            url = url.substring(0, url.length - 1);
-          this.router.navigateByUrl(url, {replaceUrl: true});
-        } else {
-          this.router.navigateByUrl('/catalog', {replaceUrl: true});
-        }
-        this.productService.page = 0;
-  
+
+      this.productService.page = 0;
+    
+      let url = ProductViewComponent.createUrlFromProductFilter(pf);
+
+      url = url.replace("/products", "/catalog");
+
+      this.router.navigateByUrl(url, {replaceUrl: true});
+
+    } else {
+
+      this.router.navigateByUrl('/catalog', {replaceUrl: true});
+      
     }
+  
+  }
   
 
 

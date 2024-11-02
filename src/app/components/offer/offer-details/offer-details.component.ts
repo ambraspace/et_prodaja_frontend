@@ -14,12 +14,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditOfferComponent } from '../add-or-edit-offer/add-or-edit-offer.component';
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 import { TextInputDialog } from '../../dialogs/text-input-dialog/text-input-dialog.component';
-import { ProductFilter } from '../../../model/product-filter';
-import { Product } from '../../../model/product';
 import { ProductListComponent } from "../../product/product-list/product-list.component";
 import { ProductService } from '../../../services/product.service';
 import { ProductFormComponent } from "../../product/product-form/product-form.component";
-import { ProductFilterComponent } from "../../product/product-filter/product-filter.component";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ItemEditorComponent } from '../../item/item-editor/item-editor.component';
 
@@ -39,8 +36,7 @@ import { ItemEditorComponent } from '../../item/item-editor/item-editor.componen
     OfferFormComponent,
     MatButtonModule,
     ProductListComponent,
-    ProductFormComponent,
-    ProductFilterComponent
+    ProductFormComponent
 ],
   templateUrl: './offer-details.component.html',
   styleUrl: './offer-details.component.css',
@@ -87,41 +83,6 @@ export class OfferDetailsComponent implements OnInit {
   @ViewChild('offerForm') offerFormComponent: OfferFormComponent | undefined;
 
 
-  get productFilter(): ProductFilter
-  {
-    if (this._productFilter)
-    {
-      return this._productFilter;
-    } else {
-      return {
-        query: undefined,
-        searchComments: false,
-        warehouseId: undefined,
-        tags: [],
-        categoryId: undefined
-      }
-    }
-  }
-
-  set productFilter(pf: ProductFilter)
-  {
-    if (pf)
-    {
-      this._productFilter = pf;
-    } else {
-      this._productFilter = {
-        query: undefined,
-        searchComments: false,
-        warehouseId: undefined,
-        tags: [],
-        categoryId: undefined
-      }
-    }
-  }
-
-  private _productFilter?: ProductFilter;
-
-
   ngOnInit(): void {
     this.loadOffer();
     this.loadItems();
@@ -147,38 +108,6 @@ export class OfferDetailsComponent implements OnInit {
   addItems(): void
   {
     this.router.navigateByUrl(`/offers/${this.offerId}/productSelector`);
-  }
-
-
-  filterProducts = (pf: ProductFilter) =>
-  {
-      if (pf)
-      {
-        let url: string = "/products";
-        url = url + "?";
-        if (pf.query) {
-          url = url + `q=${encodeURI(pf.query)}&`;
-          if (pf.searchComments) url = url + `cm=${pf.searchComments}&`;
-        }
-        if (pf.warehouseId) url = url + `w=${pf.warehouseId}&`;
-        if (pf.tags && pf.tags.length > 0)
-        {
-          pf.tags.forEach(tag => url = url + `t=${encodeURI(tag)}&`)
-        }
-        if (pf.categoryId) url = url + `ct=${pf.categoryId}&`;
-        if (url.charAt(url.length - 1) === '&' || url.charAt(url.length - 1) === '?')
-          url = url.substring(0, url.length - 1);
-        this.router.navigateByUrl(url, {replaceUrl: true});
-      } else {
-        this.router.navigateByUrl('/products', {replaceUrl: true});
-      }
-      this.productService.page = 0;
-  }
-
-
-  onProductClick = (p: Product) => {
-    console.log(p);
-    
   }
 
 

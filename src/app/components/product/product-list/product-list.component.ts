@@ -72,34 +72,21 @@ export class ProductListComponent implements OnInit, OnDestroy {
     {
       return this._productFilter;
     } else {
-      return {
-        query: undefined,
-        searchComments: false,
-        warehouseId: undefined,
-        tags: [],
-        categoryId: undefined
-      }
+      return new ProductFilter();
     }
   }
   set productFilter(pf: ProductFilter)
   {
     if (pf)
     {
-      this._productFilter = {
-        query: pf.query,
-        searchComments: pf.searchComments,
-        warehouseId: pf.warehouseId,
-        tags: pf.tags,
-        categoryId: pf.categoryId
-      };
+      this._productFilter = new ProductFilter();
+      this._productFilter.query = pf.query;
+      this._productFilter.searchComments = pf.searchComments;
+      this._productFilter.warehouseId = pf.warehouseId;
+      this._productFilter.tags = pf.tags;
+      this._productFilter.categoryId = pf.categoryId;
     } else {
-      this._productFilter = {
-        query: undefined,
-        searchComments: false,
-        warehouseId: undefined,
-        tags: [],
-        categoryId: undefined
-      }
+      this._productFilter = new ProductFilter();
     }
     this.loadProducts();
   }
@@ -124,7 +111,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   {
     if (
       this.productFilter.query ||
-      this.productFilter.searchComments ||
       this.productFilter.warehouseId ||
       (this.productFilter.tags && this.productFilter.tags.length > 0) ||
       this.productFilter.categoryId

@@ -4,10 +4,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductFilter } from '../../../model/product-filter';
 import { Product } from '../../../model/product';
 import { ProductService } from '../../../services/product.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Item } from '../../../model/item';
 import { ItemService } from '../../../services/item.service';
-import { StockInfoService } from '../../../services/stock-info.service';
 import { QuantityDialogComponent } from '../quantity-dialog/quantity-dialog.component';
 import { StockInfo } from '../../../model/stock-info';
 
@@ -33,6 +32,9 @@ export class ProductSelectorComponent implements OnInit {
 
 
   ngOnInit(): void {
+    let pf = sessionStorage.getItem('productFilter');
+    if (pf)
+      this.productFilter = new ProductFilter(pf);
     this.loadItems();
   }
 
@@ -47,7 +49,7 @@ export class ProductSelectorComponent implements OnInit {
   items: Item[] = [];
 
 
-  productFilter: ProductFilter = {};
+  productFilter = new ProductFilter();
 
 
   loadItems(): void
@@ -58,7 +60,7 @@ export class ProductSelectorComponent implements OnInit {
   }
 
 
-  showProductPage(p: Product)
+  openQuantityDialog(p: Product)
   {
     this.selectedProduct = p;
 
@@ -109,15 +111,22 @@ export class ProductSelectorComponent implements OnInit {
   {
       if (pf)
       {
-        let newFilter: ProductFilter = {
-          query: pf.query,
-          searchComments: pf.searchComments,
-          warehouseId: pf.warehouseId,
-          tags: pf.tags,
-          categoryId: pf.categoryId
+        
+        let newFilter = new ProductFilter();
+        newFilter.query = pf.query;
+        newFilter.searchComments = pf.searchComments;
+        newFilter.warehouseId = pf.warehouseId;
+        newFilter.tags = pf.tags;
+        newFilter.categoryId = pf.categoryId;
+      
+        if (!this.productFilter.equals(pf))
+        {
+          this.productService.page = 0;
+          sessionStorage.setItem('productFilter', JSON.stringify(newFilter));
         }
+
         this.productFilter = newFilter;
-        this.productService.page = 0;
+      
       }
   }
 

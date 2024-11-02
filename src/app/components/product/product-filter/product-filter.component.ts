@@ -53,36 +53,23 @@ export class ProductFilterComponent implements OnInit {
     {
       return this._productFilter;
     } else {
-      return {
-        query: undefined,
-        searchComments: false,
-        warehouseId: undefined,
-        tags: [],
-        categoryId: undefined
-      }
+      return new ProductFilter();
     }
   }
   set productFilter(pf: ProductFilter)
   {
     if (pf)
     {
-      this._productFilter = {
-        query: pf.query,
-        searchComments: pf.searchComments,
-        warehouseId: pf.warehouseId,
-        tags: pf.tags,
-        categoryId: pf.categoryId
-      };
+      this._productFilter = new ProductFilter();
+      this._productFilter.query = pf.query;
+      this._productFilter.searchComments = pf.searchComments;
+      this._productFilter.warehouseId = pf.warehouseId;
+      this._productFilter.tags = pf.tags;
+      this._productFilter.categoryId = pf.categoryId;
       if (this._productFilter.warehouseId)
         this.loadWarehouse();
     } else {
-      this._productFilter = {
-        query: undefined,
-        searchComments: false,
-        warehouseId: undefined,
-        tags: [],
-        categoryId: undefined
-      };
+      this._productFilter = new ProductFilter();
     }
   }
   private _productFilter?: ProductFilter;
@@ -211,13 +198,7 @@ export class ProductFilterComponent implements OnInit {
 
   cancelFilter(): void
   {
-    this.productFilter = {
-      query: undefined,
-      searchComments: false,
-      warehouseId: undefined,
-      tags: [],
-      categoryId: undefined
-    };
+    this.productFilter = new ProductFilter();
     this.selectedCategory = undefined;
     this.selectedWarehouse = undefined;
     this.applyFilter();

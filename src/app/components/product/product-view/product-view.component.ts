@@ -30,12 +30,14 @@ export class ProductViewComponent implements OnInit {
   ) {}
 
 
-  productFilter: ProductFilter = {};
+  productFilter = new ProductFilter();
 
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(pm => {
-      let newProductFilter: ProductFilter = {};
+
+      let newProductFilter = new ProductFilter();
+
       newProductFilter.query = pm['q'];
       newProductFilter.searchComments = pm['cm'];
       newProductFilter.warehouseId = pm['w'];
@@ -48,7 +50,25 @@ export class ProductViewComponent implements OnInit {
         newProductFilter.tags = [];
       }
       newProductFilter.categoryId = pm['ct'];
-      this.productFilter = newProductFilter;
+      
+      if (
+        newProductFilter.query ||
+        newProductFilter.warehouseId ||
+        (newProductFilter.tags && newProductFilter.tags.length > 0) ||
+        newProductFilter.categoryId
+      )
+      {
+        sessionStorage.setItem('productFilter', JSON.stringify(newProductFilter));
+        this.productFilter = newProductFilter;
+      } else {
+        let pf = sessionStorage.getItem('productFilter');
+        if (pf)
+        {
+          this.productFilter = new ProductFilter(pf);
+        } else {
+          this.productFilter = newProductFilter;
+        }
+      }
     });
   
   }
@@ -76,28 +96,65 @@ export class ProductViewComponent implements OnInit {
 
   filterProducts = (pf: ProductFilter) =>
   {
-      if (pf)
-      {
-        let url: string = "/products";
-        url = url + "?";
-        if (pf.query) {
-          url = url + `q=${encodeURI(pf.query)}&`;
-          if (pf.searchComments) url = url + `cm=${pf.searchComments}&`;
-        }
-        if (pf.warehouseId) url = url + `w=${pf.warehouseId}&`;
-        if (pf.tags && pf.tags.length > 0)
-        {
-          pf.tags.forEach(tag => url = url + `t=${encodeURI(tag)}&`)
-        }
-        if (pf.categoryId) url = url + `ct=${pf.categoryId}&`;
-        if (url.charAt(url.length - 1) === '&' || url.charAt(url.length - 1) === '?')
-          url = url.substring(0, url.length - 1);
-        this.router.navigateByUrl(url, {replaceUrl: true});
-      } else {
-        this.router.navigateByUrl('/products', {replaceUrl: true});
-      }
+
+    if (pf)
+    {
+
+      sessionStorage.setItem('productFilter', JSON.stringify(pf));
+    
       this.productService.page = 0;
+    
+      let url = ProductViewComponent.createUrlFromProductFilter(pf);
+
+      if (url == '/products')
+      {
+        /* the filter is reset */
+        this.productFilter = new ProductFilter();
+      }
+      this.router.navigateByUrl(url, {replaceUrl: true});
+
+    }
 
   }
+
+
+  static createUrlFromProductFilter(pf: ProductFilter): string
+  {
+
+    let query = "";
+    
+    if (pf.query && pf.query.trim() != '')
+    {
+      query += `q=${encodeURI(pf.query)}&`;
+      if (pf.searchComments) {
+        query += `cm=true&`;
+      }
+    }
+
+    if (pf.warehouseId)
+    {
+      query += `w=${pf.warehouseId}&`;
+    }
+
+    if (pf.tags && pf.tags.length > 0)
+    {
+      query += `t=` + (pf.tags.map(t => encodeURI(t)).join(`&t=`)) + `&`;
+    }
+
+    if (pf.categoryId)
+    {
+      query += `ct=${pf.categoryId}&`;
+    }
+
+    if (query.endsWith('&'))
+      query = query.substring(0, query.length - 1);
+
+    if (query.trim() == '')
+      return '/products';
+    else
+      return `/products?${query}`;
+
+  }
+
 
 }
