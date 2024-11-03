@@ -11,8 +11,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddOrEditOfferComponent } from '../add-or-edit-offer/add-or-edit-offer.component';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { OfferFilter } from '../../../model/offer-filter';
+import { OfferFilterComponent } from '../offer-filter/offer-filter.component';
 
 @Component({
   selector: 'app-offer-view',
@@ -37,36 +37,52 @@ export class OfferViewComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
 
-  offerFilter: OfferFilter = {};
+  offerFilter = new OfferFilter();
 
 
   ngOnInit(): void {
-    let newOfferFilter: OfferFilter = {};
+
     this.route.queryParams.subscribe(pm => {
+
+      let newOfferFilter = new OfferFilter();
+
       newOfferFilter.username = pm['u'];
       newOfferFilter.companyId = pm['c'];
-      newOfferFilter.status = pm['s'];
+      if (typeof pm['s'] === 'string')
+        newOfferFilter.statuses = Array.of(pm['s']);
+      else if (typeof pm['s'] === 'object')
+        newOfferFilter.statuses = pm['s'];
+      else
+        newOfferFilter.statuses = [];
       newOfferFilter.productId = pm['p'];
-      this.offerFilter = newOfferFilter;
+
+      if (
+        newOfferFilter.username ||
+        newOfferFilter.companyId ||
+        (newOfferFilter.statuses && newOfferFilter.statuses.length > 0) ||
+        newOfferFilter.productId
+      ) {
+        this.offerFilter = newOfferFilter;
+      } else {
+        let ofs = localStorage.getItem('offerFilter');
+        if (ofs)
+          this.offerFilter = new OfferFilter(ofs);
+        else
+          this.offerFilter = newOfferFilter;
+      }
+
+      this.loadOffers();
+
     });
 
-    this.loadOffers();
   }
 
 
-  offers: Page<Offer> | null = null;
+  offers?: Page<Offer>;
 
-
-  get offerList(): Offer[]
-  {
-    if (this.offers)
-      return this.offers.content;
-    else
-      return [];
-  }
 
   displayedColumns: string[] = [
     'id',
@@ -81,12 +97,12 @@ export class OfferViewComponent implements OnInit {
     'actions'
   ]
 
-  loadOffers(): void
-  {
+
+  loadOffers(): void {
     this.offerService.getOffers(
       this.offerFilter.username,
       this.offerFilter.companyId,
-      this.offerFilter.status,
+      this.offerFilter.statuses,
       this.offerFilter.productId
     ).subscribe(o => {
       this.offers = o;
@@ -94,52 +110,81 @@ export class OfferViewComponent implements OnInit {
   }
 
 
-  addNewOffer(): void
-  {
+  addNewOffer(): void {
 
     let dialogRef = this.dialog.open<AddOrEditOfferComponent, any, Offer>(
       AddOrEditOfferComponent,
-      {data: {offerId: undefined, offer: undefined}, width: "500px"}
+      { data: { offerId: undefined, offer: undefined }, width: "500px" }
     );
 
     dialogRef.afterClosed().subscribe(o => {
-      if (o)
-      {
-        this.router.navigateByUrl("/offers/" + o.id );
+      if (o) {
+        this.router.navigateByUrl("/offers/" + o.id);
       }
     })
 
   }
 
 
-  editOffer(offerId: number)
-  {
-
-  }
-
-
-  deleteOffer(offerId: number)
-  {
-
-  }
-
-
-  updateTable(event: any): void
-  {
+  updateTable(event: any): void {
     this.offerService.page = event.pageIndex;
     this.offerService.size = event.pageSize;
     this.loadOffers();
   }
 
 
-  isOfferInvalid(o: Offer): boolean
-  {
-    let endDate = new Date()  
-    endDate.setHours(0,0,0,0);
-    
+  isOfferInvalid(o: Offer): boolean {
+    let endDate = new Date()
+    endDate.setHours(0, 0, 0, 0);
+
     if (o.status == 'ACTIVE' && (new Date(o.validUntil).valueOf() <= endDate.valueOf()))
       return true;
 
     return false;
   }
+
+
+  openOfferFilter(): void {
+    this.dialog.open<OfferFilterComponent, { filter: OfferFilter, callBack: ((filter: OfferFilter) => void) | undefined }, void>
+      (
+        OfferFilterComponent, { data: { filter: this.offerFilter, callBack: this.applyOfferFilter }, width: "400px" }
+      )
+  }
+
+
+  isFilterApplied(): boolean {
+    
+    if (this.offerFilter)
+    {
+      if (
+        this.offerFilter.username ||
+        this.offerFilter.companyId ||
+        (this.offerFilter.statuses && this.offerFilter.statuses.length > 0) ||
+        this.offerFilter.productId
+      ) return true
+      else return false;
+    } else {
+      return false;
+    }
+    
+  }
+
+
+  applyOfferFilter = (of: OfferFilter) => {
+
+    if (!of) return;
+
+    localStorage.setItem('offerFilter', JSON.stringify(of));
+    this.offerService.page = 0;
+    this.offerFilter = of;
+
+    if (this.router.url != "/offers")
+    {
+      this.router.navigateByUrl("/offers");
+    } else {
+      this.loadOffers();
+    }
+
+  }
+
 }

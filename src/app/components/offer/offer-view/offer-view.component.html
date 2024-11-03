@@ -1,14 +1,27 @@
 <h2>Ponude<button mat-icon-button color="accent" (click)="addNewOffer()"><span class="material-symbols-outlined">add_circle</span></button></h2>
-<div *ngIf="offerList.length > 0">
 
-    <mat-paginator [length]="offers?.page?.totalElements"
-              [pageIndex]="offers?.page?.number"
-              [pageSize]="offers?.page?.size"
+@if (offers && offers.content)
+{
+
+  @if (isFilterApplied())
+  {
+    <button mat-fab color="accent" (click)="openOfferFilter()">
+      <span class="material-symbols-outlined">tune</span>
+    </button>
+  } @else {
+    <button mat-fab color="basic" (click)="openOfferFilter()">
+      <span class="material-symbols-outlined">tune</span>
+    </button>
+  }
+
+    <mat-paginator [length]="offers.page.totalElements"
+              [pageIndex]="offers.page.number"
+              [pageSize]="offers.page.size"
               [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
               aria-label="Select page" (page)="updateTable($event)">
     </mat-paginator>
 
-    <table mat-table [dataSource]="offerList" class="mat-elevation-z8">
+    <table mat-table [dataSource]="offers.content" class="mat-elevation-z8">
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Broj ponude </th>
@@ -71,4 +84,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns; let element;" [class.strikethrough]="element.status == 'CANCELED'"></tr>
     </table>
-  </div>
+
+}
+

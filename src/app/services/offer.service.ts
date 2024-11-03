@@ -21,7 +21,7 @@ export class OfferService {
     return this.http.get<Offer>(`/api/offers/${id}`);
   }
 
-  getOffers(username?: string, companyId?: number, status?: OfferStatus, productId?: number)
+  getOffers(username?: string, companyId?: number, statuses?: string[], productId?: number)
   {
 
     let params: HttpParams = new HttpParams()
@@ -31,7 +31,10 @@ export class OfferService {
 
     if (username) params = params.set("u", username);
     if (companyId) params = params.set("c", companyId);
-    if (status) params = params.set("s", status);
+    if (statuses && statuses.length > 0)
+    {
+      statuses.forEach(s => params = params.append('s', s))
+    }
     if (productId) params = params.set("p", productId);
 
     return this.http.get<Page<Offer>>(`/api/offers`, {params: params});

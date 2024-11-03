@@ -1,1 +1,22 @@
-<p>offer-filter works!</p>
+<h3 mat-dialog-title>Filtriranje ponuda</h3>
+<mat-dialog-content>
+    <mat-form-field class="w100">
+        <mat-label>Autor ponude</mat-label>
+        <mat-select [(ngModel)]="offerFilter.username">
+            <mat-option>(svi korisnici)</mat-option>
+          @for (user of userPage?.content; track user) {
+            <mat-option [value]="user.username">{{user.username}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-button-toggle-group [(ngModel)]="offerFilter.statuses" multiple class="w100">
+        <mat-button-toggle value="ACTIVE">aktivne</mat-button-toggle>
+        <mat-button-toggle value="ACCEPTED">prihvaćene</mat-button-toggle>
+        <mat-button-toggle value="CANCELED">otkazane</mat-button-toggle>
+      </mat-button-toggle-group>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close color="basic">Zatvori</button>
+    <button mat-flat-button color="warn" (click)="cancelFilter()">Otkaži</button>
+    <button mat-flat-button color="accent" (click)="applyFilter()">Primijeni</button>
+</mat-dialog-actions>
