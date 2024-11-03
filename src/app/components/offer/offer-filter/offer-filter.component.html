@@ -5,7 +5,7 @@
         <mat-select [(ngModel)]="offerFilter.username">
             <mat-option>(svi korisnici)</mat-option>
           @for (user of userPage?.content; track user) {
-            <mat-option [value]="user.username">{{user.username}}</mat-option>
+            <mat-option [value]="user.username">{{user.fullName}}</mat-option>
           }
         </mat-select>
       </mat-form-field>
