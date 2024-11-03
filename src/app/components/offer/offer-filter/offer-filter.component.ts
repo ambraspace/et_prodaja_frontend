@@ -86,9 +86,6 @@ export class OfferFilterComponent implements OnInit {
       retVal.statuses = this.offerFilter.statuses;
       retVal.productId = this.offerFilter.productId;
 
-      console.log(retVal);
-      
-
       this.callBack(retVal);
     }
   }
