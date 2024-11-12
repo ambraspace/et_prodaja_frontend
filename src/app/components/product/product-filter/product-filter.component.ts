@@ -113,6 +113,10 @@ export class ProductFilterComponent implements OnInit {
         this.tagService.searchTags(query))
     );
     this.loadCategories();
+    if (this.productFilter.warehouseId != undefined)
+    {
+      this.loadWarehouse();
+    }
   }
 
 
