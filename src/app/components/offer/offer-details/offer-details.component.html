@@ -170,7 +170,20 @@
                         }
                         <button mat-icon-button color="accent" (click)="editItem(element)" [disabled]="offer.status == 'CANCELED'"><span class="material-symbols-outlined">edit</span></button>
                         <button mat-icon-button color="accent" (click)="deleteItem(element.id)" [disabled]="offer.status == 'CANCELED'"><span class="material-symbols-outlined">delete</span></button>
-                </div>
+                        @if (element.stockInfo) {
+                            <div class="stock_info_details">
+                                <p><strong>Skladište:</strong>&nbsp;<span title="{{element.stockInfo.warehouse.company.name}}, {{element.stockInfo.warehouse.company.locality}}">{{element.stockInfo.warehouse.name}}</span></p>
+                                <p><strong>Referensa:</strong>&nbsp;{{element.stockInfo.customerReference}}</p>
+                                <p><strong>Količina:</strong>&nbsp;{{element.stockInfo.quantity | number : '1.2-2'}}</p>
+                                <p><strong>Cijena:</strong>&nbsp;<span title="{{element.stockInfo.unitPrice | toEuro | currency : '1.2-2' : '€' }}">{{element.stockInfo.unitPrice | currency : '1.2-2' : 'KM'}}</span></p>
+                            </div>
+                        }
+                        @if (element.order) {
+                            <div class="order_info">
+                                <p><strong>Narudžba:</strong>&nbsp;<a routerLink="/orders/{{element.order.id}}">{{element.order.id}}</a></p>
+                            </div>
+                        }
+                    </div>
                 </td>
             </ng-container>
     
