@@ -3,7 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
