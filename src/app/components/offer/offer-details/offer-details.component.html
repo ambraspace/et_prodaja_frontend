@@ -191,6 +191,7 @@
             <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
                 class="example-element-row"
                 [class.example-expanded-row]="expandedElement === element"
+                [class.invalid]="element.stockInfo.availableQuantity < 0"
                 (click)="expandedElement = expandedElement === element ? undefined : element">
             </tr>
             <tr mat-row *matRowDef="let row; columns: ['detailMargin', 'expandedDetail']" class="example-detail-row"></tr>
