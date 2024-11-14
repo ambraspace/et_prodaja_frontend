@@ -146,6 +146,19 @@ export class DeliveryDetailsComponent implements OnInit {
   deleteItem(id: number): void
   {
 
+    let dialogRef = this.dialog.open<YesNoDialogComponent, string, string>(
+      YesNoDialogComponent, {data: "Želite li obrisati ovu stavku iz isporuke?"}
+    );
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res === "YES")
+      {
+        this.deliveryItemService.deleteDeliveryItem(this.deliveryId, id).subscribe(() => {
+          this.loadItems();
+        });
+      }
+    })
+
   }
 
 
