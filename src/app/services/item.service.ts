@@ -39,9 +39,10 @@ export class ItemService {
     }
   }
 
-  getUnorderedItems(): Observable<Page<Item>>
+  getUnorderedItems(supplierId: number): Observable<Page<Item>>
   {
     let params = new HttpParams();
+    params = params.set("s", supplierId)
     params = params.set("page", this.page);
     params = params.set("size", this.size);
     params = params.set("sort", "stockInfo.customerReference,ASC");

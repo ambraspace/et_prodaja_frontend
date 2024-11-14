@@ -72,7 +72,7 @@ export class ItemSelectorComponent implements OnInit {
   {
     if (this.delivery)
     {
-      this.itemService.getUnorderedItems().subscribe(pi => this.itemsPage = pi);
+      this.itemService.getUnorderedItems(this.delivery.supplier.id).subscribe(pi => this.itemsPage = pi);
     }
   }
 
