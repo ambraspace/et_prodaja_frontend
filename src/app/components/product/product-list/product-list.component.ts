@@ -22,18 +22,14 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-product-list',
   standalone: true,
   imports: [
-    NgFor,
     MatExpansionModule,
     MatGridListModule,
     MatButtonModule,
     MatCardModule,
     CurrencyPipe,
-    AsyncPipe,
     ToEuroPipe,
     MatBadgeModule,
     MatPaginator,
-    RouterLink,
-    ProductFilterComponent
 ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
