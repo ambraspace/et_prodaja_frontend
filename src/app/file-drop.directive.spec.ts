@@ -1,8 +1,11 @@
+import { ElementRef, inject } from '@angular/core';
 import { FileDropDirective } from './file-drop.directive';
 
 describe('FileDropDirective', () => {
+
   it('should create an instance', () => {
-    const directive = new FileDropDirective();
+    let el = inject(ElementRef);
+    const directive = new FileDropDirective(el);
     expect(directive).toBeTruthy();
   });
 });
