@@ -27,20 +27,20 @@ export class TagService {
 
   }
 
-  getTag(id: number): Observable<Tag>
-  {
-    return this.http.get<Tag>(`/api/tags/${id}`);
-  }
+  // getTag(id: number): Observable<Tag>
+  // {
+  //   return this.http.get<Tag>(`/api/tags/${id}`);
+  // }
 
   addTag(tag: Tag): Observable<Tag>
   {
     return this.http.post<Tag>(`/api/tags`, tag);
   }
 
-  deleteTag(id: number): Observable<void>
-  {
-    return this.http.delete<void>(`/api/tags/${id}`);
-  }
+  // deleteTag(id: number): Observable<void>
+  // {
+  //   return this.http.delete<void>(`/api/tags/${id}`);
+  // }
 
   searchTags(query: string): Observable<Tag[]>
   {
