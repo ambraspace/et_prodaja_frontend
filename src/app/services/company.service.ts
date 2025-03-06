@@ -28,13 +28,15 @@ export class CompanyService {
   }
 
 
-  searchCompanies(query: string, size?: number): Observable<Company[]>
+  searchCompanies(query: string, querySize?: number): Observable<Company[]>
   {
 
-    if (!size) size = 5;
+    if (!querySize) querySize = 5;
 
     let params: HttpParams = new HttpParams()
       .set("q", query);
+
+    params = params.set("size", querySize);
 
     return this.http.get<Page<Company>>(`/api/companies`, {params: params})
       .pipe(map(page => page.content));
