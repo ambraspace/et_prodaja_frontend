@@ -1,0 +1,46 @@
+services:
+
+  db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: 1
+      MARIADB_DATABASE: et_prodaja
+      MARIADB_USER: ambra
+      MARIADB_PASSWORD: ambra
+    volumes:
+      - db-data:/var/lib/mysql
+
+  backend:
+    image: ambraspace/et-prodaja-backend:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      CALCULATION_START: '2025-01-01'
+      DB_HOST: db
+      DB_NAME: et_prodaja
+      DB_PASSWORD: ambra
+      DB_PORT: 3306
+      DB_USERNAME: ambra
+      JWT_REFRESH_TOKEN_VALIDITY: 2d
+      JWT_SECRET: 4c8lQx2Uq2BM5xL4oBEHK6kMdBp9ElLFWjVQpMKXG6xIQrMjeqmFl1ZKGQBuPn8w
+      JWT_SECRET_2FA: qAWRVuzMsKVwi0vPsmkNxrRwXsywQoVWYSyjgMPCK0mCotQg2JhJ4gdhYYvHgLDj
+      JWT_TOKEN_VALIDITY: 7d
+      STORAGE_LOCATION: /home/cnb/images
+    volumes:
+      - images:/home/cnb/images
+
+  frontend:
+    image: ambraspace/et-prodaja-frontend:latest
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+
+volumes:
+  db-data:
+  images:
