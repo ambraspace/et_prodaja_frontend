@@ -23,20 +23,19 @@ import { AuthService } from '../../../services/auth.service';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-product-filter',
-  standalone: true,
-  imports: [
-    MatFormField, MatLabel, MatInput, MatCheckbox,
-    MatButtonModule,
-    MatChipsModule,
-    FormsModule,
-    MatAutocompleteModule,
-    AsyncPipe,
-    MatSelectModule,
-    MatDialogModule
-  ],
-  templateUrl: './product-filter.component.html',
-  styleUrl: './product-filter.component.css'
+    selector: 'app-product-filter',
+    imports: [
+        MatFormField, MatLabel, MatInput, MatCheckbox,
+        MatButtonModule,
+        MatChipsModule,
+        FormsModule,
+        MatAutocompleteModule,
+        AsyncPipe,
+        MatSelectModule,
+        MatDialogModule
+    ],
+    templateUrl: './product-filter.component.html',
+    styleUrl: './product-filter.component.css'
 })
 export class ProductFilterComponent implements OnInit {
 

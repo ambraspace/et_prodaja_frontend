@@ -13,18 +13,17 @@ import { MatInput } from '@angular/material/input';
 import { AddOrEditStockInfoComponent } from '../../stock-info/add-or-edit-stock-info/add-or-edit-stock-info.component';
 
 @Component({
-  selector: 'app-quantity-dialog',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatTableModule,
-    ToEuroPipe, CurrencyPipe,
-    MatInput
-  ],
-  templateUrl: './quantity-dialog.component.html',
-  styleUrl: './quantity-dialog.component.css'
+    selector: 'app-quantity-dialog',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        MatTableModule,
+        ToEuroPipe, CurrencyPipe,
+        MatInput
+    ],
+    templateUrl: './quantity-dialog.component.html',
+    styleUrl: './quantity-dialog.component.css'
 })
 export class QuantityDialogComponent implements OnInit {
 

@@ -11,15 +11,15 @@ import { MatDialog } from "@angular/material/dialog";
 import { YesNoDialogComponent } from "../../dialogs/yes-no-dialog/yes-no-dialog.component";
 
 @Component({
-  selector: 'app-product-details',
-  standalone: true,
-  imports: [
-    ProductFormComponent,
-    StockInfoComponent,
-    MatButtonModule,
-    ToEuroPipe, CurrencyPipe],
-  templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+    selector: 'app-product-details',
+    imports: [
+        ProductFormComponent,
+        StockInfoComponent,
+        MatButtonModule,
+        ToEuroPipe, CurrencyPipe
+    ],
+    templateUrl: './product-details.component.html',
+    styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit {
 

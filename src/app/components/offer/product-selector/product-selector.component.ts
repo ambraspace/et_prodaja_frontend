@@ -11,15 +11,14 @@ import { QuantityDialogComponent } from '../quantity-dialog/quantity-dialog.comp
 import { StockInfo } from '../../../model/stock-info';
 
 @Component({
-  selector: 'app-product-selector',
-  standalone: true,
-  imports: [
-    ProductListComponent,
-    MatDialogModule,
-    RouterLink
-  ],
-  templateUrl: './product-selector.component.html',
-  styleUrl: './product-selector.component.css'
+    selector: 'app-product-selector',
+    imports: [
+        ProductListComponent,
+        MatDialogModule,
+        RouterLink
+    ],
+    templateUrl: './product-selector.component.html',
+    styleUrl: './product-selector.component.css'
 })
 export class ProductSelectorComponent implements OnInit {
 

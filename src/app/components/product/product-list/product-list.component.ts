@@ -19,20 +19,19 @@ import { ProductFilterComponent } from "../product-filter/product-filter.compone
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [
-    MatExpansionModule,
-    MatGridListModule,
-    MatButtonModule,
-    MatCardModule,
-    CurrencyPipe,
-    ToEuroPipe,
-    MatBadgeModule,
-    MatPaginator,
-],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+    selector: 'app-product-list',
+    imports: [
+        MatExpansionModule,
+        MatGridListModule,
+        MatButtonModule,
+        MatCardModule,
+        CurrencyPipe,
+        ToEuroPipe,
+        MatBadgeModule,
+        MatPaginator,
+    ],
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit, OnDestroy {
 

@@ -12,17 +12,16 @@ import { TextInputDialog } from '../../dialogs/text-input-dialog/text-input-dial
 import { HasUnsaavedChanges } from '../../../model/has-unsaaved-changes';
 
 @Component({
-  selector: 'app-categories-editor',
-  standalone: true,
-  imports: [
-    NgIf,
-    MatTreeModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ],
-  templateUrl: './categories-editor.component.html',
-  styleUrl: './categories-editor.component.css'
+    selector: 'app-categories-editor',
+    imports: [
+        NgIf,
+        MatTreeModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule
+    ],
+    templateUrl: './categories-editor.component.html',
+    styleUrl: './categories-editor.component.css'
 })
 export class CategoriesEditorComponent implements OnInit, HasUnsaavedChanges {
   

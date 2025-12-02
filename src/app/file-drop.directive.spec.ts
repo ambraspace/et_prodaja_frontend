@@ -3,9 +3,8 @@ import { FileDropDirective } from './file-drop.directive';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 
 @Component({
-  standalone: true,
-  template: '<div [appFileDrop]="fileTypes" (filesDropped)="onFileDrop($event)">DROP FILE HERE!</div>',
-  imports: [FileDropDirective]
+    template: '<div [appFileDrop]="fileTypes" (filesDropped)="onFileDrop($event)">DROP FILE HERE!</div>',
+    imports: [FileDropDirective]
 })
 class TestComponent {
 

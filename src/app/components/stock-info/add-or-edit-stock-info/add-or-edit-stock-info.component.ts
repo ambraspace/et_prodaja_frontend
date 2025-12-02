@@ -14,17 +14,16 @@ import { StockInfo } from '../../../model/stock-info';
 import { StockInfoService } from '../../../services/stock-info.service';
 
 @Component({
-  selector: 'app-add-or-edit-stock-info',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatFormField, MatLabel, MatSelect, MatOption, MatInput
-  ],
-  templateUrl: './add-or-edit-stock-info.component.html',
-  styleUrl: './add-or-edit-stock-info.component.css'
+    selector: 'app-add-or-edit-stock-info',
+    imports: [
+        AsyncPipe,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatFormField, MatLabel, MatSelect, MatOption, MatInput
+    ],
+    templateUrl: './add-or-edit-stock-info.component.html',
+    styleUrl: './add-or-edit-stock-info.component.css'
 })
 export class AddOrEditStockInfoComponent implements OnInit {
 

@@ -6,11 +6,10 @@ import { ProductService } from '../../../services/product.service';
 import { ProductViewComponent } from '../product-view/product-view.component';
 
 @Component({
-  selector: 'app-catalog',
-  standalone: true,
-  imports: [ProductListComponent],
-  templateUrl: './catalog.component.html',
-  styleUrl: './catalog.component.css'
+    selector: 'app-catalog',
+    imports: [ProductListComponent],
+    templateUrl: './catalog.component.html',
+    styleUrl: './catalog.component.css'
 })
 export class CatalogComponent implements OnInit {
 

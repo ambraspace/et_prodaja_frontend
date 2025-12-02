@@ -6,15 +6,14 @@ import { Offer } from '../../../model/offer';
 import { OfferService } from '../../../services/offer.service';
 
 @Component({
-  selector: 'app-add-or-edit-offer',
-  standalone: true,
-  imports: [
-    OfferFormComponent,
-    MatButtonModule,
-    MatDialogModule
-  ],
-  templateUrl: './add-or-edit-offer.component.html',
-  styleUrl: './add-or-edit-offer.component.css'
+    selector: 'app-add-or-edit-offer',
+    imports: [
+        OfferFormComponent,
+        MatButtonModule,
+        MatDialogModule
+    ],
+    templateUrl: './add-or-edit-offer.component.html',
+    styleUrl: './add-or-edit-offer.component.css'
 })
 export class AddOrEditOfferComponent implements OnInit {
 

@@ -8,17 +8,16 @@ import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-add-or-edit-warehouse',
-  standalone: true,
-  imports: [
-    MatLabel,
-    MatInput,
-    MatButtonModule,
-    MatFormField,
-    ReactiveFormsModule
-  ],
-  templateUrl: './add-or-edit-warehouse.component.html',
-  styleUrl: './add-or-edit-warehouse.component.css'
+    selector: 'app-add-or-edit-warehouse',
+    imports: [
+        MatLabel,
+        MatInput,
+        MatButtonModule,
+        MatFormField,
+        ReactiveFormsModule
+    ],
+    templateUrl: './add-or-edit-warehouse.component.html',
+    styleUrl: './add-or-edit-warehouse.component.css'
 })
 export class AddOrEditWarehouseComponent {
 

@@ -17,21 +17,20 @@ import { UserRole } from '../../../model/user-role';
 import { UserRolePipe } from '../../../pipes/user-role.pipe';
 
 @Component({
-  selector: 'app-add-or-edit-user', 
-  standalone: true,
-  imports: [
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    AsyncPipe,
-    ReactiveFormsModule,
-    UserRolePipe,
-  ],
-  templateUrl: './add-or-edit-user.component.html',
-  styleUrl: './add-or-edit-user.component.css'
+    selector: 'app-add-or-edit-user',
+    imports: [
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatAutocompleteModule,
+        AsyncPipe,
+        ReactiveFormsModule,
+        UserRolePipe,
+    ],
+    templateUrl: './add-or-edit-user.component.html',
+    styleUrl: './add-or-edit-user.component.css'
 })
 export class AddOrEditUserComponent implements OnInit {
 

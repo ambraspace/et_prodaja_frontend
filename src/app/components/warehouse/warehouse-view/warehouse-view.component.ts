@@ -10,18 +10,17 @@ import { AddOrEditWarehouseComponent } from '../add-or-edit-warehouse/add-or-edi
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
-  selector: 'app-warehouse-view',
-  standalone: true,
-  imports: [
-    NgFor,
-    NgIf,
-    MatTableModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ],
-  templateUrl: './warehouse-view.component.html',
-  styleUrl: './warehouse-view.component.css'
+    selector: 'app-warehouse-view',
+    imports: [
+        NgFor,
+        NgIf,
+        MatTableModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule
+    ],
+    templateUrl: './warehouse-view.component.html',
+    styleUrl: './warehouse-view.component.css'
 })
 export class WarehouseViewComponent implements OnInit
 {

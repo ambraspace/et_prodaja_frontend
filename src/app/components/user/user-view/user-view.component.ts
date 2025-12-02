@@ -14,11 +14,10 @@ import { UserRolePipe } from '../../../pipes/user-role.pipe';
 import { UserRole } from '../../../model/user-role';
 
 @Component({
-  selector: 'app-user-view',
-  standalone: true,
-  imports: [MatTableModule, MatButtonModule, NgIf, MatPaginator, MatDialogModule, MatSnackBarModule, UserRolePipe],
-  templateUrl: './user-view.component.html',
-  styleUrl: './user-view.component.css'
+    selector: 'app-user-view',
+    imports: [MatTableModule, MatButtonModule, NgIf, MatPaginator, MatDialogModule, MatSnackBarModule, UserRolePipe],
+    templateUrl: './user-view.component.html',
+    styleUrl: './user-view.component.css'
 })
 export class UserViewComponent implements OnInit {
 

@@ -13,16 +13,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-delivery-view',
-  standalone: true,
-  imports: [NgIf,
-    MatTableModule, MatPaginator,
-    MatButtonModule,
-    DatePipe, CurrencyPipe, ToEuroPipe, DeliveryStatusLocalizePipe,
-    RouterLink
-  ],
-  templateUrl: './delivery-view.component.html',
-  styleUrl: './delivery-view.component.css'
+    selector: 'app-delivery-view',
+    imports: [NgIf,
+        MatTableModule, MatPaginator,
+        MatButtonModule,
+        DatePipe, CurrencyPipe, ToEuroPipe, DeliveryStatusLocalizePipe,
+        RouterLink
+    ],
+    templateUrl: './delivery-view.component.html',
+    styleUrl: './delivery-view.component.css'
 })
 export class DeliveryViewComponent implements OnInit {
 

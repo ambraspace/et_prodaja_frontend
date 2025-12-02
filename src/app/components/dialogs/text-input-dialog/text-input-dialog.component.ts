@@ -7,19 +7,18 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 
 @Component({
-  selector: 'app-category-name',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    FormsModule,
-    MatDialogModule,
-    CdkTextareaAutosize
-  ],
-  templateUrl: './text-input-dialog.component.html',
-  styleUrl: './text-input-dialog.component.css'
+    selector: 'app-category-name',
+    imports: [
+        MatButtonModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        FormsModule,
+        MatDialogModule,
+        CdkTextareaAutosize
+    ],
+    templateUrl: './text-input-dialog.component.html',
+    styleUrl: './text-input-dialog.component.css'
 })
 export class TextInputDialog {
 

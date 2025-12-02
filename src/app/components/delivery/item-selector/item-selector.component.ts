@@ -12,17 +12,16 @@ import { RouterLink } from '@angular/router';
 import { DeliveryItemService } from '../../../services/delivery-item.service';
 
 @Component({
-  selector: 'app-item-selector',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    RouterLink
-  ],
-  templateUrl: './item-selector.component.html',
-  styleUrl: './item-selector.component.css'
+    selector: 'app-item-selector',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        RouterLink
+    ],
+    templateUrl: './item-selector.component.html',
+    styleUrl: './item-selector.component.css'
 })
 export class ItemSelectorComponent implements OnInit {
 

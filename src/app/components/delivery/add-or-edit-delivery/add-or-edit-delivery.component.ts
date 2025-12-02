@@ -6,16 +6,14 @@ import { Delivery } from '../../../model/delivery';
 import { DeliveryService } from '../../../services/delivery.service';
 
 @Component({
-  selector: 'app-add-or-edit-delivery',
-  standalone: true,
-  imports: [
-    DeliveryFormComponent,
-    MatButtonModule,
-    MatDialogModule
-
-  ],
-  templateUrl: './add-or-edit-delivery.component.html',
-  styleUrl: './add-or-edit-delivery.component.css'
+    selector: 'app-add-or-edit-delivery',
+    imports: [
+        DeliveryFormComponent,
+        MatButtonModule,
+        MatDialogModule
+    ],
+    templateUrl: './add-or-edit-delivery.component.html',
+    styleUrl: './add-or-edit-delivery.component.css'
 })
 export class AddOrEditDeliveryComponent implements OnInit {
 

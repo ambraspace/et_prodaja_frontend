@@ -14,19 +14,18 @@ import { StockInfo } from '../../../model/stock-info';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-product-popup',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    RouterLink,
-    CurrencyPipe, ToEuroPipe,
-    MatTableModule,
-    MatTabsModule,
-    MatPaginatorModule
-  ],
-  templateUrl: './product-popup.component.html',
-  styleUrl: './product-popup.component.css'
+    selector: 'app-product-popup',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        RouterLink,
+        CurrencyPipe, ToEuroPipe,
+        MatTableModule,
+        MatTabsModule,
+        MatPaginatorModule
+    ],
+    templateUrl: './product-popup.component.html',
+    styleUrl: './product-popup.component.css'
 })
 export class ProductPopupComponent implements OnInit {
 

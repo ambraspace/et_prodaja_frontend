@@ -14,21 +14,20 @@ import { Delivery } from '../../../model/delivery';
 import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-delivery-form',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule, MatLabel, MatInput, CdkTextareaAutosize,
-    MatSelectModule,
-    MatDatepickerModule
-  ],
-  providers: [
-    provideNativeDateAdapter()
-  ],
-  templateUrl: './delivery-form.component.html',
-  styleUrl: './delivery-form.component.css'
+    selector: 'app-delivery-form',
+    imports: [
+        AsyncPipe,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatFormFieldModule, MatLabel, MatInput, CdkTextareaAutosize,
+        MatSelectModule,
+        MatDatepickerModule
+    ],
+    providers: [
+        provideNativeDateAdapter()
+    ],
+    templateUrl: './delivery-form.component.html',
+    styleUrl: './delivery-form.component.css'
 })
 export class DeliveryFormComponent implements OnInit {
 

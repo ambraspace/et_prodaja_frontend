@@ -10,16 +10,15 @@ import { Page } from '../../../model/page';
 import { User } from '../../../model/user';
 
 @Component({
-  selector: 'app-offer-filter',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule, MatButtonToggleModule,
-    FormsModule,
-    MatSelectModule
-  ],
-  templateUrl: './offer-filter.component.html',
-  styleUrl: './offer-filter.component.css'
+    selector: 'app-offer-filter',
+    imports: [
+        MatDialogModule,
+        MatButtonModule, MatButtonToggleModule,
+        FormsModule,
+        MatSelectModule
+    ],
+    templateUrl: './offer-filter.component.html',
+    styleUrl: './offer-filter.component.css'
 })
 export class OfferFilterComponent implements OnInit {
 

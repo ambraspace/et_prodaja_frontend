@@ -11,18 +11,17 @@ import { Preview } from '../../../model/preview';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  selector: 'app-item-editor',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatFormField, MatLabel, MatInput,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    CdkTextareaAutosize
-  ],
-  templateUrl: './item-editor.component.html',
-  styleUrl: './item-editor.component.css'
+    selector: 'app-item-editor',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatFormField, MatLabel, MatInput,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        CdkTextareaAutosize
+    ],
+    templateUrl: './item-editor.component.html',
+    styleUrl: './item-editor.component.css'
 })
 export class ItemEditorComponent implements OnInit {
 

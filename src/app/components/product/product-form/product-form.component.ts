@@ -23,23 +23,22 @@ import { FlatTreeCategory } from '../../../model/flat-tree-category';
 import { Product } from '../../../model/product';
 
 @Component({
-  selector: 'app-product-form',
-  standalone: true,
-  imports: [
-    MatFormField,
-    MatLabel,
-    MatInput,
-    ReactiveFormsModule,
-    MatSelect, MatOption,
-    MatProgressBar,
-    MatChipsModule, MatChipRow,
-    MatButtonModule,
-    MatAutocompleteModule,
-    AsyncPipe,
-    FileDropDirective
-],
-  templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.css'
+    selector: 'app-product-form',
+    imports: [
+        MatFormField,
+        MatLabel,
+        MatInput,
+        ReactiveFormsModule,
+        MatSelect, MatOption,
+        MatProgressBar,
+        MatChipsModule, MatChipRow,
+        MatButtonModule,
+        MatAutocompleteModule,
+        AsyncPipe,
+        FileDropDirective
+    ],
+    templateUrl: './product-form.component.html',
+    styleUrl: './product-form.component.css'
 })
 export class ProductFormComponent implements OnInit {
 

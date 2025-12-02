@@ -12,18 +12,17 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 import { AddOrEditStockInfoComponent } from '../add-or-edit-stock-info/add-or-edit-stock-info.component';
 
 @Component({
-  selector: 'app-stock-info',
-  standalone: true,
-  imports: [
-    NgIf,
-    MatButtonModule,
-    MatDialogModule,
-    MatPaginator,
-    MatTableModule,
-    DatePipe, ToEuroPipe, CurrencyPipe, DecimalPipe, PercentPipe
-  ],
-  templateUrl: './stock-info.component.html',
-  styleUrl: './stock-info.component.css'
+    selector: 'app-stock-info',
+    imports: [
+        NgIf,
+        MatButtonModule,
+        MatDialogModule,
+        MatPaginator,
+        MatTableModule,
+        DatePipe, ToEuroPipe, CurrencyPipe, DecimalPipe, PercentPipe
+    ],
+    templateUrl: './stock-info.component.html',
+    styleUrl: './stock-info.component.css'
 })
 export class StockInfoComponent {
 

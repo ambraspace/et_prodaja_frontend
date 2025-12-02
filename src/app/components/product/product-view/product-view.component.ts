@@ -10,14 +10,13 @@ import { ProductFilter } from '../../../model/product-filter';
 import { ProductPopupComponent } from '../product-popup/product-popup.component';
 
 @Component({
-  selector: 'app-product-view',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    ProductListComponent
-],
-  templateUrl: './product-view.component.html',
-  styleUrl: './product-view.component.css'
+    selector: 'app-product-view',
+    imports: [
+        MatButtonModule,
+        ProductListComponent
+    ],
+    templateUrl: './product-view.component.html',
+    styleUrl: './product-view.component.css'
 })
 export class ProductViewComponent implements OnInit {
 

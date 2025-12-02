@@ -16,24 +16,22 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
-  selector: 'app-delivery-details',
-  standalone: true,
-  imports: [
-    NgIf,
-    DeliveryStatusLocalizePipe, DatePipe, DecimalPipe, ToEuroPipe, CurrencyPipe,
-    MatTableModule, MatButtonModule,
-    RouterLink
-  ],
-  templateUrl: './delivery-details.component.html',
-  styleUrl: './delivery-details.component.css',
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
-
+    selector: 'app-delivery-details',
+    imports: [
+        NgIf,
+        DeliveryStatusLocalizePipe, DatePipe, DecimalPipe, ToEuroPipe, CurrencyPipe,
+        MatTableModule, MatButtonModule,
+        RouterLink
+    ],
+    templateUrl: './delivery-details.component.html',
+    styleUrl: './delivery-details.component.css',
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ]
 })
 export class DeliveryDetailsComponent implements OnInit {
 

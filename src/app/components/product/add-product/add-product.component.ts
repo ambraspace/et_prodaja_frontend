@@ -6,14 +6,13 @@ import { Product } from '../../../model/product';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-  selector: 'app-add-product',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    ProductFormComponent
-],
-  templateUrl: './add-product.component.html',
-  styleUrl: './add-product.component.css'
+    selector: 'app-add-product',
+    imports: [
+        MatButtonModule,
+        ProductFormComponent
+    ],
+    templateUrl: './add-product.component.html',
+    styleUrl: './add-product.component.css'
 })
 export class AddProductComponent {
 

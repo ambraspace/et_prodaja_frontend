@@ -14,24 +14,23 @@ import { MatDialog } from '@angular/material/dialog';
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
-  selector: 'app-order-details',
-  standalone: true,
-  imports: [
-    NgIf,
-    OrderStatusLocalizePipe, DatePipe, DecimalPipe, CurrencyPipe, ToEuroPipe,
-    MatTableModule,
-    RouterLink,
-    MatButtonModule
-  ],
-  templateUrl: './order-details.component.html',
-  styleUrl: './order-details.component.css',
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ]
+    selector: 'app-order-details',
+    imports: [
+        NgIf,
+        OrderStatusLocalizePipe, DatePipe, DecimalPipe, CurrencyPipe, ToEuroPipe,
+        MatTableModule,
+        RouterLink,
+        MatButtonModule
+    ],
+    templateUrl: './order-details.component.html',
+    styleUrl: './order-details.component.css',
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ]
 })
 export class OrderDetailsComponent implements OnInit {
 

@@ -13,17 +13,16 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-order-view',
-  standalone: true,
-  imports: [
-    NgIf,
-    MatPaginator, MatTableModule,
-    MatButtonModule,
-    CurrencyPipe, DatePipe, OrderStatusLocalizePipe, ToEuroPipe,
-    RouterLink
-  ],
-  templateUrl: './order-view.component.html',
-  styleUrl: './order-view.component.css'
+    selector: 'app-order-view',
+    imports: [
+        NgIf,
+        MatPaginator, MatTableModule,
+        MatButtonModule,
+        CurrencyPipe, DatePipe, OrderStatusLocalizePipe, ToEuroPipe,
+        RouterLink
+    ],
+    templateUrl: './order-view.component.html',
+    styleUrl: './order-view.component.css'
 })
 export class OrderViewComponent implements OnInit {
 

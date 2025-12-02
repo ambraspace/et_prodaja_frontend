@@ -11,12 +11,11 @@ import { WarehouseViewComponent } from '../../warehouse/warehouse-view/warehouse
 import { ContactViewComponent } from '../../contact/contact-view/contact-view.component';
 
 @Component({
-  selector: 'app-company-detail',
-  standalone: true,
-  imports: [MatDialogContent, MatFormField, MatLabel, MatDialogActions,
-    MatDialogClose, FormsModule, MatInput, MatButton, NgIf, NgFor, WarehouseViewComponent, ContactViewComponent],
-  templateUrl: './company-detail.component.html',
-  styleUrl: './company-detail.component.css'
+    selector: 'app-company-detail',
+    imports: [MatDialogContent, MatFormField, MatLabel, MatDialogActions,
+        MatDialogClose, FormsModule, MatInput, MatButton, NgIf, NgFor, WarehouseViewComponent, ContactViewComponent],
+    templateUrl: './company-detail.component.html',
+    styleUrl: './company-detail.component.css'
 })
 export class CompanyDetailComponent implements OnInit {
 

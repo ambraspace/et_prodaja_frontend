@@ -10,11 +10,10 @@ import { AddOrEditContactComponent } from '../add-or-edit-contact/add-or-edit-co
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
-  selector: 'app-contact-view',
-  standalone: true,
-  imports: [NgIf, NgFor, MatTableModule, MatButtonModule],
-  templateUrl: './contact-view.component.html',
-  styleUrl: './contact-view.component.css'
+    selector: 'app-contact-view',
+    imports: [NgIf, NgFor, MatTableModule, MatButtonModule],
+    templateUrl: './contact-view.component.html',
+    styleUrl: './contact-view.component.css'
 })
 export class ContactViewComponent {
 

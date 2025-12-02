@@ -16,21 +16,20 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
-  selector: 'app-offer-form',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule, MatLabel, MatInput, CdkTextareaAutosize,
-    MatSelectModule,
-    MatDatepickerModule
-  ],
-  providers: [
-    provideNativeDateAdapter()
-  ],  
-  templateUrl: './offer-form.component.html',
-  styleUrl: './offer-form.component.css'
+    selector: 'app-offer-form',
+    imports: [
+        AsyncPipe,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatFormFieldModule, MatLabel, MatInput, CdkTextareaAutosize,
+        MatSelectModule,
+        MatDatepickerModule
+    ],
+    providers: [
+        provideNativeDateAdapter()
+    ],
+    templateUrl: './offer-form.component.html',
+    styleUrl: './offer-form.component.css'
 })
 export class OfferFormComponent implements OnInit {
 

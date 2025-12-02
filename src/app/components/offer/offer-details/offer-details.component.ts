@@ -21,32 +21,31 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ItemEditorComponent } from '../../item/item-editor/item-editor.component';
 
 @Component({
-  selector: 'app-offer-details',
-  standalone: true,
-  imports: [
-    NgIf,
-    MatTableModule,
-    DecimalPipe,
-    PercentPipe,
-    CurrencyPipe,
-    ToEuroPipe,
-    DatePipe,
-    OfferStatusLocalizePipe,
-    RouterLink,
-    OfferFormComponent,
-    MatButtonModule,
-    ProductListComponent,
-    ProductFormComponent
-],
-  templateUrl: './offer-details.component.html',
-  styleUrl: './offer-details.component.css',
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+    selector: 'app-offer-details',
+    imports: [
+        NgIf,
+        MatTableModule,
+        DecimalPipe,
+        PercentPipe,
+        CurrencyPipe,
+        ToEuroPipe,
+        DatePipe,
+        OfferStatusLocalizePipe,
+        RouterLink,
+        OfferFormComponent,
+        MatButtonModule,
+        ProductListComponent,
+        ProductFormComponent
+    ],
+    templateUrl: './offer-details.component.html',
+    styleUrl: './offer-details.component.css',
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ]
 })
 export class OfferDetailsComponent implements OnInit {
 

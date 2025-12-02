@@ -8,17 +8,16 @@ import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-add-or-edit-contact',
-  standalone: true,
-  imports: [
-    MatFormField,
-    MatLabel,
-    ReactiveFormsModule,
-    MatInput,
-    MatButtonModule
-  ],
-  templateUrl: './add-or-edit-contact.component.html',
-  styleUrl: './add-or-edit-contact.component.css'
+    selector: 'app-add-or-edit-contact',
+    imports: [
+        MatFormField,
+        MatLabel,
+        ReactiveFormsModule,
+        MatInput,
+        MatButtonModule
+    ],
+    templateUrl: './add-or-edit-contact.component.html',
+    styleUrl: './add-or-edit-contact.component.css'
 })
 export class AddOrEditContactComponent {
 

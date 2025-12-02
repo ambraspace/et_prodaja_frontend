@@ -12,11 +12,10 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 import { AddCompanyDialogComponent } from '../add-company-dialog/add-company-dialog.component';
 
 @Component({
-  selector: 'app-company-view',
-  standalone: true,
-  imports: [NgFor, MatTableModule, RouterLink, MatButtonModule, MatDialogModule, MatPaginator],
-  templateUrl: './company-view.component.html',
-  styleUrl: './company-view.component.css'
+    selector: 'app-company-view',
+    imports: [NgFor, MatTableModule, RouterLink, MatButtonModule, MatDialogModule, MatPaginator],
+    templateUrl: './company-view.component.html',
+    styleUrl: './company-view.component.css'
 })
 export class CompanyViewComponent implements OnInit{
 

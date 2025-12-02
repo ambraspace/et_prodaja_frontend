@@ -15,19 +15,18 @@ import { OfferFilter } from '../../../model/offer-filter';
 import { OfferFilterComponent } from '../offer-filter/offer-filter.component';
 
 @Component({
-  selector: 'app-offer-view',
-  standalone: true,
-  imports: [
-    NgIf,
-    MatPaginator,
-    MatTableModule,
-    MatButtonModule,
-    DatePipe, CurrencyPipe, ToEuroPipe, PercentPipe, OfferStatusLocalizePipe,
-    RouterLink,
-    MatDialogModule
-  ],
-  templateUrl: './offer-view.component.html',
-  styleUrl: './offer-view.component.css'
+    selector: 'app-offer-view',
+    imports: [
+        NgIf,
+        MatPaginator,
+        MatTableModule,
+        MatButtonModule,
+        DatePipe, CurrencyPipe, ToEuroPipe, PercentPipe, OfferStatusLocalizePipe,
+        RouterLink,
+        MatDialogModule
+    ],
+    templateUrl: './offer-view.component.html',
+    styleUrl: './offer-view.component.css'
 })
 export class OfferViewComponent implements OnInit {
 

@@ -7,11 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-add-company-dialog',
-  standalone: true,
-  imports: [MatInput, MatLabel, MatFormField, FormsModule, MatButtonModule],
-  templateUrl: './add-company-dialog.component.html',
-  styleUrl: './add-company-dialog.component.css'
+    selector: 'app-add-company-dialog',
+    imports: [MatInput, MatLabel, MatFormField, FormsModule, MatButtonModule],
+    templateUrl: './add-company-dialog.component.html',
+    styleUrl: './add-company-dialog.component.css'
 })
 export class AddCompanyDialogComponent {
 
