@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
-import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
+import { HttpTestingController, RequestMatch, provideHttpClientTesting } from '@angular/common/http/testing';
 import { User } from '../model/user';
 import { Page } from '../model/page';
 import { Company } from '../model/company';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('UserService', () => {
 
@@ -16,8 +17,9 @@ describe('UserService', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(UserService);
     testing = TestBed.inject(HttpTestingController);

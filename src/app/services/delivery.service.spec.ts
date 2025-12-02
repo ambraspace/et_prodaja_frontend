@@ -1,10 +1,11 @@
 import { flush, TestBed } from '@angular/core/testing';
 
 import { DeliveryService } from './delivery.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Delivery } from '../model/delivery';
 import { Company } from '../model/company';
 import { Page } from '../model/page';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('DeliveryService', () => {
 
@@ -13,8 +14,9 @@ describe('DeliveryService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(DeliveryService);
     tester = TestBed.inject(HttpTestingController);

@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { JWToken } from '../model/jwt-token';
 import { Router } from '@angular/router';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AuthenticationService', () => {
 
@@ -14,8 +15,9 @@ describe('AuthenticationService', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     tester = TestBed.inject(HttpTestingController);
   });
 

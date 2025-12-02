@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { OfferService } from './offer.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Offer } from '../model/offer';
 import { Page } from '../model/page';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('OfferService', () => {
   
@@ -16,8 +16,9 @@ describe('OfferService', () => {
   beforeEach(() => {
   
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(OfferService);
     tester = TestBed.inject(HttpTestingController);

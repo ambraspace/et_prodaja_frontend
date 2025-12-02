@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { StockInfoService } from './stock-info.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { StockInfo } from '../model/stock-info';
 import { Product } from '../model/product';
 import { Warehouse } from '../model/warehouse';
 import { Page } from '../model/page';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('StockInfoService', () => {
 
@@ -15,8 +16,9 @@ describe('StockInfoService', () => {
   beforeEach(() => {
     
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(StockInfoService);
     tester = TestBed.inject(HttpTestingController);

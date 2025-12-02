@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TagService } from './tag.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Page } from '../model/page';
 import { Tag } from '../model/tag';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TagService', () => {
 
@@ -15,10 +16,9 @@ describe('TagService', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(TagService);
     tester = TestBed.inject(HttpTestingController);

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { PreviewService } from './preview.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpEventType } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpEventType, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Preview } from '../model/preview';
 
 describe('PreviewService', () => {
@@ -15,8 +15,9 @@ describe('PreviewService', () => {
   beforeEach(() => {
     
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(PreviewService);
     tester = TestBed.inject(HttpTestingController);

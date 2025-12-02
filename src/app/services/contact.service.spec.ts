@@ -1,4 +1,4 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { TestBed } from '@angular/core/testing';
 
@@ -6,6 +6,7 @@ import { ContactService } from './contact.service';
 import { Contact } from '../model/contact';
 import { AuthService } from './auth.service';
 import { JWToken } from '../model/jwt-token';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ContactService', () => {
 
@@ -17,8 +18,9 @@ describe('ContactService', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(ContactService); 
     testing = TestBed.inject(HttpTestingController);
