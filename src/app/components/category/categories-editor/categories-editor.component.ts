@@ -5,7 +5,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule } from '@angular
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { FlatTreeCategory } from '../../../model/flat-tree-category';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TextInputDialog } from '../../dialogs/text-input-dialog/text-input-dialog.component';
@@ -14,12 +14,11 @@ import { HasUnsaavedChanges } from '../../../model/has-unsaaved-changes';
 @Component({
     selector: 'app-categories-editor',
     imports: [
-        NgIf,
-        MatTreeModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        MatDialogModule
-    ],
+    MatTreeModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule
+],
     templateUrl: './categories-editor.component.html',
     styleUrl: './categories-editor.component.css'
 })

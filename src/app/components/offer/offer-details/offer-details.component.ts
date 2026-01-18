@@ -4,7 +4,7 @@ import { Item } from '../../../model/item';
 import { Offer } from '../../../model/offer';
 import { OfferService } from '../../../services/offer.service';
 import { MatTableModule } from '@angular/material/table';
-import { CurrencyPipe, DatePipe, DecimalPipe, NgIf, PercentPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from '@angular/common';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { Router, RouterLink } from '@angular/router';
 import { OfferFormComponent } from "../offer-form/offer-form.component";
@@ -23,20 +23,19 @@ import { ItemEditorComponent } from '../../item/item-editor/item-editor.componen
 @Component({
     selector: 'app-offer-details',
     imports: [
-        NgIf,
-        MatTableModule,
-        DecimalPipe,
-        PercentPipe,
-        CurrencyPipe,
-        ToEuroPipe,
-        DatePipe,
-        OfferStatusLocalizePipe,
-        RouterLink,
-        OfferFormComponent,
-        MatButtonModule,
-        ProductListComponent,
-        ProductFormComponent
-    ],
+    MatTableModule,
+    DecimalPipe,
+    PercentPipe,
+    CurrencyPipe,
+    ToEuroPipe,
+    DatePipe,
+    OfferStatusLocalizePipe,
+    RouterLink,
+    OfferFormComponent,
+    MatButtonModule,
+    ProductListComponent,
+    ProductFormComponent
+],
     templateUrl: './offer-details.component.html',
     styleUrl: './offer-details.component.css',
     animations: [

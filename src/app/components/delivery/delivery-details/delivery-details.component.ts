@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Delivery } from '../../../model/delivery';
 import { Item } from '../../../model/item';
-import { CurrencyPipe, DatePipe, DecimalPipe, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { DeliveryStatusLocalizePipe } from '../../../pipes/delivery-status-localize.pipe';
 import { MatTableModule } from '@angular/material/table';
 import { Router, RouterLink } from '@angular/router';
@@ -18,11 +18,15 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 @Component({
     selector: 'app-delivery-details',
     imports: [
-        NgIf,
-        DeliveryStatusLocalizePipe, DatePipe, DecimalPipe, ToEuroPipe, CurrencyPipe,
-        MatTableModule, MatButtonModule,
-        RouterLink
-    ],
+    DeliveryStatusLocalizePipe,
+    DatePipe,
+    DecimalPipe,
+    ToEuroPipe,
+    CurrencyPipe,
+    MatTableModule,
+    MatButtonModule,
+    RouterLink
+],
     templateUrl: './delivery-details.component.html',
     styleUrl: './delivery-details.component.css',
     animations: [

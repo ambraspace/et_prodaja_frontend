@@ -1,4 +1,4 @@
-import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -15,12 +15,15 @@ import { RouterLink } from '@angular/router';
 @Component({
     selector: 'app-order-view',
     imports: [
-        NgIf,
-        MatPaginator, MatTableModule,
-        MatButtonModule,
-        CurrencyPipe, DatePipe, OrderStatusLocalizePipe, ToEuroPipe,
-        RouterLink
-    ],
+    MatPaginator,
+    MatTableModule,
+    MatButtonModule,
+    CurrencyPipe,
+    DatePipe,
+    OrderStatusLocalizePipe,
+    ToEuroPipe,
+    RouterLink
+],
     templateUrl: './order-view.component.html',
     styleUrl: './order-view.component.css'
 })

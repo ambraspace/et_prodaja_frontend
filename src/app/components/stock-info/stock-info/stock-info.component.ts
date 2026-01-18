@@ -6,7 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { StockInfoService } from '../../../services/stock-info.service';
 import { Page } from '../../../model/page';
 import { StockInfo } from '../../../model/stock-info';
-import { CurrencyPipe, DatePipe, DecimalPipe, NgIf, PercentPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from '@angular/common';
 import { ToEuroPipe } from '../../../pipes/to-euro.pipe';
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
 import { AddOrEditStockInfoComponent } from '../add-or-edit-stock-info/add-or-edit-stock-info.component';
@@ -14,13 +14,16 @@ import { AddOrEditStockInfoComponent } from '../add-or-edit-stock-info/add-or-ed
 @Component({
     selector: 'app-stock-info',
     imports: [
-        NgIf,
-        MatButtonModule,
-        MatDialogModule,
-        MatPaginator,
-        MatTableModule,
-        DatePipe, ToEuroPipe, CurrencyPipe, DecimalPipe, PercentPipe
-    ],
+    MatButtonModule,
+    MatDialogModule,
+    MatPaginator,
+    MatTableModule,
+    DatePipe,
+    ToEuroPipe,
+    CurrencyPipe,
+    DecimalPipe,
+    PercentPipe
+],
     templateUrl: './stock-info.component.html',
     styleUrl: './stock-info.component.css'
 })

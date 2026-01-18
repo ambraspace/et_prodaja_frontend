@@ -6,14 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { CompanyService } from '../../../services/company.service';
-import { NgIf, NgFor } from '@angular/common';
+
 import { WarehouseViewComponent } from '../../warehouse/warehouse-view/warehouse-view.component';
 import { ContactViewComponent } from '../../contact/contact-view/contact-view.component';
 
 @Component({
     selector: 'app-company-detail',
-    imports: [MatDialogContent, MatFormField, MatLabel, MatDialogActions,
-        MatDialogClose, FormsModule, MatInput, MatButton, NgIf, NgFor, WarehouseViewComponent, ContactViewComponent],
+    imports: [MatDialogContent, MatFormField, MatLabel, MatDialogActions, MatDialogClose, FormsModule, MatInput, MatButton, WarehouseViewComponent, ContactViewComponent],
     templateUrl: './company-detail.component.html',
     styleUrl: './company-detail.component.css'
 })

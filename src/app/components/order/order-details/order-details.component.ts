@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Order } from '../../../model/order';
 import { OrderService } from '../../../services/order.service';
-import { CurrencyPipe, DatePipe, DecimalPipe, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { OrderStatusLocalizePipe } from '../../../pipes/order-status-localize.pipe';
 import { ItemService } from '../../../services/item.service';
 import { Item } from '../../../model/item';
@@ -16,12 +16,15 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 @Component({
     selector: 'app-order-details',
     imports: [
-        NgIf,
-        OrderStatusLocalizePipe, DatePipe, DecimalPipe, CurrencyPipe, ToEuroPipe,
-        MatTableModule,
-        RouterLink,
-        MatButtonModule
-    ],
+    OrderStatusLocalizePipe,
+    DatePipe,
+    DecimalPipe,
+    CurrencyPipe,
+    ToEuroPipe,
+    MatTableModule,
+    RouterLink,
+    MatButtonModule
+],
     templateUrl: './order-details.component.html',
     styleUrl: './order-details.component.css',
     animations: [

@@ -6,18 +6,26 @@
     <button mat-icon-button disabled></button>
     {{node.name}}
     <div id="actions">
-      <button mat-icon-button *ngIf="!isFirstOfSiblings(node.category.id)" (click)="moveUp(node.category.id)" color="accent" title="Premjesti kategoriju gore">
-        <span class="material-symbols-outlined">keyboard_arrow_up</span>
-      </button>
-      <button mat-icon-button disabled="" *ngIf="isFirstOfSiblings(node.category.id)" color="accent">
-        <span class="material-symbols-outlined"></span>
-      </button>
-      <button mat-icon-button *ngIf="!isLastOfSiblings(node.category.id)" (click)="moveDown(node.category.id)" color="accent" title="Premjesti kategoriju dolje">
-        <span class="material-symbols-outlined">keyboard_arrow_down</span>
-      </button>
-      <button mat-icon-button disabled="" *ngIf="isLastOfSiblings(node.category.id)" color="accent">
-        <span class="material-symbols-outlined"></span>
-      </button>
+      @if (!isFirstOfSiblings(node.category.id)) {
+        <button mat-icon-button (click)="moveUp(node.category.id)" color="accent" title="Premjesti kategoriju gore">
+          <span class="material-symbols-outlined">keyboard_arrow_up</span>
+        </button>
+      }
+      @if (isFirstOfSiblings(node.category.id)) {
+        <button mat-icon-button disabled="" color="accent">
+          <span class="material-symbols-outlined"></span>
+        </button>
+      }
+      @if (!isLastOfSiblings(node.category.id)) {
+        <button mat-icon-button (click)="moveDown(node.category.id)" color="accent" title="Premjesti kategoriju dolje">
+          <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </button>
+      }
+      @if (isLastOfSiblings(node.category.id)) {
+        <button mat-icon-button disabled="" color="accent">
+          <span class="material-symbols-outlined"></span>
+        </button>
+      }
       <button mat-icon-button (click)="editCategoryName(node.category.id)" color="accent" title="Promijeni naziv kategorije">
         <span class="material-symbols-outlined">edit</span>
       </button>
@@ -38,18 +46,26 @@
     </button>
     {{node.name}}
     <div id="actions">
-      <button mat-icon-button *ngIf="!isFirstOfSiblings(node.category.id)" (click)="moveUp(node.category.id)" color="accent" title="Premjesti kategoriju gore">
-        <span class="material-symbols-outlined">keyboard_arrow_up</span>
-      </button>
-      <button mat-icon-button disabled="" *ngIf="isFirstOfSiblings(node.category.id)" color="accent">
-        <span class="material-symbols-outlined"></span>
-      </button>
-      <button mat-icon-button *ngIf="!isLastOfSiblings(node.category.id)" (click)="moveDown(node.category.id)" color="accent" title="Premjesti kategoriju dolje">
-        <span class="material-symbols-outlined">keyboard_arrow_down</span>
-      </button>
-      <button mat-icon-button disabled="" *ngIf="isLastOfSiblings(node.category.id)" color="accent">
-        <span class="material-symbols-outlined"></span>
-      </button>
+      @if (!isFirstOfSiblings(node.category.id)) {
+        <button mat-icon-button (click)="moveUp(node.category.id)" color="accent" title="Premjesti kategoriju gore">
+          <span class="material-symbols-outlined">keyboard_arrow_up</span>
+        </button>
+      }
+      @if (isFirstOfSiblings(node.category.id)) {
+        <button mat-icon-button disabled="" color="accent">
+          <span class="material-symbols-outlined"></span>
+        </button>
+      }
+      @if (!isLastOfSiblings(node.category.id)) {
+        <button mat-icon-button (click)="moveDown(node.category.id)" color="accent" title="Premjesti kategoriju dolje">
+          <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </button>
+      }
+      @if (isLastOfSiblings(node.category.id)) {
+        <button mat-icon-button disabled="" color="accent">
+          <span class="material-symbols-outlined"></span>
+        </button>
+      }
       <button mat-icon-button (click)="editCategoryName(node.category.id)" color="accent" title="Promijeni naziv kategorije">
         <span class="material-symbols-outlined">edit</span>
       </button>

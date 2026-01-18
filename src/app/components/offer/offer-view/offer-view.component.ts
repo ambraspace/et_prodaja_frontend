@@ -1,4 +1,4 @@
-import { DatePipe, NgIf, PercentPipe, CurrencyPipe } from '@angular/common';
+import { DatePipe, PercentPipe, CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,14 +17,17 @@ import { OfferFilterComponent } from '../offer-filter/offer-filter.component';
 @Component({
     selector: 'app-offer-view',
     imports: [
-        NgIf,
-        MatPaginator,
-        MatTableModule,
-        MatButtonModule,
-        DatePipe, CurrencyPipe, ToEuroPipe, PercentPipe, OfferStatusLocalizePipe,
-        RouterLink,
-        MatDialogModule
-    ],
+    MatPaginator,
+    MatTableModule,
+    MatButtonModule,
+    DatePipe,
+    CurrencyPipe,
+    ToEuroPipe,
+    PercentPipe,
+    OfferStatusLocalizePipe,
+    RouterLink,
+    MatDialogModule
+],
     templateUrl: './offer-view.component.html',
     styleUrl: './offer-view.component.css'
 })

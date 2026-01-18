@@ -1,4 +1,4 @@
-import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,12 +14,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-delivery-view',
-    imports: [NgIf,
-        MatTableModule, MatPaginator,
-        MatButtonModule,
-        DatePipe, CurrencyPipe, ToEuroPipe, DeliveryStatusLocalizePipe,
-        RouterLink
-    ],
+    imports: [MatTableModule, MatPaginator, MatButtonModule, DatePipe, CurrencyPipe, ToEuroPipe, DeliveryStatusLocalizePipe, RouterLink],
     templateUrl: './delivery-view.component.html',
     styleUrl: './delivery-view.component.css'
 })

@@ -4,7 +4,7 @@ import { User } from '../../../model/user';
 import { Page } from '../../../model/page';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.component';
@@ -15,7 +15,7 @@ import { UserRole } from '../../../model/user-role';
 
 @Component({
     selector: 'app-user-view',
-    imports: [MatTableModule, MatButtonModule, NgIf, MatPaginator, MatDialogModule, MatSnackBarModule, UserRolePipe],
+    imports: [MatTableModule, MatButtonModule, MatPaginator, MatDialogModule, MatSnackBarModule, UserRolePipe],
     templateUrl: './user-view.component.html',
     styleUrl: './user-view.component.css'
 })

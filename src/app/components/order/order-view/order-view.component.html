@@ -1,15 +1,13 @@
 <h2>Narudžbe</h2>
-<div *ngIf="orderList.length > 0">
-
+@if (orderList.length > 0) {
+  <div>
     <mat-paginator [length]="orders?.page?.totalElements"
-              [pageIndex]="orders?.page?.number"
-              [pageSize]="orders?.page?.size"
-              [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
-              aria-label="Select page" (page)="updateTable($event)">
+      [pageIndex]="orders?.page?.number"
+      [pageSize]="orders?.page?.size"
+      [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
+      aria-label="Select page" (page)="updateTable($event)">
     </mat-paginator>
-
     <table mat-table [dataSource]="orderList" class="mat-elevation-z8">
-
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Broj narudžbe </th>
         <td mat-cell *matCellDef="let element">
@@ -18,56 +16,59 @@
           </a>
         </td>
       </ng-container>
-    
       <ng-container matColumnDef="warehouse">
         <th mat-header-cell *matHeaderCellDef> Skladište </th>
         <td mat-cell *matCellDef="let element"> {{element.warehouse.company.name}} - {{element.warehouse.name}} </td>
       </ng-container>
-
       <ng-container matColumnDef="status">
         <th class="center" mat-header-cell *matHeaderCellDef> Status narudžbe </th>
         <td class="center" mat-cell *matCellDef="let element">
-          <span *ngIf="element.status == 'OPEN'" title="{{element.status | orderStatusLocalize}}" class="material-symbols-outlined">folder_open</span>
-          <span *ngIf="element.status == 'CLOSED'" title="{{element.status | orderStatusLocalize}}" class="material-symbols-outlined">folder</span>
+          @if (element.status == 'OPEN') {
+            <span title="{{element.status | orderStatusLocalize}}" class="material-symbols-outlined">folder_open</span>
+          }
+          @if (element.status == 'CLOSED') {
+            <span title="{{element.status | orderStatusLocalize}}" class="material-symbols-outlined">folder</span>
+          }
         </td>
       </ng-container>
-
       <ng-container matColumnDef="creation">
         <th class="center" mat-header-cell *matHeaderCellDef> Datum otvaranja </th>
         <td class="center" mat-cell *matCellDef="let element">
           {{element.creationDate | date}}
         </td>
       </ng-container>
-
       <ng-container matColumnDef="closure">
         <th class="center" mat-header-cell *matHeaderCellDef> Datum zatvaranja </th>
         <td class="center" mat-cell *matCellDef="let element">
           {{element.closureTime | date}}
         </td>
       </ng-container>
-
       <ng-container matColumnDef="value">
         <th class="right" mat-header-cell *matHeaderCellDef> Vrijednost </th>
         <td class="right" mat-cell *matCellDef="let element" title="{{element.value | toEuro | currency : '1.2-2' : '€'}}"> {{element.value | currency : '1.2-2' : 'KM'}} </td>
       </ng-container>
-
       <ng-container matColumnDef="actions">
-          <th class="center" mat-header-cell *matHeaderCellDef> Akcije </th>
-          <td class="center" mat-cell *matCellDef="let element">
-            <a mat-icon-button color="accent" title="Pogledaj narudžbu" routerLink="/orders/{{element.id}}">
-              <span class="material-symbols-outlined">visibility</span>
-            </a>
-            <a *ngIf="element.status=='OPEN'" mat-icon-button color="accent" title="Zatvori narudžbu" (click)="closeOrder(element.id)">
+        <th class="center" mat-header-cell *matHeaderCellDef> Akcije </th>
+        <td class="center" mat-cell *matCellDef="let element">
+          <a mat-icon-button color="accent" title="Pogledaj narudžbu" routerLink="/orders/{{element.id}}">
+            <span class="material-symbols-outlined">visibility</span>
+          </a>
+          @if (element.status=='OPEN') {
+            <a mat-icon-button color="accent" title="Zatvori narudžbu" (click)="closeOrder(element.id)">
               <span class="material-symbols-outlined">folder</span>
             </a>
-            <button *ngIf="element.status=='CLOSED'"
+          }
+          @if (element.status=='CLOSED') {
+            <button
               mat-icon-button color="accent"
               title="Preuzmi narudžbu" (click)="downloadOrder(element.id)">
               <span class="material-symbols-outlined">download</span>
-          </button>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </button>
+          }
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+}

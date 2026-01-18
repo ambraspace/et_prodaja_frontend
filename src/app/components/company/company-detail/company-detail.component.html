@@ -10,7 +10,11 @@
   </mat-form-field>&nbsp;
   <button mat-raised-button color="accent" (click)="saveCompany()" [disabled]="!dirty">Sačuvaj</button>
 </div>
-<app-warehouse-view *ngIf="company" [companyId]="company!.id">
-</app-warehouse-view>
-<app-contact-view *ngIf="company" [companyId]="company!.id">
-</app-contact-view>
+@if (company) {
+  <app-warehouse-view [companyId]="company!.id">
+  </app-warehouse-view>
+}
+@if (company) {
+  <app-contact-view [companyId]="company!.id">
+  </app-contact-view>
+}

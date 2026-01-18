@@ -1,129 +1,135 @@
 <h2>
-    Isporuka: {{deliveryId}}&nbsp;
-    <span *ngIf="delivery?.status == 'ON_THE_WAY'" title="{{delivery!.status | deliveryStatusLocalize}}" class="material-symbols-outlined">local_shipping</span> 
-    <span *ngIf="delivery?.status == 'DELIVERED'" title="{{delivery!.status | deliveryStatusLocalize}}" class="material-symbols-outlined">sports_score</span>
+  Isporuka: {{deliveryId}}&nbsp;
+  @if (delivery?.status == 'ON_THE_WAY') {
+    <span title="{{delivery!.status | deliveryStatusLocalize}}" class="material-symbols-outlined">local_shipping</span>
+  }
+  @if (delivery?.status == 'DELIVERED') {
+    <span title="{{delivery!.status | deliveryStatusLocalize}}" class="material-symbols-outlined">sports_score</span>
+  }
 </h2>
 @if (delivery) {
-    <table class="details">
-        <tr>
-            <td>Isporučilac:</td>
-            <td class="strong">{{delivery.supplier.name}}, {{delivery.supplier.locality}}</td>
-            <td rowspan="4">
-                <button mat-flat-button class="w100"><span class="material-symbols-outlined">edit</span> Izmijeni</button><br>
-                <button mat-flat-button class="w100" (click)="deleteDelivery()"><span class="material-symbols-outlined">delete</span> Obriši</button><br>
-                @if (delivery.status == 'ON_THE_WAY') {
-                    <button mat-flat-button class="w100" (click)="markDelivered()"><span class="material-symbols-outlined">sports_score</span> Označi isporučenom </button><br>
-                }
-                <button mat-flat-button class="w100" (click)="downloadDelivery()"><span class="material-symbols-outlined">export_notes</span> Izvezi u XLSX</button><br>
-            </td>
-        </tr>
-        <tr>
-            <td>Referenca:</td>
-            <td class="strong">{{delivery.supplierReference}}</td>
-        </tr>
-        <tr>
-            <td>Datum isporuke:</td>
-            <td class="strong">{{delivery.deliveryDate | date}}</td>
-        </tr>
-        <tr>
-            <td>Komentar:</td>
-            <td class="strong">{{delivery.comment}}</td>
-        </tr>
+  <table class="details">
+    <tr>
+      <td>Isporučilac:</td>
+      <td class="strong">{{delivery.supplier.name}}, {{delivery.supplier.locality}}</td>
+      <td rowspan="4">
+        <button mat-flat-button class="w100"><span class="material-symbols-outlined">edit</span> Izmijeni</button><br>
+        <button mat-flat-button class="w100" (click)="deleteDelivery()"><span class="material-symbols-outlined">delete</span> Obriši</button><br>
+        @if (delivery.status == 'ON_THE_WAY') {
+          <button mat-flat-button class="w100" (click)="markDelivered()"><span class="material-symbols-outlined">sports_score</span> Označi isporučenom </button><br>
+        }
+        <button mat-flat-button class="w100" (click)="downloadDelivery()"><span class="material-symbols-outlined">export_notes</span> Izvezi u XLSX</button><br>
+      </td>
+    </tr>
+    <tr>
+      <td>Referenca:</td>
+      <td class="strong">{{delivery.supplierReference}}</td>
+    </tr>
+    <tr>
+      <td>Datum isporuke:</td>
+      <td class="strong">{{delivery.deliveryDate | date}}</td>
+    </tr>
+    <tr>
+      <td>Komentar:</td>
+      <td class="strong">{{delivery.comment}}</td>
+    </tr>
+  </table>
+
+  <h3>Proizvodi&nbsp;
+    <button mat-icon-button color="accent" (click)="addItems()" [disabled]="delivery.status == 'DELIVERED'"><span class="material-symbols-outlined">add_circle</span></button>
+  </h3>
+  @if (items && items.length > 0) {
+    <table mat-table [dataSource]="items" multiTemplateDataRows class="mat-elevation-z8">
+
+      <ng-container matColumnDef="no">
+        <th class="td-right" mat-header-cell *matHeaderCellDef> RB </th>
+        <td class="td-right" mat-cell *matCellDef="let element; let i = dataIndex"> {{(i + 1)}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="productName">
+        <th mat-header-cell *matHeaderCellDef> Proizvod </th>
+        <td mat-cell *matCellDef="let element"> <a routerLink="/products/{{element.item.stockInfo.product.id}}">{{element.item.productName}}</a> </td>
+        <td class="td-right" colspan="3" mat-footer-cell *matFooterCellDef>
+          Ukupna vrijednost:
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit">
+        <th class="td-center" mat-header-cell *matHeaderCellDef> JM </th>
+        <td class="td-center" mat-cell *matCellDef="let element"> {{element.item.stockInfo.product.unit}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th class="td-center" mat-header-cell *matHeaderCellDef> Kol. </th>
+        <td class="td-center" mat-cell *matCellDef="let element"> {{element.quantity | number : '1.0-2'}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="cost">
+        <th class="td-right" mat-header-cell *matHeaderCellDef> Fakt. cijena </th>
+        <td class="td-right" mat-cell *matCellDef="let element" title="{{element.item.stockInfo.unitPrice | toEuro | currency : '1.2-2' : '€'}}"> {{element.item.stockInfo.unitPrice | currency : '1.2-2' : "KM"}} </td>
+        <td class="td-right" mat-footer-cell *matFooterCellDef>
+          <span title="{{delivery.value| toEuro | currency : '1.2-2' : '€'}}">{{delivery.value | currency : '1.2-2' : "KM"}}</span><br>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="note">
+        <th class="td-center" mat-header-cell *matHeaderCellDef> Napomena </th>
+        <td class="td-center" mat-cell *matCellDef="let element"> @if (element.deliveryNote) {
+          <span class="material-symbols-outlined" title="{{element.deliveryNote}}">comment</span>
+        } </td>
+        <td class="td-right" colspan="4" mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="(expandedElement = expandedElement === element ? undefined : element); $event.stopPropagation()">
+            @if (expandedElement === element) {
+              <span class="material-symbols-outlined">keyboard_arrow_up</span>
+            } @else {
+              <span class="material-symbols-outlined">keyboard_arrow_down</span>
+            }
+          </button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="detailMargin">
+        <td mat-cell *matCellDef="let element">
+          <div class="example-element-detail"
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length - 1">
+          <div class="example-element-detail"
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            @if (element.item.preview && element.item.preview.trim() != "") {
+              <img width="150px" height="150px" src="/api/images/{{element.item.preview}}">
+            } @else {
+              <img width="150px" height="150px" src="/assets/no-image.jpg">
+            }
+            <button mat-icon-button color="accent" (click)="editItem(element)" [disabled]="delivery.status == 'DELIVERED'"><span class="material-symbols-outlined">edit</span></button>
+            <button mat-icon-button color="accent" (click)="deleteItem(element.id)" [disabled]="delivery.status == 'DELIVERED'"><span class="material-symbols-outlined">delete</span></button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? undefined : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['detailMargin', 'expandedDetail']" class="example-detail-row"></tr>
+      <tr mat-footer-row *matFooterRowDef="footerColumns"></tr>
+
     </table>
-
-    <h3>Proizvodi&nbsp;
-        <button mat-icon-button color="accent" (click)="addItems()" [disabled]="delivery.status == 'DELIVERED'"><span class="material-symbols-outlined">add_circle</span></button>
-    </h3>
-    @if (items && items.length > 0) {
-        <table mat-table [dataSource]="items" multiTemplateDataRows class="mat-elevation-z8">
-
-            <ng-container matColumnDef="no">
-            <th class="td-right" mat-header-cell *matHeaderCellDef> RB </th>
-            <td class="td-right" mat-cell *matCellDef="let element; let i = dataIndex"> {{(i + 1)}} </td>
-            <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="productName"> 
-                <th mat-header-cell *matHeaderCellDef> Proizvod </th>
-                <td mat-cell *matCellDef="let element"> <a routerLink="/products/{{element.item.stockInfo.product.id}}">{{element.item.productName}}</a> </td>
-                <td class="td-right" colspan="3" mat-footer-cell *matFooterCellDef>
-                    Ukupna vrijednost:
-                </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="unit">
-            <th class="td-center" mat-header-cell *matHeaderCellDef> JM </th>
-            <td class="td-center" mat-cell *matCellDef="let element"> {{element.item.stockInfo.product.unit}} </td>
-            <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="quantity">
-                <th class="td-center" mat-header-cell *matHeaderCellDef> Kol. </th>
-                <td class="td-center" mat-cell *matCellDef="let element"> {{element.quantity | number : '1.0-2'}} </td>
-                <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-                    
-            <ng-container matColumnDef="cost">
-                <th class="td-right" mat-header-cell *matHeaderCellDef> Fakt. cijena </th>
-                <td class="td-right" mat-cell *matCellDef="let element" title="{{element.item.stockInfo.unitPrice | toEuro | currency : '1.2-2' : '€'}}"> {{element.item.stockInfo.unitPrice | currency : '1.2-2' : "KM"}} </td>
-                <td class="td-right" mat-footer-cell *matFooterCellDef>
-                    <span title="{{delivery.value| toEuro | currency : '1.2-2' : '€'}}">{{delivery.value | currency : '1.2-2' : "KM"}}</span><br>
-                </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="note">
-                <th class="td-center" mat-header-cell *matHeaderCellDef> Napomena </th>
-                <td class="td-center" mat-cell *matCellDef="let element"> <span *ngIf="element.deliveryNote" class="material-symbols-outlined" title="{{element.deliveryNote}}">comment</span> </td>
-                <td class="td-right" colspan="4" mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="expand">
-                <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-                <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="(expandedElement = expandedElement === element ? undefined : element); $event.stopPropagation()">
-                    @if (expandedElement === element) {
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
-                    } @else {
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
-                    }
-                </button>
-                </td>
-                <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="detailMargin">
-                <td mat-cell *matCellDef="let element">
-                    <div class="example-element-detail"
-                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                    </div>
-                </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="expandedDetail">
-                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length - 1">
-                <div class="example-element-detail"
-                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                        @if (element.item.preview && element.item.preview.trim() != "") {
-                            <img width="150px" height="150px" src="/api/images/{{element.item.preview}}">
-                        } @else {
-                            <img width="150px" height="150px" src="/assets/no-image.jpg">
-                        }
-                        <button mat-icon-button color="accent" (click)="editItem(element)" [disabled]="delivery.status == 'DELIVERED'"><span class="material-symbols-outlined">edit</span></button>
-                        <button mat-icon-button color="accent" (click)="deleteItem(element.id)" [disabled]="delivery.status == 'DELIVERED'"><span class="material-symbols-outlined">delete</span></button>
-                </div>
-                </td>
-            </ng-container>
-    
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-            <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
-                class="example-element-row"
-                [class.example-expanded-row]="expandedElement === element"
-                (click)="expandedElement = expandedElement === element ? undefined : element">
-            </tr>
-            <tr mat-row *matRowDef="let row; columns: ['detailMargin', 'expandedDetail']" class="example-detail-row"></tr>
-            <tr mat-footer-row *matFooterRowDef="footerColumns"></tr>
-    
-        </table>
-    }
+  }
 
 }

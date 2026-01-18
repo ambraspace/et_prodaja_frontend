@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { WarehouseService } from '../../../services/warehouse.service';
 import { Warehouse } from '../../../model/warehouse';
@@ -12,13 +12,11 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 @Component({
     selector: 'app-warehouse-view',
     imports: [
-        NgFor,
-        NgIf,
-        MatTableModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        MatDialogModule
-    ],
+    MatTableModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule
+],
     templateUrl: './warehouse-view.component.html',
     styleUrl: './warehouse-view.component.css'
 })

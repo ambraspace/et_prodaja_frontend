@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
+
 import { CompanyService } from '../../../services/company.service';
 import { Company } from '../../../model/company';
 import { Page } from '../../../model/page';
@@ -13,7 +13,7 @@ import { AddCompanyDialogComponent } from '../add-company-dialog/add-company-dia
 
 @Component({
     selector: 'app-company-view',
-    imports: [NgFor, MatTableModule, RouterLink, MatButtonModule, MatDialogModule, MatPaginator],
+    imports: [MatTableModule, RouterLink, MatButtonModule, MatDialogModule, MatPaginator],
     templateUrl: './company-view.component.html',
     styleUrl: './company-view.component.css'
 })

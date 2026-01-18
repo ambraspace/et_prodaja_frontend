@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ContactService } from '../../../services/contact.service';
 import { Contact } from '../../../model/contact';
-import { NgFor, NgIf } from '@angular/common';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +11,7 @@ import { YesNoDialogComponent } from '../../dialogs/yes-no-dialog/yes-no-dialog.
 
 @Component({
     selector: 'app-contact-view',
-    imports: [NgIf, NgFor, MatTableModule, MatButtonModule],
+    imports: [MatTableModule, MatButtonModule],
     templateUrl: './contact-view.component.html',
     styleUrl: './contact-view.component.css'
 })
